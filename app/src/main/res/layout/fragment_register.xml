@@ -24,15 +24,14 @@
         android:textColor="@color/g_black"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_lets_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/poppins_thin"
         android:gravity="center"
         android:text="@string/g_let_s_register"
@@ -40,7 +39,7 @@
         android:textSize="@dimen/_27sdp"
         app:layout_constraintEnd_toEndOf="@id/tv_app_name"
         app:layout_constraintStart_toStartOf="@id/tv_app_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
+        app:layout_constraintTop_toBottomOf="@id/guideline8" />
 
     <TextView
         android:id="@+id/tv_dont_have_an_account"
@@ -61,114 +60,111 @@
         android:id="@+id/ed_first_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        app:layout_constraintTop_toBottomOf="@id/tv_dont_have_an_account"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        android:hint="@string/g_first_name"
-        android:fontFamily="@font/poppins_light"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:hint="@string/g_first_name"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
-        android:background="@drawable/btn_white_background"/>
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/tv_dont_have_an_account" />
 
     <EditText
         android:id="@+id/ed_second_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        app:layout_constraintTop_toBottomOf="@id/ed_first_name"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        android:hint="@string/g_second_name"
-        android:fontFamily="@font/poppins_light"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:hint="@string/g_second_name"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
-        android:background="@drawable/btn_white_background"/>
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/ed_first_name" />
 
     <EditText
         android:id="@+id/ed_email"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        app:layout_constraintTop_toBottomOf="@id/ed_second_name"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        android:hint="@string/g_email"
-        android:fontFamily="@font/poppins_light"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:hint="@string/g_email"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
-        android:background="@drawable/btn_white_background" />
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/ed_second_name" />
 
     <EditText
         android:id="@+id/ed_password"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        app:layout_constraintTop_toBottomOf="@id/ed_email"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        android:hint="@string/g_password"
-        android:fontFamily="@font/poppins_light"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
         android:background="@drawable/btn_white_background"
-        android:password="true"/>
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:hint="@string/g_password"
+        android:password="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/ed_email" />
 
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/poppins_light"
-        android:textStyle="bold"
         android:text="@string/g_register"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/ed_second_name"
         app:layout_constraintStart_toStartOf="@id/ed_second_name"
-        app:layout_constraintTop_toBottomOf="@id/ed_password"
-        android:layout_marginTop="@dimen/_20sdp"
-        />
-
-
+        app:layout_constraintTop_toBottomOf="@id/ed_password" />
 
 
     <ImageView
         android:id="@+id/btn_facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        android:layout_marginTop="@dimen/_10sdp"
         android:src="@drawable/ic_facebook_login"
-        android:layout_marginTop="@dimen/_10sdp"/>
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/g_facebook"
-        app:layout_constraintStart_toStartOf="@id/btn_facebook"
+        app:layout_constraintBottom_toBottomOf="@id/btn_facebook"
         app:layout_constraintEnd_toEndOf="@id/btn_facebook"
-        app:layout_constraintTop_toTopOf="@id/btn_facebook"
-        app:layout_constraintBottom_toBottomOf="@id/btn_facebook"/>
+        app:layout_constraintStart_toStartOf="@id/btn_facebook"
+        app:layout_constraintTop_toTopOf="@id/btn_facebook" />
 
     <ImageView
         android:id="@+id/btn_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        android:layout_marginTop="@dimen/_10sdp"
         android:src="@drawable/ic_google_login"
-        android:layout_marginTop="@dimen/_10sdp"/>
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/g_google"
-        app:layout_constraintStart_toStartOf="@id/btn_google"
+        app:layout_constraintBottom_toBottomOf="@id/btn_google"
         app:layout_constraintEnd_toEndOf="@id/btn_google"
-        app:layout_constraintTop_toTopOf="@id/btn_google"
-        app:layout_constraintBottom_toBottomOf="@id/btn_google"/>
+        app:layout_constraintStart_toStartOf="@id/btn_google"
+        app:layout_constraintTop_toTopOf="@id/btn_google" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -184,6 +180,19 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.89" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1751026" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
