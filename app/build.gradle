@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -54,6 +55,10 @@ dependencies {
     //loading button
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
+    //firebase
+    implementation 'com.google.firebase:firebase-firestore:24.0.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
 
 
 }

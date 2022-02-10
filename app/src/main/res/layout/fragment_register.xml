@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_dont_have_an_account" />
 
     <EditText
-        android:id="@+id/ed_second_name"
+        android:id="@+id/ed_last_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -96,7 +96,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/ed_second_name" />
+        app:layout_constraintTop_toBottomOf="@id/ed_last_name" />
 
     <EditText
         android:id="@+id/ed_password"
@@ -125,8 +125,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/ed_second_name"
-        app:layout_constraintStart_toStartOf="@id/ed_second_name"
+        app:layout_constraintEnd_toEndOf="@id/ed_last_name"
+        app:layout_constraintStart_toStartOf="@id/ed_last_name"
         app:layout_constraintTop_toBottomOf="@id/ed_password" />
 
 

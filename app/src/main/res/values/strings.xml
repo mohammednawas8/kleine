@@ -23,4 +23,15 @@
     <string name="g_log_in">Log in</string>
     <string name="g_google">Google</string>
     <string name="g_facebook">Facebook</string>
+    <string name="first_name_cant_be_empty">First name can\'t be empty</string>
+    <string name="last_name_cant_be_empty">Last name can\'t be empty</string>
+    <string name="email_cant_be_empty">Email can\'t be empty</string>
+    <string name="password_cant_be_empty">password can\'t be empty</string>
+    <string name="password_at_least_six">password should have 6</string>
+    <string name="valid_email">check your email</string>
+
+
+
+
+
 </resources>
