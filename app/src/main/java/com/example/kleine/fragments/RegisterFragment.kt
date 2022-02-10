@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.example.kleine.MainActivity
 import com.example.kleine.R
 import com.example.kleine.databinding.FragmentRegisterBinding
 import com.example.kleine.model.User
 import com.example.kleine.viewmodel.KleineViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG= "RegisterFragment"
 class RegisterFragment : Fragment() {
@@ -42,7 +44,9 @@ class RegisterFragment : Fragment() {
 
         onRegisterBtnClick()
         observeRegister()
-        observeError()
+        observeRegisterError()
+        observeSaveUserInformation()
+        observeSaveUserInformationError()
     }
 
 
@@ -58,12 +62,34 @@ class RegisterFragment : Fragment() {
                     btnRegister.startAnimation()
                 }
             }
-
         }
     }
 
+    private fun observeSaveUserInformationError() {
+        viewModel.saveInformationError.observe(viewLifecycleOwner, Observer { error->
+            Log.e(TAG,error)
+            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+            btnRegister.revertAnimation()
+        })
+    }
 
-    private fun observeError() {
+    private fun observeSaveUserInformation() {
+        viewModel.saveInformation.observe(viewLifecycleOwner, Observer {
+            if(it == true) {
+                btnRegister.revertAnimation()
+                Log.d(TAG, "user signed successfully")
+                Toast.makeText(
+                    activity,
+                    resources.getString(R.string.signed_up_successfully),
+                    Toast.LENGTH_SHORT
+                ).show()
+                btnRegister.revertAnimation()
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            }
+        })
+    }
+
+    private fun observeRegisterError() {
         viewModel.registerError.observe(viewLifecycleOwner, Observer { error->
             Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
             Log.e(TAG,error)
@@ -73,9 +99,7 @@ class RegisterFragment : Fragment() {
 
     private fun observeRegister() {
         viewModel.register.observe(viewLifecycleOwner, Observer { user->
-            Log.d(TAG,"user signed successfully")
-            btnRegister.revertAnimation()
-
+            viewModel.saveUserInformation(FirebaseAuth.getInstance().currentUser!!.uid,user)
         })
     }
 

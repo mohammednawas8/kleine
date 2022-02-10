@@ -17,6 +17,7 @@
         <action
             android:id="@+id/action_firstScreenFragment_to_secondScreenFragment"
             app:destination="@id/secondScreenFragment"
+            app:enterAnim="@anim/from_left_to_right"
             app:popUpTo="@id/firstScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -26,13 +27,25 @@
         android:label="SecondScreenFragment" >
         <action
             android:id="@+id/action_secondScreenFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/from_left_to_right"
+            app:popEnterAnim="@anim/from_right_to_left" />
         <action
             android:id="@+id/action_secondScreenFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_left_to_right"
+            app:popEnterAnim="@anim/from_right_to_left" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.kleine.fragments.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_left_to_right"
+            app:popEnterAnim="@anim/from_right_to_left"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

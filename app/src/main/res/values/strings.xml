@@ -29,6 +29,7 @@
     <string name="password_cant_be_empty">password can\'t be empty</string>
     <string name="password_at_least_six">password should have 6</string>
     <string name="valid_email">check your email</string>
+    <string name="signed_up_successfully">you have created new account, login now</string>
 
 
 

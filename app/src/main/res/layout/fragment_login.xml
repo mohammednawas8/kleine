@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_lets_login" />
 
     <EditText
-        android:id="@+id/ed_first_name"
+        android:id="@+id/ed_email_login"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginTop="@dimen/_50sdp"
@@ -72,7 +72,7 @@
         />
 
     <EditText
-        android:id="@+id/ed_last_name"
+        android:id="@+id/ed_password_login"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -84,7 +84,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/ed_first_name" />
+        app:layout_constraintTop_toBottomOf="@id/ed_email_login" />
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btn_login"
@@ -100,7 +100,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/ed_last_name" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_password_login" />
 
     <ImageView
         android:id="@+id/btn_facebook"
