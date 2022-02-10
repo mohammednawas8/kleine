@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">kleine</string>
+    <string name="g_app_name">kaline.</string>
+    <string name="g_the_right_address">The Right Address \n For Shopping \n Anyday</string>
+
+    <!--    <string name="g_for_shopping">For Shopping</string>-->
+    <!--    <string name="g_any_day">Anyday</string>-->
+
+    <string name="g_best_quality">It is now very easy to reach the \n best quality among all the \n products on the internet!</string>
+    <string name="g_next">Next</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
