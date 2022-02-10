@@ -6,10 +6,6 @@
     app:startDestination="@id/firstScreenFragment">
 
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.kleine.fragments.RegisterFragment"
-        android:label="RegisterFragment" />
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.kleine.fragments.LoginFragment"
         android:label="LoginFragment" />
@@ -34,4 +30,8 @@
             android:id="@+id/action_secondScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.kleine.fragments.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>

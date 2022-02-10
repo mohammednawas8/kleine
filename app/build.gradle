@@ -51,5 +51,9 @@ dependencies {
     //intuit
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
+    //loading button
+    implementation 'br.com.simplepass:loading-button-android:2.2.0'
+
+
 
 }
