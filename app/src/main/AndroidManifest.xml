@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kleine">
         <activity
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -15,8 +15,8 @@
 
     <ImageView
         android:id="@+id/img_ellipse"
-        android:layout_width="@dimen/_190sdp"
-        android:layout_height="@dimen/_190sdp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/ellips1_backround"
         app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
@@ -115,4 +115,6 @@
         app:layout_constraintEnd_toEndOf="@id/tv_best_quality"
         app:layout_constraintStart_toStartOf="@id/tv_best_quality"
         app:layout_constraintTop_toBottomOf="@id/tv_best_quality" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
