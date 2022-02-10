@@ -16,9 +16,11 @@
     <string name="g_do_you_have_an_account_log_in">Do you have an account? log in</string>
     <string name="g_first_name">First Name</string>
     <string name="g_email">Email</string>
-    <string name="g_second_name">Second Name</string>
+    <string name="g_second_name">Last Name</string>
     <string name="g_password">Password</string>
     <string name="g_don_t_have_an_account_register">Don\'t have an account? Register</string>
     <string name="g_let_s_login">Let\'s Login</string>
     <string name="g_log_in">Log in</string>
+    <string name="g_google">Google</string>
+    <string name="g_facebook">Facebook</string>
 </resources>
