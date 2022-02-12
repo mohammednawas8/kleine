@@ -108,7 +108,7 @@
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/poppins_thin"
-        android:text="@string/g_next"
+        android:text="@string/g_start"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
