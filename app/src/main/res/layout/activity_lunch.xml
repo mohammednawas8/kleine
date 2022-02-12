@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/my_nav"/>
+        app:navGraph="@navigation/lunch_nav_graph"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

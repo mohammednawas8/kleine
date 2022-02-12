@@ -6,10 +6,16 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="g_hint">#666666</color>
     <color name="g_black">#000000</color>
     <color name="g_blue">#000DAE</color>
-    <color name="g_white">#FFFFFF</color>
+    <color name="g_white">#F5F8FA</color>
+    <color name="g_dark_blue">#000759</color>
+    <color name="g_icon_tint">#97AABD</color>
+    <color name="g_pink">#FF9999</color>
+    <color name="g_card_background">#FAFDFF</color>
+    <color name="g_search_and_icons">#FAFBFC</color>
+
 </resources>

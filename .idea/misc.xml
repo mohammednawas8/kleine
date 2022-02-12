@@ -15,8 +15,19 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_second_screen.xml" value="0.2" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_view_pager.xml" value="0.20854700854700856" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/bottom_nav_item_background.xml" value="0.3245" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/bottom_navigation_background.xml" value="0.3245" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/favorite_background.xml" value="0.355" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_untitled_1.xml" value="0.3245" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/search_box_background.xml" value="0.355" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/activity_lunch.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/activity_shopping.xml" value="0.33" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/chair_extra_ads.xml" value="0.33" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_home.xml" value="0.67" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -14,4 +14,13 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="tabLayout_text" parent="TextAppearance.AppCompat">
+        <item name="textColor">@color/black</item>
+        <item name="fontFamily">@font/sf_pro_display</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
 </resources>

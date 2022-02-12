@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
@@ -63,7 +62,7 @@ class LoginFragment : Fragment() {
             if(it == true){
                 btnLogin.revertAnimation()
                 val intent = Intent(activity,ShoppingActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
         })
@@ -72,7 +71,7 @@ class LoginFragment : Fragment() {
     private fun onLoginClick() {
         btnLogin.setOnClickListener {
             btnLogin.apply {
-                spinningBarColor = resources.getColor(R.color.g_white)
+                spinningBarColor = resources.getColor(R.color.white)
                 spinningBarWidth = resources.getDimension(R.dimen._20sdp)
             }
             btnLogin.startAnimation()

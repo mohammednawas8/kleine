@@ -30,6 +30,12 @@
     <string name="password_at_least_six">password should have 6</string>
     <string name="valid_email">check your email</string>
     <string name="signed_up_successfully">you have created new account, login now</string>
+    <string name="g_home">Home</string>
+    <string name="g_search">search</string>
+    <string name="g_cart">cart</string>
+    <string name="g_profile">profile</string>
+    <string name="g_add_to_cart">Add to cart</string>
+    <string name="g_search_now">Search Now</string>
 
 
 </resources>

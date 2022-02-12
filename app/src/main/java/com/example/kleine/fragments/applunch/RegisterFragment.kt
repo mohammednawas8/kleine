@@ -52,7 +52,7 @@ class RegisterFragment : Fragment() {
 
     private fun onRegisterBtnClick() {
         btnRegister.setOnClickListener {
-            btnRegister.spinningBarColor = resources.getColor(R.color.g_white)
+            btnRegister.spinningBarColor = resources.getColor(R.color.white)
             btnRegister.spinningBarWidth = resources.getDimension(R.dimen._20sdp)
             val user = getUser()
             val password = getPassword()
