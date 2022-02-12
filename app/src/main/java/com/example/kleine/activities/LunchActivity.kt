@@ -1,39 +1,29 @@
-package com.example.kleine
+package com.example.kleine.activities
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
-import android.os.Build.VERSION_CODES.M
-import android.os.Build.VERSION_CODES.S
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
-import com.example.kleine.model.Products
-import com.example.kleine.util.Constants
-import com.example.kleine.util.Constants.Companion.BEST_DEALS
-import com.example.kleine.util.Constants.Companion.BLACK
-import com.example.kleine.util.Constants.Companion.CLOTHES
-import com.example.kleine.util.Constants.Companion.COLORS
-import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
-import com.example.kleine.util.Constants.Companion.GREEN
-import com.example.kleine.util.Constants.Companion.IMAGES
-import com.example.kleine.util.Constants.Companion.ORANGE
-import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
-import com.example.kleine.util.Constants.Companion.RED
-import com.example.kleine.util.Constants.Companion.SIZES
-import com.example.kleine.util.Constants.Companion.XLARGE
 import com.example.kleine.viewmodel.KleineViewModel
 import com.example.kleine.viewmodel.ViewModelProviderFactory
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class LunchActivity : AppCompatActivity() {
     lateinit var viewModel:KleineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_lunch)
 
-
+        //user viewmodel later
+        if(FirebaseAuth.getInstance().currentUser!==null)
+        {
+            val intent = Intent(this,ShoppingActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+        }
 //        saveNewProduct()
 
         supportActionBar?.hide()

@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-import com.example.kleine.MainActivity
+import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
 import com.example.kleine.databinding.FragmentRegisterBinding
 import com.example.kleine.model.User
@@ -26,7 +26,7 @@ class RegisterFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as LunchActivity).viewModel
     }
 
     override fun onCreateView(

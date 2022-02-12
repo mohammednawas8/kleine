@@ -1,5 +1,6 @@
 package com.example.kleine.fragments.applunch
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-import com.example.kleine.MainActivity
+import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
+import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.databinding.FragmentLoginBinding
 import com.example.kleine.viewmodel.KleineViewModel
 
@@ -25,7 +28,7 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as LunchActivity).viewModel
 
     }
 
@@ -51,6 +54,7 @@ class LoginFragment : Fragment() {
         viewModel.loginError.observe(viewLifecycleOwner, Observer { error->
             Log.e(TAG,error)
             Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+            btnLogin.revertAnimation()
         })
     }
 
@@ -58,7 +62,9 @@ class LoginFragment : Fragment() {
         viewModel.login.observe(viewLifecycleOwner, Observer {
             if(it == true){
                 btnLogin.revertAnimation()
-                Toast.makeText(activity, "Logged in", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity,ShoppingActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
             }
         })
     }

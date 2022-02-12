@@ -1,6 +1,6 @@
 package com.example.kleine.model
 
-data class Products(
+data class Product(
     val title: String? = "",
     val description: String? = "",
     val category: String? = "",

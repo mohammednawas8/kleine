@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kleine">
+
+        <activity android:name=".activities.ShoppingActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+
+        </activity>
+
         <activity
-            android:windowSoftInputMode="stateVisible|adjustPan"
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".activities.LunchActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

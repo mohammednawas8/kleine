@@ -9,11 +9,15 @@
         android:id="@+id/loginFragment"
         android:name="com.example.kleine.fragments.applunch.LoginFragment"
         android:label="LoginFragment"
-        />
+        tools:layout="@layout/fragment_login"
+        >
+
+    </fragment>
     <fragment
         android:id="@+id/firstScreenFragment"
         android:name="com.example.kleine.fragments.applunch.FirstScreenFragment"
-        android:label="FirstScreenFragment" >
+        android:label="FirstScreenFragment"
+        tools:layout="@layout/fragment_first_screen">
         <action
             android:id="@+id/action_firstScreenFragment_to_secondScreenFragment"
             app:destination="@id/secondScreenFragment"
@@ -24,7 +28,8 @@
     <fragment
         android:id="@+id/secondScreenFragment"
         android:name="com.example.kleine.fragments.applunch.SecondScreenFragment"
-        android:label="SecondScreenFragment" >
+        android:label="SecondScreenFragment"
+        tools:layout="@layout/fragment_second_screen">
         <action
             android:id="@+id/action_secondScreenFragment_to_registerFragment"
             app:destination="@id/registerFragment"
@@ -39,7 +44,8 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.kleine.fragments.applunch.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
