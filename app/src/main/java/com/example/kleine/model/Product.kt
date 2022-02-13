@@ -1,6 +1,7 @@
 package com.example.kleine.model
 
 data class Product(
+    val id :Int,
     val title: String? = "",
     val description: String? = "",
     val category: String? = "",
@@ -12,6 +13,7 @@ data class Product(
     val sizes: HashMap<String, Any>?=null
 ){
     constructor(
+         id :Int,
          title: String? = "",
          description: String? = "",
          category: String? = "",
@@ -20,7 +22,7 @@ data class Product(
          images: HashMap<String, Any>,
          colors: HashMap<String, Any>,
          sizes: HashMap<String, Any>
-    ) : this(title,description,category,null,price,seller, images, colors, sizes)
+    ) : this(id,title,description,category,null,price,seller, images, colors, sizes)
 
-    constructor():this("","","","","",null,null,null)
+    constructor():this(0,"","","","",null,null,null)
 }

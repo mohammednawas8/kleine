@@ -66,6 +66,9 @@ dependencies {
     //smooth bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
 
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+
 
 
 

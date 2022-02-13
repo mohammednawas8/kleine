@@ -14,7 +14,7 @@ import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.databinding.FragmentLoginBinding
-import com.example.kleine.viewmodel.KleineViewModel
+import com.example.kleine.viewmodel.lunchapp.KleineViewModel
 
 
 class LoginFragment : Fragment() {
@@ -22,7 +22,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
     private lateinit var btnLogin : CircularProgressButton
-    private lateinit var viewModel:KleineViewModel
+    private lateinit var viewModel: KleineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

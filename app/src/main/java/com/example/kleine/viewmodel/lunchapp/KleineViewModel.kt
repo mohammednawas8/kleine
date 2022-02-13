@@ -1,10 +1,9 @@
-package com.example.kleine.viewmodel
+package com.example.kleine.viewmodel.lunchapp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.User
-import com.google.firebase.auth.FirebaseAuth
 
 class KleineViewModel(
     private val firebaseDatabase: FirebaseDb

@@ -6,12 +6,12 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
-import com.example.kleine.viewmodel.KleineViewModel
-import com.example.kleine.viewmodel.ViewModelProviderFactory
+import com.example.kleine.viewmodel.lunchapp.KleineViewModel
+import com.example.kleine.viewmodel.lunchapp.ViewModelProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 
 class LunchActivity : AppCompatActivity() {
-    lateinit var viewModel:KleineViewModel
+    lateinit var viewModel: KleineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +30,7 @@ class LunchActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelProviderFactory(firebaseDb)
         viewModel = ViewModelProvider(this,viewModelFactory)[KleineViewModel::class.java]
 
+//        val random = Random.nextInt(from = 10000, until = 99999)
 
     }
 

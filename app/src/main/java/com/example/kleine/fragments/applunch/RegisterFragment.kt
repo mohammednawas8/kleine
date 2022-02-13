@@ -14,7 +14,7 @@ import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
 import com.example.kleine.databinding.FragmentRegisterBinding
 import com.example.kleine.model.User
-import com.example.kleine.viewmodel.KleineViewModel
+import com.example.kleine.viewmodel.lunchapp.KleineViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG= "RegisterFragment"
