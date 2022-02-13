@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.shopping.HomeFragment">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ed_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@color/white"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/tabLayout_text"
+
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chair." />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cupboard" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Table" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accessory" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Furniture" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enlightening" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <EditText
+        android:id="@+id/ed_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/search_box_background"
+        android:fontFamily="@font/poppins_thin"
+        android:hint="@string/g_search_now"
+        android:paddingStart="@dimen/_12sdp"
+        android:textColor="@color/g_icon_tint"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="@id/guideline5"
+        app:layout_constraintVertical_bias="1.0"
+        android:singleLine="true"/>
+
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintEnd_toEndOf="@id/ed_search"
+        app:layout_constraintTop_toTopOf="@id/ed_search"
+        app:layout_constraintBottom_toBottomOf="@id/ed_search"
+        android:layout_marginEnd="@dimen/_15sdp"/>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/favorite_background"
+        android:backgroundTint="@color/g_search_and_icons"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintStart_toEndOf="@id/ed_search"
+        app:layout_constraintTop_toTopOf="@id/guideline5"
+        app:layout_constraintVertical_bias="0.533">
+
+        <ImageView
+            android:id="@+id/img_scan"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:src="@drawable/ic_scan" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        app:layout_constraintStart_toEndOf="@id/linear"
+        app:layout_constraintTop_toTopOf="@id/guideline5"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        android:background="@drawable/favorite_background"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/g_search_and_icons">
+        <ImageView
+            android:id="@+id/img_mic"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/ic_microphone"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_9sdp"
+            />
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
