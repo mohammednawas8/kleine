@@ -1,5 +1,6 @@
 package com.example.kleine.adapters.recyclerview
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -43,8 +44,9 @@ class BestDealsRecyclerAdapter : RecyclerView.Adapter<BestDealsRecyclerAdapter.B
         holder.binding.apply {
             Glide.with(holder.itemView).load(image).into(imgBestDeal)
             tvDealProductName.text = product.title
-            tvNewPrice.text = product.newPrice
-            tvOldPrice.text = product.price
+            tvNewPrice.text = "$${product.newPrice}"
+            tvOldPrice.text = "$${product.price}"
+            tvOldPrice.paintFlags = tvOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
     }
 

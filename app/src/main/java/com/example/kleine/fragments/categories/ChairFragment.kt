@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
+import com.example.kleine.adapters.recyclerview.ChairsRecyclerAdapter
 import com.example.kleine.databinding.FragmentChairBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
@@ -22,7 +23,7 @@ class ChairFragment : Fragment() {
     private lateinit var adsAdapter: AdsRecyclerAdapter
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var bestDealsAdapter:BestDealsRecyclerAdapter
-    private lateinit var chairsAdapter: BestDealsRecyclerAdapter
+    private lateinit var chairsAdapter: ChairsRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +32,14 @@ class ChairFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[ShoppingViewModel::class.java]
         adsAdapter = AdsRecyclerAdapter()
         bestDealsAdapter = BestDealsRecyclerAdapter()
-        chairsAdapter = BestDealsRecyclerAdapter()
+        chairsAdapter = ChairsRecyclerAdapter()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentChairBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -83,8 +84,7 @@ class ChairFragment : Fragment() {
         object : CountDownTimer(43140000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                val millis = millisUntilFinished
-                updateTimer(millis)
+                updateTimer(millisUntilFinished)
             }
 
             override fun onFinish() {

@@ -6,14 +6,12 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.kleine.databinding.BestDealItemBinding
 import com.example.kleine.databinding.ProductItemBinding
 import com.example.kleine.model.Product
-import com.example.kleine.util.Constants
 import com.example.kleine.util.Constants.Companion.IMAGES
 
-class BestProductsRecyclerAdapter() :
-    RecyclerView.Adapter<BestProductsRecyclerAdapter.BestProductsRecyclerAdapterViewHolder>() {
+class ChairsRecyclerAdapter() :
+    RecyclerView.Adapter<ChairsRecyclerAdapter.BestProductsRecyclerAdapterViewHolder>() {
 
     inner class BestProductsRecyclerAdapterViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -48,7 +46,7 @@ class BestProductsRecyclerAdapter() :
         holder.binding.apply {
             Glide.with(holder.itemView).load(image).into(imgProduct)
             tvName.text = product.title
-            tvPrice.text = product.price
+            tvPrice.text = "$${product.price}"
         }
     }
 

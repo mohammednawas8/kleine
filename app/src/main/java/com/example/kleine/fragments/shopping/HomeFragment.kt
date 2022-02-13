@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         )
         binding.viewpagerHome.isUserInputEnabled = false
         val fragmentAdapter =
-            HomeViewpagerAdapter(categoriesFragments, parentFragmentManager, lifecycle)
+            HomeViewpagerAdapter(categoriesFragments, childFragmentManager, lifecycle)
         binding.viewpagerHome.adapter = fragmentAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewpagerHome) { tab, position ->
             when (position) {

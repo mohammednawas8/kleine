@@ -51,48 +51,48 @@ class LunchActivity : AppCompatActivity() {
 //        saveNewProduct()
     }
 
-//    private fun saveNewProduct() {
-//
-//        val title = "Chair"
-//        val description = null
-//        val category = CHAIR_CATEGORY
-//        val oldPrice = "2000"
-//        val price = "1600"
-//        val seller = "mo mart"
-//
-//        val images = HashMap<String,Any>()
-//        val imagesList = listOf(
-//            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FZnDRiKZR2Ucg46xATKBA%2FImput%20Image.png?alt=media&token=c4ed7492-526b-48a6-99e1-9d2b7f97aeba",
-//            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FZnDRiKZR2Ucg46xATKBA%2FImput%20Image.png?alt=media&token=c4ed7492-526b-48a6-99e1-9d2b7f97aeba",
-//            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FZnDRiKZR2Ucg46xATKBA%2FImput%20Image.png?alt=media&token=c4ed7492-526b-48a6-99e1-9d2b7f97aeba"
-//        )
-//
-//        images.put(IMAGES,imagesList.toList())
-//
-//        val colors = HashMap<String,Any>()
-//        val colorsList = listOf<String>(
-//            GREEN,
-//            RED,
-//            BLACK,
-//            ORANGE
-//        )
-//        colors.put(COLORS, colorsList.toList())
-//
-//        val sizes = HashMap<String,Any>()
-//        val sizesList = listOf(
-//            S,
-//            M,
-//            L,
-//            XLARGE
-//        )
-//        sizes.put(SIZES,sizesList.toList())
-//
-//        val prodcut = Product(100372,title, description, category, price,oldPrice, seller, images, colors, sizes)
-//
-//        Firebase.firestore.collection(PRODUCTS_COLLECTION)
-//            .document()
-//            .set(prodcut)
-//
-//
-//    }
+    private fun saveNewProduct() {
+
+        val title = "Chair"
+        val description = null
+        val category = CHAIR_CATEGORY
+        val oldPrice = "2000"
+        val price = "1600"
+        val seller = "mo mart"
+
+        val images = HashMap<String,Any>()
+        val imagesList = listOf(
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FaOrZ4QgqBdxfASDILBpG%2Fpngwing.com%20(3).png?alt=media&token=c4f8e276-ab8b-4eeb-9077-9eeea9301394",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FaOrZ4QgqBdxfASDILBpG%2Fpngwing.com%20(3).png?alt=media&token=c4f8e276-ab8b-4eeb-9077-9eeea9301394",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FaOrZ4QgqBdxfASDILBpG%2Fpngwing.com%20(3).png?alt=media&token=c4f8e276-ab8b-4eeb-9077-9eeea9301394"
+        )
+
+        images.put(IMAGES,imagesList.toList())
+
+        val colors = HashMap<String,Any>()
+        val colorsList = listOf<String>(
+            GREEN,
+            RED,
+            BLACK,
+            ORANGE
+        )
+        colors.put(COLORS, colorsList.toList())
+
+        val sizes = HashMap<String,Any>()
+        val sizesList = listOf(
+            S,
+            M,
+            L,
+            XLARGE
+        )
+        sizes.put(SIZES,sizesList.toList())
+
+        val prodcut = Product(100362,title, description, category, price,oldPrice, seller, images, colors, sizes)
+
+        Firebase.firestore.collection(PRODUCTS_COLLECTION)
+            .document()
+            .set(prodcut)
+
+
+    }
 }
