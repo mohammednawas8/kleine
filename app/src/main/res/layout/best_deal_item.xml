@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/g_card_background"
+    android:elevation="0dp"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_88sdp">
+
+    <ImageView
+        android:id="@+id/img_best_deal"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/test_image" />
+
+    <TextView
+        android:id="@+id/tv_deal_product_name"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"
+        android:text="Scotch Premium"
+        app:layout_constraintStart_toEndOf="@id/img_best_deal"
+        app:layout_constraintTop_toTopOf="@id/img_best_deal"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_11sdp"
+        android:fontFamily="@font/poppins_light"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_9ssp"/>
+
+    <TextView
+        android:id="@+id/tv_old_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$2000"
+        app:layout_constraintTop_toBottomOf="@id/tv_deal_product_name"
+        app:layout_constraintStart_toEndOf="@id/tv_new_price"
+        android:textColor="@color/g_hint"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/sf_pro_display"
+        android:layout_marginStart="@dimen/_10sdp"
+        />
+
+    <TextView
+        android:id="@+id/tv_new_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$1600"
+        app:layout_constraintStart_toStartOf="@id/tv_deal_product_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_deal_product_name"
+
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/sf_pro_display"/>
+
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/btn_see_product"
+        android:layout_width="@dimen/_83sdp"
+        android:layout_height="@dimen/_28sdp"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/g_see_product"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/tv_deal_product_name"
+        app:layout_constraintTop_toTopOf="@id/tv_deal_product_name"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

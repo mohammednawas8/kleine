@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,251 +7,177 @@
     android:fillViewport="true"
     tools:context=".fragments.shopping.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/ed_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/search_box_background"
+        android:fontFamily="@font/poppins_thin"
+        android:hint="@string/g_search_now"
+        android:paddingStart="@dimen/_12sdp"
+        android:singleLine="true"
+        android:textColor="@color/g_icon_tint"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="@id/guideline5"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ed_search"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
-            app:tabRippleColor="@color/white"
-            app:tabSelectedTextColor="@color/black"
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/ed_search"
+        app:layout_constraintEnd_toEndOf="@id/ed_search"
+        app:layout_constraintTop_toTopOf="@id/ed_search" />
 
-            app:tabTextAppearance="@style/tabLayout_text">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chair." />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cupboard" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Table" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Accessory" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Furniture" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enlightening" />
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.04" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.96" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.68" />
-
-        <EditText
-            android:id="@+id/ed_search"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/search_box_background"
-            android:fontFamily="@font/poppins_thin"
-            android:hint="@string/g_search_now"
-            android:paddingStart="@dimen/_12sdp"
-            android:singleLine="true"
-            android:textColor="@color/g_icon_tint"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintBottom_toBottomOf="@id/guideline4"
-            app:layout_constraintEnd_toEndOf="@id/guideline3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toTopOf="@id/guideline5"
-            app:layout_constraintVertical_bias="1.0" />
+    <FrameLayout
+        android:id="@+id/linear"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/favorite_background"
+        android:backgroundTint="@color/g_search_and_icons"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline5"
+        app:layout_constraintVertical_bias="0.533">
 
         <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:src="@drawable/ic_search"
-            app:layout_constraintBottom_toBottomOf="@id/ed_search"
-            app:layout_constraintEnd_toEndOf="@id/ed_search"
-            app:layout_constraintTop_toTopOf="@id/ed_search" />
+            android:id="@+id/img_scan"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_scan" />
+    </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/linear"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:background="@drawable/favorite_background"
-            android:backgroundTint="@color/g_search_and_icons"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/guideline4"
-            app:layout_constraintEnd_toEndOf="@id/guideline8"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@id/guideline5"
-            app:layout_constraintVertical_bias="0.533">
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:background="@drawable/favorite_background"
+        android:backgroundTint="@color/g_search_and_icons"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toTopOf="@id/guideline5">
 
-            <ImageView
-                android:id="@+id/img_scan"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_scan" />
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/img_mic"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_microphone" />
 
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:background="@drawable/favorite_background"
-            android:backgroundTint="@color/g_search_and_icons"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/guideline4"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
-            app:layout_constraintStart_toEndOf="@id/guideline8"
-            app:layout_constraintTop_toTopOf="@id/guideline5">
+    </FrameLayout>
 
-            <ImageView
-                android:id="@+id/img_mic"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_microphone" />
-        </FrameLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_search"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@color/white"
+        app:tabSelectedTextColor="@color/black"
+
+        app:tabTextAppearance="@style/tabLayout_text">
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
+
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08" />
+            android:text="Chair." />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.01" />
+            android:text="Cupboard" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17" />
+            android:text="Table" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.42" />
+            android:text="Accessory" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline8"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.83" />
+            android:text="Furniture" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_ads"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/guideline7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toTopOf="@id/guideline6"
-            android:overScrollMode="never"/>
-
-        <TextView
-            android:id="@+id/tv_offer_timer"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/sf_pro_display"
-            android:text="11:03:28"
-            android:textColor="@color/g_hint"
-            android:textSize="@dimen/_11ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline7" />
+            android:text="Enlightening" />
 
-        <TextView
-            android:id="@+id/tv_best_deals"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_thin"
-            android:text="@string/g_best_deals"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp"
-            app:layout_constraintEnd_toEndOf="@id/tv_offer_timer"
-            app:layout_constraintStart_toStartOf="@id/tv_offer_timer"
-            app:layout_constraintTop_toBottomOf="@id/tv_offer_timer" />
+    </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager_best_deals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/tv_best_deals" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.83" />
 
-        <TextView
-            android:id="@+id/tv_best_products"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/poppins_thin"
-            android:text="@string/g_best_deals"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/viewpager_best_deals" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_chairs"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/tv_best_products" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

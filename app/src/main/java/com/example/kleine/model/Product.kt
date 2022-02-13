@@ -5,7 +5,7 @@ data class Product(
     val title: String? = "",
     val description: String? = "",
     val category: String? = "",
-    val oldPrice:String?="",
+    val newPrice:String?="",
     val price: String? = "",
     val seller: String? = "",
     val images: HashMap<String, Any>?=null,

@@ -1,14 +1,30 @@
 package com.example.kleine.activities
 
 import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
+import android.os.Build.VERSION_CODES.M
+import android.os.Build.VERSION_CODES.S
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.model.Product
+import com.example.kleine.util.Constants.Companion.BLACK
+import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
+import com.example.kleine.util.Constants.Companion.COLORS
+import com.example.kleine.util.Constants.Companion.GREEN
+import com.example.kleine.util.Constants.Companion.IMAGES
+import com.example.kleine.util.Constants.Companion.ORANGE
+import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
+import com.example.kleine.util.Constants.Companion.RED
+import com.example.kleine.util.Constants.Companion.SIZES
+import com.example.kleine.util.Constants.Companion.XLARGE
 import com.example.kleine.viewmodel.lunchapp.KleineViewModel
 import com.example.kleine.viewmodel.lunchapp.ViewModelProviderFactory
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class LunchActivity : AppCompatActivity() {
     lateinit var viewModel: KleineViewModel
@@ -32,13 +48,14 @@ class LunchActivity : AppCompatActivity() {
 
 //        val random = Random.nextInt(from = 10000, until = 99999)
 
+//        saveNewProduct()
     }
 
 //    private fun saveNewProduct() {
 //
-//        val title = "Special Shirt's"
+//        val title = "Chair"
 //        val description = null
-//        val category = BEST_DEALS
+//        val category = CHAIR_CATEGORY
 //        val oldPrice = "2000"
 //        val price = "1600"
 //        val seller = "mo mart"
@@ -70,11 +87,10 @@ class LunchActivity : AppCompatActivity() {
 //        )
 //        sizes.put(SIZES,sizesList.toList())
 //
-//        val prodcut = Products(title, description, category, price,oldPrice, seller, images, colors, sizes)
+//        val prodcut = Product(100372,title, description, category, price,oldPrice, seller, images, colors, sizes)
 //
 //        Firebase.firestore.collection(PRODUCTS_COLLECTION)
-//            .document(
-//                    "Ff7YVgeGV7chY0dcW3EW")
+//            .document()
 //            .set(prodcut)
 //
 //

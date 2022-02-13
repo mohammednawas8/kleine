@@ -1,7 +1,9 @@
 package com.example.kleine.firebaseDatabase
 
 import com.example.kleine.model.User
+import com.example.kleine.util.Constants.Companion.BEST_DEALS
 import com.example.kleine.util.Constants.Companion.CATEGORY
+import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.CLOTHES
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
@@ -29,4 +31,8 @@ class FirebaseDb {
     ) = firebaseAuth.signInWithEmailAndPassword(email, password)
 
     fun getClothesProducts() = productsCollection.whereEqualTo(CATEGORY, CLOTHES).get()
+
+    fun getBestDealsProducts() = productsCollection.whereEqualTo(CATEGORY, BEST_DEALS).get()
+
+    fun getChairs() = productsCollection.whereEqualTo(CATEGORY, CHAIR_CATEGORY).get()
 }

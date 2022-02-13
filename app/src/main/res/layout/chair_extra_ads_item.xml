@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_235sdp"
+    android:layout_width="@dimen/_230sdp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/img_ad"
-            android:layout_width="@dimen/_96sdp"
-            android:layout_height="@dimen/_96sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="@dimen/_16sdp"
@@ -24,13 +24,13 @@
             android:src="@drawable/test_image" />
 
         <TextView
-            android:id="@+id/tv_ad_product_name"
+            android:id="@+id/tv_ad_name"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="wrap_content"
             android:text="Scotch Premium"
             app:layout_constraintStart_toEndOf="@id/img_ad"
             app:layout_constraintTop_toTopOf="@id/img_ad"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginStart="@dimen/_18sdp"
             android:fontFamily="@font/poppins_thin"
             android:textStyle="bold"
@@ -42,21 +42,21 @@
             android:layout_width="@dimen/_80sdp"
             android:layout_height="wrap_content"
             android:text="$1600"
-            app:layout_constraintStart_toStartOf="@id/tv_ad_product_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_ad_product_name"
+            app:layout_constraintStart_toStartOf="@id/tv_ad_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_ad_name"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             android:fontFamily="@font/sf_pro_display"/>
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/btn_ad_add_to_cart"
-            android:layout_width="@dimen/_83sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:id="@+id/btn_see_product"
+            android:layout_width="@dimen/_77sdp"
+            android:layout_height="@dimen/_25sdp"
             android:background="@drawable/btn_background"
             android:fontFamily="@font/poppins_light"
             android:text="@string/g_add_to_cart"
             android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_ad_price"

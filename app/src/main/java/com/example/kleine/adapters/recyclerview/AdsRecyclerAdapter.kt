@@ -1,4 +1,4 @@
-package com.example.kleine.adapters.viewpager
+package com.example.kleine.adapters.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.kleine.databinding.ChairExtraAdsBinding
+import com.example.kleine.databinding.ChairExtraAdsItemBinding
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.IMAGES
 
@@ -24,20 +24,20 @@ class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder
 
     val differ = AsyncListDiffer(this,diffCallBack)
 
-    inner class AdsViewHolder(val binding:ChairExtraAdsBinding):RecyclerView.ViewHolder(binding.root)
+    inner class AdsViewHolder(val binding:ChairExtraAdsItemBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AdsRecyclerAdapter.AdsViewHolder {
+    ): AdsViewHolder {
         return AdsViewHolder(
-            ChairExtraAdsBinding.inflate(
+            ChairExtraAdsItemBinding.inflate(
                 LayoutInflater.from(parent.context),parent,false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: AdsRecyclerAdapter.AdsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdsViewHolder, position: Int) {
         val product = differ.currentList[position]
         val images = product.images
         val image = (images!![IMAGES] as List<String>)[0]
@@ -45,7 +45,7 @@ class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder
         holder.binding.apply {
             Glide.with(holder.itemView).load(image).into(imgAd)
             tvAdPrice.text = "$${product.price}"
-            tvAdProductName.text = product.title
+            tvAdName.text = product.title
         }
     }
 
