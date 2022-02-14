@@ -10,7 +10,8 @@ data class Product(
     val seller: String? = "",
     val images: HashMap<String, Any>?=null,
     val colors: HashMap<String, Any>?=null,
-    val sizes: HashMap<String, Any>?=null
+    val sizes: HashMap<String, Any>?=null,
+    val orders:Int = 0
 ){
     constructor(
          id :Int,

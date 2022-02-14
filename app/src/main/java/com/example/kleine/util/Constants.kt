@@ -10,6 +10,7 @@ class Constants {
         const val CATEGORY = "category"
         const val CHAIR_CATEGORY = "Chair"
         const val CUPBOARD_CATEGORY = "Cupboard"
+        const val ORDERS = "orders"
         const val CLOTHES = "Clothes"
         const val BEST_DEALS = "Best Deals"
         const val IMAGES = "images"

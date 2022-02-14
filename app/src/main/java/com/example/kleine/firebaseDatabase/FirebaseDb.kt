@@ -5,6 +5,8 @@ import com.example.kleine.util.Constants.Companion.BEST_DEALS
 import com.example.kleine.util.Constants.Companion.CATEGORY
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.CLOTHES
+import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
+import com.example.kleine.util.Constants.Companion.ORDERS
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.firebase.auth.ktx.auth
@@ -36,5 +38,7 @@ class FirebaseDb {
 
     fun getChairs(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY, CHAIR_CATEGORY).limit(pagingPage).get()
 
+    fun getMostOrderedCupboard(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY,
+        CUPBOARD_CATEGORY).limit(pagingPage).orderBy(ORDERS).get()
 
 }

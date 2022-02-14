@@ -13,15 +13,20 @@ class ShoppingViewModel(
     val bestDeals = MutableLiveData<List<Product>>()
     val emptyBestDeals = MutableLiveData<Boolean>()
     val chairs = MutableLiveData<List<Product>>()
+    val mostCupboardOrdered = MutableLiveData<List<Product>>()
 
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
 
+    private var mostOrderCupboardPaging: Long = 5
+
     init {
         getClothesProducts()
         getBestDealsProduct()
         getChairs()
+        getCupboardsByOrders()
+
     }
 
     fun getClothesProducts() =
@@ -30,7 +35,7 @@ class ShoppingViewModel(
                 val productsList = documents.toObjects(Product::class.java)
                 clothes.postValue(productsList)
                 clothesPaging += 5
-            }else{
+            } else {
                 emptyClothes.postValue(true)
             }
         }
@@ -54,7 +59,15 @@ class ShoppingViewModel(
                 chairsPagingPage += 10
 
             }
+        }
 
+    fun getCupboardsByOrders() =
+        firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging).addOnSuccessListener { documents ->
+        if (!documents.isEmpty) {
+            val productsList = documents.toObjects(Product::class.java)
+            mostCupboardOrdered.postValue(productsList)
+            chairsPagingPage += 5
 
         }
+    }
 }

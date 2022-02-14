@@ -5,7 +5,6 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
-import com.example.kleine.adapters.recyclerview.ChairsRecyclerAdapter
+import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentChairBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
@@ -26,7 +25,7 @@ class ChairFragment : Fragment() {
     private lateinit var adsAdapter: AdsRecyclerAdapter
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var bestDealsAdapter: BestDealsRecyclerAdapter
-    private lateinit var chairsAdapter: ChairsRecyclerAdapter
+    private lateinit var productsAdapter: ProductsRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class ChairFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[ShoppingViewModel::class.java]
         adsAdapter = AdsRecyclerAdapter()
         bestDealsAdapter = BestDealsRecyclerAdapter()
-        chairsAdapter = ChairsRecyclerAdapter()
+        productsAdapter = ProductsRecyclerAdapter()
     }
 
     override fun onCreateView(
@@ -126,7 +125,7 @@ class ChairFragment : Fragment() {
 
     private fun observeChairs() {
         viewModel.chairs.observe(viewLifecycleOwner, Observer { chairsList ->
-            chairsAdapter.differ.submitList(chairsList.toList())
+            productsAdapter.differ.submitList(chairsList.toList())
 
         })
     }
@@ -134,7 +133,7 @@ class ChairFragment : Fragment() {
     private fun setupChairsRecyclerView() {
         binding.rvChairs.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-            adapter = chairsAdapter
+            adapter = productsAdapter
         }
     }
 

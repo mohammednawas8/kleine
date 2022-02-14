@@ -10,8 +10,8 @@ import com.example.kleine.databinding.ProductItemBinding
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.IMAGES
 
-class ChairsRecyclerAdapter() :
-    RecyclerView.Adapter<ChairsRecyclerAdapter.BestProductsRecyclerAdapterViewHolder>() {
+class ProductsRecyclerAdapter() :
+    RecyclerView.Adapter<ProductsRecyclerAdapter.BestProductsRecyclerAdapterViewHolder>() {
 
     inner class BestProductsRecyclerAdapterViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root)
