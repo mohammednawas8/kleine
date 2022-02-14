@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/g_card_background"
-    app:elevation="0dp">
+    app:elevation="0dp"
+
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,12 +39,14 @@
             android:id="@+id/img_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_favorite"
             app:layout_constraintEnd_toEndOf="@id/img_product"
             app:layout_constraintTop_toBottomOf="@id/img_product"
             app:layout_constraintTop_toTopOf="@id/tv_name"
-            android:src="@drawable/ic_favorite"
             app:tint="@color/g_icon_tint"
-            />
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/tv_price"

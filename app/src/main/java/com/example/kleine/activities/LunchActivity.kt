@@ -6,6 +6,7 @@ import android.os.Build.VERSION_CODES.M
 import android.os.Build.VERSION_CODES.S
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
@@ -17,6 +18,7 @@ import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.example.kleine.util.Constants.Companion.GREEN
 import com.example.kleine.util.Constants.Companion.IMAGES
 import com.example.kleine.util.Constants.Companion.ORANGE
+import com.example.kleine.util.Constants.Companion.ORDERS
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.RED
 import com.example.kleine.util.Constants.Companion.SIZES
@@ -24,6 +26,8 @@ import com.example.kleine.util.Constants.Companion.XLARGE
 import com.example.kleine.viewmodel.lunchapp.KleineViewModel
 import com.example.kleine.viewmodel.lunchapp.ViewModelProviderFactory
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -49,23 +53,25 @@ class LunchActivity : AppCompatActivity() {
 
 //        val random = Random.nextInt(from = 10000, until = 99999)
 
-        saveNewProduct()
+
+//        saveNewProduct()
     }
 
     private fun saveNewProduct() {
 
-        val title = "Cupboard 2"
+        val title = "Cupboard 4"
         val description = "Original cupboard"
         val category = CUPBOARD_CATEGORY
         val price = "1200"
-        val newPrice = null
+        val newPrice = "77"
         val seller = "mo mart"
+        val orders = 78
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FUwlohue4OclECb0aABut%2Fcupbard1.jpg?alt=media&token=d491349f-a2fe-42bb-8d04-92dcdd9ca673",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FUwlohue4OclECb0aABut%2Fcupbard1.jpg?alt=media&token=d491349f-a2fe-42bb-8d04-92dcdd9ca673",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FUwlohue4OclECb0aABut%2Fcupbard1.jpg?alt=media&token=d491349f-a2fe-42bb-8d04-92dcdd9ca673"
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Ffdcf79ecf88f41f3a498bd37e754bdd0.jpg?alt=media&token=55a63213-9fb2-46dc-bdac-1436cb3d0265",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Ffdcf79ecf88f41f3a498bd37e754bdd0.jpg?alt=media&token=55a63213-9fb2-46dc-bdac-1436cb3d0265",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Ffdcf79ecf88f41f3a498bd37e754bdd0.jpg?alt=media&token=55a63213-9fb2-46dc-bdac-1436cb3d0265"
         )
 
         images.put(IMAGES,imagesList.toList())
@@ -86,10 +92,10 @@ class LunchActivity : AppCompatActivity() {
         )
         sizes.put(SIZES,sizesList.toList())
 
-        val prodcut = Product(102862,title, description, category, price,newPrice, seller, images, colors, sizes)
+        val prodcut = Product(102312,title, description, category, price,newPrice, seller, images, colors, sizes,orders)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
-            .document("kT7n9tbCbOdJxzCx1Bwt")
+            .document()
             .set(prodcut)
 
 

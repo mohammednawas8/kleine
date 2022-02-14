@@ -2,6 +2,7 @@ package com.example.kleine.fragments.categories
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
@@ -30,8 +32,7 @@ class ChairFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val database = FirebaseDb()
-        val viewModelFactory = ShoppingViewModelProviderFactory(database)
-        viewModel = ViewModelProvider(this, viewModelFactory)[ShoppingViewModel::class.java]
+        viewModel = (activity as ShoppingActivity).viewModel
         adsAdapter = AdsRecyclerAdapter()
         bestDealsAdapter = BestDealsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()

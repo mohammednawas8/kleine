@@ -27,7 +27,7 @@ class FirstScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val shouldShowSplash =
-            activity!!.getSharedPreferences(SPLASH_SHARED_PREF, Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences(SPLASH_SHARED_PREF, Context.MODE_PRIVATE) //changed from activty to requierdActivty
                 .getBoolean(SHOULD_SHOW, true)
 
 
@@ -40,7 +40,7 @@ class FirstScreenFragment : Fragment() {
                 findNavController().navigate(R.id.action_firstScreenFragment_to_secondScreenFragment)
 
                 val sharedPref =
-                    activity!!.getSharedPreferences(SPLASH_SHARED_PREF, Context.MODE_PRIVATE)
+                    requireActivity().getSharedPreferences(SPLASH_SHARED_PREF, Context.MODE_PRIVATE)
                 sharedPref.edit().putBoolean(SHOULD_SHOW, false).apply()
             }
     }
