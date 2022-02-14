@@ -6,11 +6,17 @@ import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.Product
 
 class ShoppingViewModel(
-    private val firebaseDatabase:FirebaseDb
+    private val firebaseDatabase: FirebaseDb
 ) : ViewModel() {
     val clothes = MutableLiveData<List<Product>>()
+    val emptyClothes = MutableLiveData<Boolean>()
     val bestDeals = MutableLiveData<List<Product>>()
+    val emptyBestDeals = MutableLiveData<Boolean>()
     val chairs = MutableLiveData<List<Product>>()
+
+    private var chairsPagingPage: Long = 10
+    private var clothesPaging: Long = 5
+    private var bestDealsPaging: Long = 5
 
     init {
         getClothesProducts()
@@ -18,26 +24,37 @@ class ShoppingViewModel(
         getChairs()
     }
 
-    private fun getClothesProducts() = firebaseDatabase.getClothesProducts().addOnSuccessListener { documents->
-        if(!documents.isEmpty){
-            val productsList = documents.toObjects(Product::class.java)
-            clothes.postValue(productsList)
+    fun getClothesProducts() =
+        firebaseDatabase.getClothesProducts(clothesPaging).addOnSuccessListener { documents ->
+            if (!documents.isEmpty) {
+                val productsList = documents.toObjects(Product::class.java)
+                clothes.postValue(productsList)
+                clothesPaging += 5
+            }else{
+                emptyClothes.postValue(true)
+            }
         }
-    }
 
-    private fun getBestDealsProduct() = firebaseDatabase.getBestDealsProducts().addOnSuccessListener { documents->
-        if(!documents.isEmpty){
-            val productsList = documents.toObjects(Product::class.java)
-            bestDeals.postValue(productsList)
+    fun getBestDealsProduct() =
+        firebaseDatabase.getBestDealsProducts(bestDealsPaging).addOnSuccessListener { documents ->
+            if (!documents.isEmpty) {
+                val productsList = documents.toObjects(Product::class.java)
+                bestDeals.postValue(productsList)
+                bestDealsPaging += 5
+            } else {
+                emptyBestDeals.postValue(true)
+            }
         }
-    }
 
-    private fun getChairs() = firebaseDatabase.getChairs().addOnSuccessListener { documents->
-        if(!documents.isEmpty){
-            val productsList = documents.toObjects(Product::class.java)
-            chairs.postValue(productsList)
+    fun getChairs() =
+        firebaseDatabase.getChairs(chairsPagingPage).addOnSuccessListener { documents ->
+            if (!documents.isEmpty) {
+                val productsList = documents.toObjects(Product::class.java)
+                chairs.postValue(productsList)
+                chairsPagingPage += 10
+
+            }
+
+
         }
-    }
-
-
 }

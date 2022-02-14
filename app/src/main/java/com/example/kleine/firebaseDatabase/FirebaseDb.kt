@@ -30,9 +30,11 @@ class FirebaseDb {
         password: String
     ) = firebaseAuth.signInWithEmailAndPassword(email, password)
 
-    fun getClothesProducts() = productsCollection.whereEqualTo(CATEGORY, CLOTHES).get()
+    fun getClothesProducts(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY, CLOTHES).limit(pagingPage).get()
 
-    fun getBestDealsProducts() = productsCollection.whereEqualTo(CATEGORY, BEST_DEALS).get()
+    fun getBestDealsProducts(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY, BEST_DEALS).limit(pagingPage).get()
 
-    fun getChairs() = productsCollection.whereEqualTo(CATEGORY, CHAIR_CATEGORY).get()
+    fun getChairs(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY, CHAIR_CATEGORY).limit(pagingPage).get()
+
+
 }

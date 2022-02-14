@@ -13,6 +13,7 @@ import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.BLACK
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.COLORS
+import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.example.kleine.util.Constants.Companion.GREEN
 import com.example.kleine.util.Constants.Companion.IMAGES
 import com.example.kleine.util.Constants.Companion.ORANGE
@@ -48,23 +49,23 @@ class LunchActivity : AppCompatActivity() {
 
 //        val random = Random.nextInt(from = 10000, until = 99999)
 
-//        saveNewProduct()
+        saveNewProduct()
     }
 
     private fun saveNewProduct() {
 
-        val title = "Chair"
-        val description = null
-        val category = CHAIR_CATEGORY
-        val oldPrice = "2000"
-        val price = "1600"
+        val title = "Cupboard 2"
+        val description = "Original cupboard"
+        val category = CUPBOARD_CATEGORY
+        val price = "1200"
+        val newPrice = null
         val seller = "mo mart"
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FaOrZ4QgqBdxfASDILBpG%2Fpngwing.com%20(3).png?alt=media&token=c4f8e276-ab8b-4eeb-9077-9eeea9301394",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FaOrZ4QgqBdxfASDILBpG%2Fpngwing.com%20(3).png?alt=media&token=c4f8e276-ab8b-4eeb-9077-9eeea9301394",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FaOrZ4QgqBdxfASDILBpG%2Fpngwing.com%20(3).png?alt=media&token=c4f8e276-ab8b-4eeb-9077-9eeea9301394"
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FUwlohue4OclECb0aABut%2Fcupbard1.jpg?alt=media&token=d491349f-a2fe-42bb-8d04-92dcdd9ca673",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FUwlohue4OclECb0aABut%2Fcupbard1.jpg?alt=media&token=d491349f-a2fe-42bb-8d04-92dcdd9ca673",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FUwlohue4OclECb0aABut%2Fcupbard1.jpg?alt=media&token=d491349f-a2fe-42bb-8d04-92dcdd9ca673"
         )
 
         images.put(IMAGES,imagesList.toList())
@@ -72,9 +73,7 @@ class LunchActivity : AppCompatActivity() {
         val colors = HashMap<String,Any>()
         val colorsList = listOf<String>(
             GREEN,
-            RED,
             BLACK,
-            ORANGE
         )
         colors.put(COLORS, colorsList.toList())
 
@@ -87,10 +86,10 @@ class LunchActivity : AppCompatActivity() {
         )
         sizes.put(SIZES,sizesList.toList())
 
-        val prodcut = Product(100362,title, description, category, price,oldPrice, seller, images, colors, sizes)
+        val prodcut = Product(102862,title, description, category, price,newPrice, seller, images, colors, sizes)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
-            .document()
+            .document("kT7n9tbCbOdJxzCx1Bwt")
             .set(prodcut)
 
 

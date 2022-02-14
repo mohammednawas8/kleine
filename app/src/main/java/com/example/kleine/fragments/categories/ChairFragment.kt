@@ -5,11 +5,14 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ChairsRecyclerAdapter
@@ -22,7 +25,7 @@ class ChairFragment : Fragment() {
     private lateinit var binding: FragmentChairBinding
     private lateinit var adsAdapter: AdsRecyclerAdapter
     private lateinit var viewModel: ShoppingViewModel
-    private lateinit var bestDealsAdapter:BestDealsRecyclerAdapter
+    private lateinit var bestDealsAdapter: BestDealsRecyclerAdapter
     private lateinit var chairsAdapter: ChairsRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,11 +58,74 @@ class ChairFragment : Fragment() {
 
         setupChairsRecyclerView()
         observeChairs()
+
+        adsPaging()
+        bestDealsPaging()
+        chairsPaging()
+
+        observeEmptyAds()
+        observeEmptyBestDeals()
+
         setUpTimer()
+
+
+    }
+
+    private fun observeEmptyBestDeals() {
+        viewModel.emptyBestDeals.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.apply {
+                    rvBestDeals.visibility = View.GONE
+                    tvBestDeals.visibility = View.GONE
+                }
+            }
+        })
+    }
+
+    private fun observeEmptyAds() {
+        viewModel.emptyClothes.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.apply {
+                    rvAds.visibility = View.GONE
+                }
+            }
+        })
+    }
+
+
+    private fun bestDealsPaging() {
+        binding.rvBestDeals.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollHorizontally(1) && dx != 0) {
+                    viewModel.getBestDealsProduct()
+                }
+            }
+        })
+    }
+
+    private fun adsPaging() {
+        binding.rvAds.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1) && dx != 0) {
+                    viewModel.getClothesProducts()
+                }
+            }
+        })
+    }
+
+    private fun chairsPaging() {
+        binding.scrollChair.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+            if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
+                viewModel.getChairs()
+            }
+        })
     }
 
     private fun observeChairs() {
-        viewModel.chairs.observe(viewLifecycleOwner, Observer { chairsList->
+        viewModel.chairs.observe(viewLifecycleOwner, Observer { chairsList ->
             chairsAdapter.differ.submitList(chairsList.toList())
 
         })
@@ -67,7 +133,7 @@ class ChairFragment : Fragment() {
 
     private fun setupChairsRecyclerView() {
         binding.rvChairs.apply {
-            layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = chairsAdapter
         }
     }
@@ -75,7 +141,7 @@ class ChairFragment : Fragment() {
 
     private fun setupBestDealsRecyclerView() {
         binding.rvBestDeals.apply {
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = bestDealsAdapter
         }
     }
@@ -107,7 +173,7 @@ class ChairFragment : Fragment() {
     }
 
     private fun observeBestDeals() {
-        viewModel.bestDeals.observe(viewLifecycleOwner, Observer { bestDealsList->
+        viewModel.bestDeals.observe(viewLifecycleOwner, Observer { bestDealsList ->
             bestDealsAdapter.differ.submitList(bestDealsList.toList())
         })
     }
