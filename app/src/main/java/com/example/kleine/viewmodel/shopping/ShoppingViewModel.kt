@@ -31,7 +31,7 @@ class ShoppingViewModel(
         getBestDealsProduct()
         getChairs()
         getCupboardsByOrders()
-        getCupboardProduct ()
+        getCupboardProduct()
     }
 
     fun getClothesProducts() =
@@ -81,7 +81,7 @@ class ShoppingViewModel(
     }
 
 
-    fun getCupboardsByOrders() = firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging)
+    fun getCupboardsByOrders(category:String = "Cupboard") = firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging,category)
         .addOnCompleteListener {
             if (it.isSuccessful) {
                 val documents = it.result

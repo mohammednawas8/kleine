@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kleine.R
 import com.example.kleine.SpacingDecorator.SpacingItemDecorator
 import com.example.kleine.activities.ShoppingActivity
@@ -46,6 +49,30 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
 
         setupCupboardRecyclerView()
         observeCupboard()
+
+        mostRequestedCupboardPaging()
+        cupboardPaging()
+
+    }
+
+    private fun cupboardPaging() {
+        binding.scrollCupboard.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
+                viewModel.getCupboardProduct()
+            }
+        })
+    }
+
+    private fun mostRequestedCupboardPaging() {
+        binding.rvCupboardMostOrdered.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if(!recyclerView.canScrollHorizontally(1) && dx!=0)
+                    viewModel.getCupboardsByOrders()
+
+            }
+        })
     }
 
     private fun observeCupboard() {

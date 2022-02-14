@@ -36,10 +36,10 @@ class HomeFragment : Fragment() {
         val categoriesFragments = arrayListOf<Fragment>(
             ChairFragment(),
             CupboardFragment(),
-            TableFragment(),
-            AccessoryFragment(),
-            FurnitureFragment(),
-            EnlighteningFragment()
+            CupboardFragment(),
+            CupboardFragment(),
+            CupboardFragment(),
+            CupboardFragment()
         )
         binding.viewpagerHome.isUserInputEnabled = false
         val fragmentAdapter =
