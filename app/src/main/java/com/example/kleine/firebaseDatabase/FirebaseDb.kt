@@ -40,8 +40,7 @@ class FirebaseDb {
     fun getChairs(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY, CHAIR_CATEGORY).limit(pagingPage).get()
 
     //add order by orders
-    fun getMostOrderedCupboard(pagingPage:Long,category:String) = productsCollection.whereEqualTo(CATEGORY,
-        category).limit(pagingPage).orderBy(ORDERS,Query.Direction.DESCENDING).limit(pagingPage).get()
+    fun getMostOrderedCupboard(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY, CUPBOARD_CATEGORY).limit(pagingPage).orderBy(ORDERS,Query.Direction.DESCENDING).limit(pagingPage).get()
 
     fun getCupboards(pagingPage:Long) = productsCollection.whereEqualTo(CATEGORY,CUPBOARD_CATEGORY).limit(pagingPage).limit(pagingPage).get()
 
