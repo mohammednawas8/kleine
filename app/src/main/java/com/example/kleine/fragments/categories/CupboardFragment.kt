@@ -1,6 +1,7 @@
 package com.example.kleine.fragments.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.kleine.SpacingDecorator.SpacingItemDecorator
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentCupboardBinding
+import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 
 class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
@@ -23,7 +25,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     private lateinit var binding: FragmentCupboardBinding
     private lateinit var mostOrderedCupboardsAdapter: ProductsRecyclerAdapter
     private lateinit var cupboardAdapter:ProductsRecyclerAdapter
-
+    private val TAG = "CupboardFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mostOrderedCupboardsAdapter = ProductsRecyclerAdapter()
@@ -58,7 +60,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     private fun cupboardPaging() {
         binding.scrollCupboard.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getCupboardProduct()
+                viewModel.getCupboardProduct(cupboardAdapter.differ.currentList.size)
             }
         })
     }
@@ -69,16 +71,42 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if(!recyclerView.canScrollHorizontally(1) && dx!=0)
-                    viewModel.getCupboardsByOrders()
+                    viewModel.getCupboardsByOrders(mostOrderedCupboardsAdapter.differ.currentList.size)
 
             }
         })
     }
 
     private fun observeCupboard() {
-        viewModel.cupboard.observe(viewLifecycleOwner, Observer { cupboardList->
-            cupboardAdapter.differ.submitList(cupboardList.toList())
+        viewModel.cupboard.observe(viewLifecycleOwner, Observer { response->
+
+            when(response){
+                is Resource.Loading -> {
+                    showBottomLoading()
+                    return@Observer
+                }
+
+                is Resource.Success ->{
+                    hideBottomLoading()
+                    cupboardAdapter.differ.submitList(response.data)
+                    return@Observer
+                }
+
+                is Resource.Error ->{
+                    hideBottomLoading()
+                    Log.e(TAG,response.message.toString())
+                    return@Observer
+                }
+            }
         })
+    }
+
+    private fun hideBottomLoading() {
+        binding.progressbar2.visibility = View.GONE
+    }
+
+    private fun showBottomLoading() {
+        binding.progressbar2.visibility = View.VISIBLE
     }
 
     private fun setupCupboardRecyclerView() {
@@ -89,9 +117,35 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     }
 
     private fun observeMostOrderedCupboard() {
-        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { cupboardList ->
-            mostOrderedCupboardsAdapter.differ.submitList(cupboardList.toList())
+        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { response->
+
+            when(response){
+                is Resource.Loading -> {
+                    showTopLoading()
+                    return@Observer
+                }
+
+                is Resource.Success ->{
+                    hideTopLoading()
+                    mostOrderedCupboardsAdapter.differ.submitList(response.data)
+                    return@Observer
+                }
+
+                is Resource.Error ->{
+                    hideTopLoading()
+                    Log.e(TAG,response.message.toString())
+                    return@Observer
+                }
+            }
         })
+    }
+
+    private fun hideTopLoading() {
+        binding.progressbar1.visibility = View.GONE
+    }
+
+    private fun showTopLoading() {
+        binding.progressbar1.visibility = View.VISIBLE
     }
 
     private fun setupMostOrderedCupboardRecyclerView() {

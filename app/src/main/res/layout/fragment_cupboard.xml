@@ -8,9 +8,32 @@
     android:overScrollMode="never"
     android:id="@+id/scroll_cupboard">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressbar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/g_icon_tint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progressbar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/g_icon_tint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_cupboard_most_ordered"
+            app:layout_constraintBottom_toBottomOf="@id/rv_cupboard_most_ordered"
+            android:visibility="gone"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cupboard_most_ordered"
@@ -23,7 +46,8 @@
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/product_item"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@id/progressbar1"/>
 
         <TextView
             android:id="@+id/tv_best_products"
@@ -45,7 +69,8 @@
             android:overScrollMode="never"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/tv_best_products" />
+            app:layout_constraintTop_toBottomOf="@id/tv_best_products"
+            app:layout_constraintBottom_toTopOf="@id/progressbar2"/>
 
 
 
