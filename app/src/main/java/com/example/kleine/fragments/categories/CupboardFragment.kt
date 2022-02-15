@@ -1,8 +1,6 @@
 package com.example.kleine.fragments.categories
 
-import android.nfc.Tag
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +16,6 @@ import com.example.kleine.SpacingDecorator.SpacingItemDecorator
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentCupboardBinding
-import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 
 class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
@@ -61,7 +58,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     private fun cupboardPaging() {
         binding.scrollCupboard.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getCupboardProduct(cupboardAdapter.differ.currentList.size)
+                viewModel.getCupboardProduct()
             }
         })
     }
@@ -71,9 +68,9 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if(!recyclerView.canScrollHorizontally(1) && dx!=0) {
-                    viewModel.getCupboardsByOrders(mostOrderedCupboardsAdapter.differ.currentList.size)
-                }
+                if(!recyclerView.canScrollHorizontally(1) && dx!=0)
+                    viewModel.getCupboardsByOrders()
+
             }
         })
     }
@@ -92,24 +89,10 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     }
 
     private fun observeMostOrderedCupboard() {
-        viewModel.mostOrderedCupboard.observe(viewLifecycleOwner, Observer { response ->
-            mostOrderedCupboardsAdapter.differ.submitList(response.toList())
+        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { cupboardList ->
+            mostOrderedCupboardsAdapter.differ.submitList(cupboardList.toList())
         })
     }
-
-//    is Resource.Loading -> {
-//        Log.d("CupboardFragment","loading")
-//        return@Observer
-//    }
-//    is Resource.Success -> {
-//        cupboardAdapter.differ.submitList(response.data)
-//        return@Observer
-//    }
-//
-//    is Resource.Error -> {
-//        Log.e("CupboardFragment",response.message.toString())
-//        return@Observer
-//    }
 
     private fun setupMostOrderedCupboardRecyclerView() {
         binding.rvCupboardMostOrdered.apply {
