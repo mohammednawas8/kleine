@@ -18,4 +18,5 @@
     <color name="g_card_background">#FAFDFF</color>
     <color name="g_search_and_icons">#FAFBFC</color>
     <color name="g_line">#E9EAEC</color>
+    <color name="g_circle_shadow">#B8D9FA</color>
 </resources>

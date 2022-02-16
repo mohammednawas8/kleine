@@ -57,7 +57,9 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         cupboardPaging()
 
         cupboardAdapter.onItemClick = { product ->
-            findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2)
+            val bundle = Bundle()
+            bundle.putParcelable("product",product)
+            findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 
     }

@@ -11,12 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.Product
+import com.example.kleine.util.Constants
 import com.example.kleine.util.Constants.Companion.BLACK
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.COLORS
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.example.kleine.util.Constants.Companion.GREEN
 import com.example.kleine.util.Constants.Companion.IMAGES
+import com.example.kleine.util.Constants.Companion.LARGE
+import com.example.kleine.util.Constants.Companion.MEDIUM
 import com.example.kleine.util.Constants.Companion.ORANGE
 import com.example.kleine.util.Constants.Companion.ORDERS
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
@@ -54,7 +57,7 @@ class LunchActivity : AppCompatActivity() {
 //        val random = Random.nextInt(from = 10000, until = 99999)
 
 
-//        saveNewProduct()
+        saveNewProduct()
     }
 
     private fun saveNewProduct() {
@@ -69,25 +72,25 @@ class LunchActivity : AppCompatActivity() {
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Ffdcf79ecf88f41f3a498bd37e754bdd0.jpg?alt=media&token=55a63213-9fb2-46dc-bdac-1436cb3d0265",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Ffdcf79ecf88f41f3a498bd37e754bdd0.jpg?alt=media&token=55a63213-9fb2-46dc-bdac-1436cb3d0265",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Ffdcf79ecf88f41f3a498bd37e754bdd0.jpg?alt=media&token=55a63213-9fb2-46dc-bdac-1436cb3d0265"
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Fawdj.jpeg?alt=media&token=761fcb84-6c5e-4729-b7a6-11a5f9948f17",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Fcupbard3.jpg?alt=media&token=dfeeb964-b338-47e0-97c4-14368ec3f502",
+            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Fcupbard3.jpg?alt=media&token=dfeeb964-b338-47e0-97c4-14368ec3f502"
         )
 
         images.put(IMAGES,imagesList.toList())
 
         val colors = HashMap<String,Any>()
         val colorsList = listOf<String>(
-            GREEN,
-            BLACK,
+            "#D8F0D6",
+            "#B8D9FA",
         )
         colors.put(COLORS, colorsList.toList())
 
         val sizes = HashMap<String,Any>()
         val sizesList = listOf(
-            S,
-            M,
-            L,
+            Constants.SMALL,
+            MEDIUM,
+            LARGE,
             XLARGE
         )
         sizes.put(SIZES,sizesList.toList())
@@ -95,7 +98,7 @@ class LunchActivity : AppCompatActivity() {
         val prodcut = Product(10812,title, description, category, price,newPrice, seller, images, colors, sizes,orders)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
-            .document()
+            .document("5ZHYSD5s6N2mumIqaANu")
             .set(prodcut)
 
 

@@ -41,5 +41,9 @@
         android:id="@+id/productPreviewFragment2"
         android:name="com.example.kleine.fragments.shopping.ProductPreviewFragment"
         android:label="fragment_product_preview"
-        tools:layout="@layout/fragment_product_preview" />
+        tools:layout="@layout/fragment_product_preview" >
+        <argument
+            android:name="product"
+            app:argType="com.example.kleine.model.Product" />
+    </fragment>
 </navigation>

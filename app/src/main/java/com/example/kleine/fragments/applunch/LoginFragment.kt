@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
                 spinningBarWidth = resources.getDimension(R.dimen._20sdp)
             }
             btnLogin.startAnimation()
-            val email = getEmail()
+            val email = getEmail()?.trim()
             val password = getPassword()
             email?.let {
                 password?.let {

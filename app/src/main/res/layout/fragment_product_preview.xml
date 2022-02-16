@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.shopping.ProductPreviewFragment">
+    tools:context=".fragments.shopping.ProductPreviewFragment"
+    android:fillViewport="true">
 
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.cardview.widget.CardView
+        android:id="@+id/viewpager_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:backgroundTint="@color/white"
+        android:overScrollMode="never"
+        app:cardElevation="0dp"
+        >
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager2_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/test_image_cchair" />
+            android:src="@drawable/test_image_cchair"
+            />
 
         <ImageView
+            android:id="@+id/img_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_white_background"
             android:src="@drawable/ic_close"
-            app:tint="@color/black" />
+            app:tint="@color/black"
+            />
 
 
     </androidx.cardview.widget.CardView>
@@ -55,13 +66,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.55" />
 
     <TextView
         android:id="@+id/tv_product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:fontFamily="@font/poppins_light"
         android:text="Premium chair"
         android:textColor="@color/black"
@@ -69,6 +80,19 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/guideline3" />
+
+    <TextView
+        android:id="@+id/tv_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="$300"
+        android:textColor="@color/g_hint"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="@id/tv_product_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_product_name"/>
 
     <TextView
         android:id="@+id/tv_product_description"
@@ -80,12 +104,13 @@
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+        android:maxHeight="@dimen/_100sdp"/>
 
     <View
         android:id="@+id/line"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_2sdp"
+        android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="10dp"
         android:background="@drawable/line"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
@@ -93,12 +118,14 @@
         app:layout_constraintTop_toBottomOf="@id/tv_product_description" />
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/line">
+        app:layout_constraintTop_toBottomOf="@id/line"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -151,5 +178,33 @@
         </LinearLayout>
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_firstscreen"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/poppins_thin"
+        android:text="@string/g_add_to_card"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        android:textAllCaps="false"
+        android:layout_marginTop="45dp"/>
+
+    <io.github.vejei.viewpagerindicator.indicator.CircleIndicator
+        android:id="@+id/circle_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/viewpager_card"
+        app:layout_constraintStart_toStartOf="@id/viewpager_card"
+        app:layout_constraintEnd_toEndOf="@+id/viewpager_card"
+        android:layout_marginTop="10dp"
+        app:indicatorGap="5dp"
+        app:indicatorRadius="5dp"
+        app:indicatorItemCount="4"
+        app:indicatorSelectedColor="@color/g_black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

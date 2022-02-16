@@ -1,5 +1,11 @@
 package com.example.kleine.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
+
+
+@Parcelize
 data class Product(
     val id :Int,
     val title: String? = "",
@@ -8,11 +14,13 @@ data class Product(
     val newPrice:String?="",
     val price: String? = "",
     val seller: String? = "",
-    val images: HashMap<String, Any>?=null,
-    val colors: HashMap<String, Any>?=null,
-    val sizes: HashMap<String, Any>?=null,
+
+    val images:@RawValue HashMap<String, Any>?=null,
+    val colors:@RawValue HashMap<String, Any>?=null,
+    val sizes:@RawValue HashMap<String, Any>?=null,
     val orders:Int = 0
-){
+) : Parcelable
+    {
     constructor(
          id :Int,
          title: String? = "",

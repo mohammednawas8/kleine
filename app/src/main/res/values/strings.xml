@@ -47,5 +47,6 @@
     <string name="g_see_product">See product</string>
     <string name="g_color">Color</string>
     <string name="g_size">Size</string>
+    <string name="g_add_to_card">Add to Card</string>
 
 </resources>
