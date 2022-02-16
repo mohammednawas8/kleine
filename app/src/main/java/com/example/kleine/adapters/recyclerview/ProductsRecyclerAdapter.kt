@@ -12,6 +12,7 @@ import com.example.kleine.util.Constants.Companion.IMAGES
 
 class ProductsRecyclerAdapter() :
     RecyclerView.Adapter<ProductsRecyclerAdapter.BestProductsRecyclerAdapterViewHolder>() {
+    var onItemClick : ((Product) ->Unit)?=null
 
     inner class BestProductsRecyclerAdapterViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -48,9 +49,15 @@ class ProductsRecyclerAdapter() :
             tvName.text = product.title
             tvPrice.text = "$${product.price}"
         }
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(differ.currentList[position])
+        }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+
 }

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var binding: FragmentCupboardBinding
     private lateinit var mostOrderedCupboardsAdapter: ProductsRecyclerAdapter
-    private lateinit var cupboardAdapter:ProductsRecyclerAdapter
+    private lateinit var cupboardAdapter: ProductsRecyclerAdapter
     private val TAG = "CupboardFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +56,10 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         mostRequestedCupboardPaging()
         cupboardPaging()
 
+        cupboardAdapter.onItemClick = { product ->
+            findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2)
+        }
+
     }
 
     private fun cupboardPaging() {
@@ -66,11 +71,11 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     }
 
     private fun mostRequestedCupboardPaging() {
-        binding.rvCupboardMostOrdered.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        binding.rvCupboardMostOrdered.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if(!recyclerView.canScrollHorizontally(1) && dx!=0)
+                if (!recyclerView.canScrollHorizontally(1) && dx != 0)
                     viewModel.getCupboardsByOrders(mostOrderedCupboardsAdapter.differ.currentList.size)
 
             }
@@ -78,23 +83,23 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     }
 
     private fun observeCupboard() {
-        viewModel.cupboard.observe(viewLifecycleOwner, Observer { response->
+        viewModel.cupboard.observe(viewLifecycleOwner, Observer { response ->
 
-            when(response){
+            when (response) {
                 is Resource.Loading -> {
                     showBottomLoading()
                     return@Observer
                 }
 
-                is Resource.Success ->{
+                is Resource.Success -> {
                     hideBottomLoading()
                     cupboardAdapter.differ.submitList(response.data)
                     return@Observer
                 }
 
-                is Resource.Error ->{
+                is Resource.Error -> {
                     hideBottomLoading()
-                    Log.e(TAG,response.message.toString())
+                    Log.e(TAG, response.message.toString())
                     return@Observer
                 }
             }
@@ -112,28 +117,28 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     private fun setupCupboardRecyclerView() {
         binding.rvCupboard.apply {
             adapter = cupboardAdapter
-            layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         }
     }
 
     private fun observeMostOrderedCupboard() {
-        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { response->
+        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { response ->
 
-            when(response){
+            when (response) {
                 is Resource.Loading -> {
                     showTopLoading()
                     return@Observer
                 }
 
-                is Resource.Success ->{
+                is Resource.Success -> {
                     hideTopLoading()
                     mostOrderedCupboardsAdapter.differ.submitList(response.data)
                     return@Observer
                 }
 
-                is Resource.Error ->{
+                is Resource.Error -> {
                     hideTopLoading()
-                    Log.e(TAG,response.message.toString())
+                    Log.e(TAG, response.message.toString())
                     return@Observer
                 }
             }
@@ -155,5 +160,6 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
             addItemDecoration(SpacingItemDecorator(100))
         }
     }
+
 
 }

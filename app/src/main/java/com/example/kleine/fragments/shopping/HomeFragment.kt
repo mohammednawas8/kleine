@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.kleine.R
 import com.example.kleine.adapters.viewpager.HomeViewpagerAdapter
 import com.example.kleine.databinding.FragmentHomeBinding
 import com.example.kleine.fragments.categories.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -57,6 +59,13 @@ class HomeFragment : Fragment() {
         }.attach()
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val bottomNavigation = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.visibility = View.VISIBLE
     }
 
 

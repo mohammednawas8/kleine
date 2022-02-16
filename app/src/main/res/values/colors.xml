@@ -17,5 +17,5 @@
     <color name="g_pink">#FF9999</color>
     <color name="g_card_background">#FAFDFF</color>
     <color name="g_search_and_icons">#FAFBFC</color>
-
+    <color name="g_line">#E9EAEC</color>
 </resources>

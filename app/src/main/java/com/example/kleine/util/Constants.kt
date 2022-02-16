@@ -25,5 +25,8 @@ class Constants {
         const val PURPLE = "purple"
         const val BLACK = "black"
         const val ORANGE = "orange"
+
+        const val COLORS_TYPE = "colors"
+        const val SIZES_TYPE = "sizes"
     }
 }

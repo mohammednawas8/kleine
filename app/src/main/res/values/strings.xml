@@ -45,5 +45,7 @@
     <string name="g_enlightening">Enlightening</string>
     <string name="g_best_products">Best Products</string>
     <string name="g_see_product">See product</string>
+    <string name="g_color">Color</string>
+    <string name="g_size">Size</string>
 
 </resources>
