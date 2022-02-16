@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager2_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
