@@ -6,16 +6,16 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_shadow"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
         android:src="#B8D9FA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_content"
-        android:layout_width="@dimen/_17sdp"
-        android:layout_height="@dimen/_17sdp"
+        android:layout_width="@dimen/_21sdp"
+        android:layout_height="@dimen/_21sdp"
         android:src="@color/g_blue"
         app:layout_constraintStart_toStartOf="@+id/img_shadow"
         app:layout_constraintTop_toTopOf="@+id/img_shadow"
@@ -28,12 +28,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="XL"
-        android:textSize="@dimen/_9ssp"
+        android:textSize="@dimen/_11ssp"
         app:layout_constraintStart_toStartOf="@id/img_content"
         app:layout_constraintTop_toTopOf="@id/img_content"
         app:layout_constraintBottom_toBottomOf="@id/img_content"
         app:layout_constraintEnd_toEndOf="@id/img_content"
         android:textColor="@color/white"
-        android:fontFamily="@font/poppins_light"/>
+        android:fontFamily="@font/poppins_light"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/img_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_picked"
+        app:layout_constraintTop_toTopOf="@id/img_content"
+        app:layout_constraintBottom_toBottomOf="@id/img_content"
+        app:layout_constraintStart_toStartOf="@id/img_content"
+        app:layout_constraintEnd_toEndOf="@id/img_content"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

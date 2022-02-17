@@ -10,9 +10,11 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
@@ -67,6 +69,13 @@ class ChairFragment : Fragment() {
         observeEmptyBestDeals()
 
         setUpTimer()
+
+        productsAdapter.onItemClick= { product ->
+            val bundle = Bundle()
+            bundle.putParcelable("product",product)
+            findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
+        }
+
 
 
     }
