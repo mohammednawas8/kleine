@@ -52,7 +52,7 @@ class ColorsAndSizesAdapter(var type: String = COLORS_TYPE) :
                     val color = Color.parseColor(color)
                     val imageDrawable = ColorDrawable(color)
                     imgContent.setImageDrawable(imageDrawable)
-                    imgShadow.setImageDrawable(imageDrawable)
+                    imgShadow.visibility = View.INVISIBLE
                     imgDone.visibility = View.VISIBLE
                 }
             }
@@ -62,6 +62,7 @@ class ColorsAndSizesAdapter(var type: String = COLORS_TYPE) :
                     val imageDrawable = ColorDrawable(color)
                     imgContent.setImageDrawable(imageDrawable)
                     imgShadow.setImageDrawable(imageDrawable)
+                    imgShadow.visibility = View.INVISIBLE
                     imgDone.visibility = View.GONE
                     tvSize.visibility = View.GONE
                 }

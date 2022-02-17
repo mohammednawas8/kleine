@@ -62,7 +62,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 
-        mostOrderedCupboardsAdapter.onItemClick= { product ->
+        mostOrderedCupboardsAdapter.onItemClick = { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)

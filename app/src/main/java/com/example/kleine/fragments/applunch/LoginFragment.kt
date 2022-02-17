@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
         btnLogin.setOnClickListener {
             btnLogin.apply {
                 spinningBarColor = resources.getColor(R.color.white)
-                spinningBarWidth = resources.getDimension(R.dimen._20sdp)
+                spinningBarWidth = resources.getDimension(R.dimen._5sdp)
             }
             btnLogin.startAnimation()
             val email = getEmail()?.trim()

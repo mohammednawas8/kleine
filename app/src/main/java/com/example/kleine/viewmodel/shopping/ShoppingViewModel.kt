@@ -23,6 +23,8 @@ class ShoppingViewModel(
     val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
 
+    val addToCart = MutableLiveData<Resource<Product>>()
+
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -139,5 +141,25 @@ class ShoppingViewModel(
                 else
                     onSuccess(true)
             }
+    }
+
+
+
+
+
+
+
+
+
+
+    fun addProductToCart(product: Product) = firebaseDatabase.addProductToCart(product).addOnCompleteListener{
+        addToCart.postValue(Resource.Loading())
+        Log.d(TAG,"Loading")
+        if (it.isSuccessful){
+            addToCart.postValue(Resource.Success(product))
+            Log.d(TAG,"Success")
+        }else{
+            addToCart.postValue(Resource.Error(it.exception.toString()))
+        }
     }
 }

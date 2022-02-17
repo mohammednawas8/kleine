@@ -48,5 +48,6 @@
     <string name="g_color">Color</string>
     <string name="g_size">Size</string>
     <string name="g_add_to_card">Add to Card</string>
-
+    <string name="g_added">Added</string>
+    <string name="g_already_added">Product is in your cart</string>
 </resources>

@@ -45,5 +45,6 @@
         <argument
             android:name="product"
             app:argType="com.example.kleine.model.Product" />
+
     </fragment>
 </navigation>

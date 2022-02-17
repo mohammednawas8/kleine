@@ -178,22 +178,24 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_firstscreen"
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/btn_add_to_cart"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/poppins_thin"
         android:text="@string/g_add_to_card"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/linear"
-        android:textAllCaps="false"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintVertical_bias="0.494" />
 
     <io.github.vejei.viewpagerindicator.indicator.CircleIndicator
         android:id="@+id/circle_indicator"
