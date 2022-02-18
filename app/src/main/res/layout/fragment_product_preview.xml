@@ -150,6 +150,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <TextView
+                android:id="@+id/tv_color_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/g_please_select_color"
+                android:textColor="@color/g_red"
+                android:drawablePadding="5dp"
+                app:drawableStartCompat="@drawable/ic_baseline_error_24"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -175,15 +185,37 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <TextView
+                android:id="@+id/tv_size_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/g_please_select_size"
+                android:textColor="@color/g_red"
+                android:drawablePadding="5dp"
+                app:drawableStartCompat="@drawable/ic_baseline_error_24"
+                android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
 
-    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/g_icon_tint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        android:layout_marginTop="45dp"
+        android:visibility="invisible"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_to_cart"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/poppins_thin"
         android:text="@string/g_add_to_card"
@@ -195,7 +227,10 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/linear"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintVertical_bias="0.494"
+        android:layout_marginTop="45dp"
+        android:visibility="visible"
+        />
 
     <io.github.vejei.viewpagerindicator.indicator.CircleIndicator
         android:id="@+id/circle_indicator"

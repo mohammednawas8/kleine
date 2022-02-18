@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnLogin = view.findViewById(R.id.btn_login)
+        btnLogin = view.findViewById(R.id.btn_login_fragment)
 
         onLoginClick()
         observerLogin()
@@ -72,13 +72,13 @@ class LoginFragment : Fragment() {
         btnLogin.setOnClickListener {
             btnLogin.apply {
                 spinningBarColor = resources.getColor(R.color.white)
-                spinningBarWidth = resources.getDimension(R.dimen._5sdp)
+                spinningBarWidth = resources.getDimension(R.dimen._20sdp)
             }
-            btnLogin.startAnimation()
             val email = getEmail()?.trim()
             val password = getPassword()
             email?.let {
                 password?.let {
+                    btnLogin.startAnimation()
                     viewModel.loginUser(email, password)
                 }
             }

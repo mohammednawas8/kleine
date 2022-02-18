@@ -20,6 +20,7 @@ import com.example.kleine.adapters.recyclerview.ColorsAndSizesAdapter
 import com.example.kleine.adapters.viewpager.ViewPager2Images
 import com.example.kleine.databinding.FragmentProductPreviewBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Product
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.COLORS
@@ -82,7 +83,27 @@ class ProductPreviewFragment : Fragment() {
 
         observeAddToCart()
 
+        onColorClick()
+        onSizeClick()
     }
+
+    private var selectedSize: String = ""
+    private fun onSizeClick() {
+        sizesAdapter.onItemClick = { size ->
+            selectedSize = size
+            binding.tvSizeError.visibility = View.INVISIBLE
+
+        }
+    }
+
+    private var selectedColor: String = ""
+    private fun onColorClick() {
+        colorsAdapter.onItemClick = { color ->
+            selectedColor = color
+            binding.tvColorError.visibility = View.INVISIBLE
+        }
+    }
+
 
     private fun observeAddToCart() {
         viewModel.addToCart.observe(viewLifecycleOwner, Observer { response ->
@@ -100,7 +121,7 @@ class ProductPreviewFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-                    btn.revertAnimation()
+                    Toast.makeText(activity, "Oops! error occurred", Toast.LENGTH_SHORT).show()
                     viewModel.addToCart.value = null
                     Log.e(TAG, response.message.toString())
                 }
@@ -109,70 +130,40 @@ class ProductPreviewFragment : Fragment() {
     }
 
     private fun stopLoading() {
-        val btn = binding.btnAddToCart
-        btn.revertAnimation()
-        btn.setBackgroundColor(resources.getColor(R.color.black))
-        binding.btnAddToCart.isClickable = true
-
-
+        binding.apply {
+            btnAddToCart.visibility = View.VISIBLE
+            progressbar.visibility = View.INVISIBLE
+        }
     }
 
     private fun startLoading() {
-        val btn = binding.btnAddToCart as CircularProgressButton
-        btn.apply {
-            spinningBarColor = resources.getColor(R.color.white)
-            spinningBarWidth = resources.getDimension(R.dimen._5sdp)
-            binding.btnAddToCart.isClickable = false
-            startAnimation()
+        binding.apply {
+            btnAddToCart.visibility = View.INVISIBLE
+            progressbar.visibility = View.VISIBLE
         }
     }
 
-    //use viewModel later
-    private fun checkIfItemInCard(onSuccess: (Boolean) -> Unit) {
-        FirebaseFirestore.getInstance().collection("users")
-            .document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .collection("cart")
-            .whereEqualTo("id", args.product.id)
-            .get()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    startLoading()
-                    val result = it.result
-                    if (result!!.isEmpty)
-                        onSuccess(true)
-                    else
-                        onSuccess(false)
-
-                } else {
-                    onSuccess(false)
-                }
-            }
-    }
 
     private fun onBtnAddToCartClick() {
-        checkIfItemInCard {
-            if (it)
-                binding.btnAddToCart.revertAnimation()
-            else {
-                stopLoading()
-            }
-        }
+        binding.btnAddToCart.apply {
+            setOnClickListener {
 
-        binding.btnAddToCart.setOnClickListener {
-            if (binding.btnAddToCart.text == resources.getText(R.string.g_added))
-                Toast.makeText(
-                    activity,
-                    resources.getText(R.string.g_already_added),
-                    Toast.LENGTH_SHORT
-                ).show()
-            else {
+                if(selectedColor.isEmpty()){
+                    binding.tvColorError.visibility = View.VISIBLE
+                }
+
+                if(selectedSize.isEmpty()){
+                    binding.tvSizeError.visibility = View.VISIBLE
+                    return@setOnClickListener
+                }
+
                 val product = args.product
-                product.quantity = 1
-                viewModel.addProductToCart(product)
+                val image = (product.images?.get(IMAGES) as List<String>)[0]
+                val cartProduct = CartProduct(product.id,product.title!!,image,product.price!!,1,selectedColor,selectedSize)
+                viewModel.addProductToCart(cartProduct)
+                setBackgroundResource(R.color.g_black)
             }
-
         }
-
     }
 
     private fun onImageCloseClick() {

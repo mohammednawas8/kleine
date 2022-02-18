@@ -16,6 +16,7 @@ import com.example.kleine.util.Constants.Companion.COLORS_TYPE
 class ColorsAndSizesAdapter(var type: String = COLORS_TYPE) :
     RecyclerView.Adapter<ColorsAndSizesAdapter.ColorsAndSizesAdapterViewHolder>() {
 
+    var onItemClick : ((String) -> Unit)?=null
     inner class ColorsAndSizesAdapterViewHolder(val binding: ColorAndSizesBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -73,6 +74,7 @@ class ColorsAndSizesAdapter(var type: String = COLORS_TYPE) :
                     notifyItemChanged(selectedPosition)
                 selectedPosition = holder.adapterPosition
                 notifyItemChanged(selectedPosition)
+                onItemClick!!.invoke(color)
 
             }
         }
@@ -106,7 +108,11 @@ class ColorsAndSizesAdapter(var type: String = COLORS_TYPE) :
                     notifyItemChanged(selectedPosition)
                 selectedPosition = holder.adapterPosition
                 notifyItemChanged(selectedPosition)
+
+                onItemClick!!.invoke(size)
             }
+
+
         }
     }
 

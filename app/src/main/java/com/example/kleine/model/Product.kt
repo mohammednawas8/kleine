@@ -18,8 +18,7 @@ data class Product(
     val images:@RawValue HashMap<String, Any>?=null,
     val colors:@RawValue HashMap<String, Any>?=null,
     val sizes:@RawValue HashMap<String, Any>?=null,
-    val orders:Int = 0,
-    var quantity:Int?=0
+    val orders:Int = 0
 ) : Parcelable
     {
     constructor(

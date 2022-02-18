@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Category
 import com.example.kleine.model.Product
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ShoppingViewModel(
@@ -23,7 +25,7 @@ class ShoppingViewModel(
     val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
 
-    val addToCart = MutableLiveData<Resource<Product>>()
+    val addToCart = MutableLiveData<Resource<Boolean>>()
 
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
@@ -87,9 +89,9 @@ class ShoppingViewModel(
     }
 
 
-    fun getCupboardsByOrders(size:Int) =
-        shouldPaging(CUPBOARD_CATEGORY,size) {
-            if(it) {
+    fun getCupboardsByOrders(size: Int) =
+        shouldPaging(CUPBOARD_CATEGORY, size) {
+            if (it) {
                 mostCupboardOrdered.postValue(Resource.Loading())
                 firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging)
                     .addOnCompleteListener {
@@ -144,22 +146,43 @@ class ShoppingViewModel(
     }
 
 
-
-
-
-
-
-
-
-
-    fun addProductToCart(product: Product) = firebaseDatabase.addProductToCart(product).addOnCompleteListener{
+    private fun checkIfProductAlreadyAdded(
+        product: CartProduct,
+        onSuccess: (Boolean, String) -> Unit
+    ) {
         addToCart.postValue(Resource.Loading())
-        Log.d(TAG,"Loading")
-        if (it.isSuccessful){
-            addToCart.postValue(Resource.Success(product))
-            Log.d(TAG,"Success")
-        }else{
-            addToCart.postValue(Resource.Error(it.exception.toString()))
+        firebaseDatabase.checkIfProductInCart(product).addOnCompleteListener {
+            if (it.isSuccessful) {
+                val documents = it.result!!.documents
+                if (documents.isNotEmpty())
+                    onSuccess(true, documents[0].id) // true ---> product is already in cart
+                else
+                    onSuccess(false, "") // false ---> product is not in cart
+            } else
+                addToCart.postValue(Resource.Error(it.exception.toString()))
+
         }
     }
+
+
+    fun addProductToCart(product: CartProduct) =
+        checkIfProductAlreadyAdded(product) { isAdded, id ->
+            if (isAdded) {
+                firebaseDatabase.increaseProductQuantity(product, id).addOnCompleteListener {
+                    if (it.isSuccessful)
+                        addToCart.postValue(Resource.Success(true))
+                    else
+                        addToCart.postValue(Resource.Error(it.exception!!.message))
+
+                }
+            } else {
+                firebaseDatabase.addProductToCart(product).addOnCompleteListener {
+                    if (it.isSuccessful)
+                        addToCart.postValue(Resource.Success(true))
+                    else
+                        addToCart.postValue(Resource.Error(it.exception!!.message))
+                }
+            }
+        }
+
 }

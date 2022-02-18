@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@id/ed_email_login" />
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_login_fragment"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginTop="@dimen/_20sdp"
@@ -109,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_fragment"
         android:src="@drawable/ic_facebook_login"
         android:layout_marginTop="@dimen/_10sdp"/>
 
@@ -127,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_fragment"
         android:src="@drawable/ic_google_login"
         android:layout_marginTop="@dimen/_10sdp"/>
 
