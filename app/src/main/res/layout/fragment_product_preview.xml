@@ -133,6 +133,11 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_color"
                 android:layout_width="wrap_content"
@@ -143,7 +148,18 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 
+                <TextView
+                    android:id="@+id/tv_color_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/g_please_select_color"
+                    android:textColor="@color/g_red"
+                    android:visibility="invisible"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="10dp"
+                    />
 
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_colors"
                 android:layout_width="match_parent"
@@ -151,15 +167,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-            <TextView
-                android:id="@+id/tv_color_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/g_please_select_color"
-                android:textColor="@color/g_red"
-                android:drawablePadding="5dp"
-                app:drawableStartCompat="@drawable/ic_baseline_error_24"
-                android:visibility="invisible"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -167,7 +175,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
@@ -179,6 +190,17 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 
+                <TextView
+                    android:id="@+id/tv_size_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/g_please_select_size"
+                    android:textColor="@color/g_red"
+                    android:visibility="invisible"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="10dp"/>
+
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sizes"
                 android:layout_width="match_parent"
@@ -186,15 +208,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-            <TextView
-                android:id="@+id/tv_size_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/g_please_select_size"
-                android:textColor="@color/g_red"
-                android:drawablePadding="5dp"
-                app:drawableStartCompat="@drawable/ic_baseline_error_24"
-                android:visibility="invisible"/>
+
         </LinearLayout>
     </LinearLayout>
 
