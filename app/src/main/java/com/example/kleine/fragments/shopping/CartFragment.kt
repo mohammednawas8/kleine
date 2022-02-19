@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kleine.SpacingDecorator.VerticalSpacingItemDecorator
 import com.example.kleine.adapters.recyclerview.CartRecyclerAdapter
@@ -42,6 +43,14 @@ class CartFragment : Fragment() {
 
         setupRecyclerView()
         observeCart()
+
+        onCloseImgClick()
+    }
+
+    private fun onCloseImgClick() {
+        binding.imgCloseCart.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -63,6 +72,7 @@ class CartFragment : Fragment() {
 
                 is Resource.Success -> {
                     hideLoading()
+
                     val products = response.data
                     if(products!!.isNotEmpty()) {
                         cartAdapter.differ.submitList(products)
@@ -73,8 +83,14 @@ class CartFragment : Fragment() {
                         }
                     }else{
                         cartAdapter.differ.submitList(products)
-                        binding.btnCheckout.visibility = View.INVISIBLE
-                        binding.linear.visibility = View.INVISIBLE
+                        binding.apply {
+                            btnCheckout.visibility = View.INVISIBLE
+                            linear.visibility = View.INVISIBLE
+                            imgEmptyBox.visibility = View.VISIBLE
+                            imgEmptyBoxTexture.visibility = View.VISIBLE
+                            tvEmptyCart.visibility = View.VISIBLE
+                        }
+
                     }
                     return@Observer
                 }
@@ -94,6 +110,9 @@ class CartFragment : Fragment() {
             progressBar.visibility = View.GONE
             linear.visibility = View.VISIBLE
             btnCheckout.visibility = View.VISIBLE
+            imgEmptyBox.visibility = View.GONE
+            imgEmptyBoxTexture.visibility = View.GONE
+            tvEmptyCart.visibility = View.GONE
         }
     }
 

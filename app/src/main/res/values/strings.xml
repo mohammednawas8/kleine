@@ -55,4 +55,5 @@
     <string name="g_my_cart">My Cart</string>
     <string name="g_checkout">Checkout</string>
     <string name="g_total">Total:</string>
+    <string name="g_your_shopping_cart_is_empty">Your Shopping Cart\n Is Empty</string>
 </resources>
