@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kleine.R
-import com.example.kleine.SpacingDecorator.SpacingItemDecorator
+import com.example.kleine.SpacingDecorator.HorizantalSpacingItemDecorator
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentCupboardBinding
@@ -165,7 +164,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         binding.rvCupboardMostOrdered.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = mostOrderedCupboardsAdapter
-            addItemDecoration(SpacingItemDecorator(100))
+            addItemDecoration(HorizantalSpacingItemDecorator(100))
         }
     }
 

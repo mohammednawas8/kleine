@@ -45,15 +45,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateTint="@color/g_hint"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_cart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar_cart"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"/>
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"/>
 
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -75,9 +87,9 @@
             android:layout_marginBottom="@dimen/_15sdp"/>
 
         <TextView
+            android:id="@+id/tv_totalprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$ 9,800"
             android:layout_marginEnd="10dp"
             android:textSize="@dimen/_16ssp"
             android:textColor="@color/black"
@@ -104,6 +116,12 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         />
 
+
+<!--    Your Shopping Card-->
+<!--    İs Empty-->
+
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="match_parent"
@@ -123,6 +141,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65663475" />
+        app:layout_constraintGuide_percent="0.68" />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

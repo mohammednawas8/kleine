@@ -3,16 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/box_background.xml" value="0.2703125" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/btn_background.xml" value="0.2703125" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/btn_white_background.xml" value="0.22179487179487178" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ellips1_backround.xml" value="0.536" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/favorite_background.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_cart.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_close.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_ellipse1.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_favorite.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_google_login.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_home.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_kleine_shape.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_launcher_background.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_microphone.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_minus.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_picked.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_profile.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_scan.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_search.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_slide_bar.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_texture_left.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_texture_right.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/line.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/search_box_background.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/total_box_background.xml" value="0.2435" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/viewpager_background.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/font/dw.xml" value="0.284375" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/activity_main.xml" value="0.23615160349854228" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/activity_shopping.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/best_deal_item.xml" value="0.2" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/cart_item.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/chair_extra_ads.xml" value="0.536" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/chair_extra_ads_item.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/color_and_sizes.xml" value="0.4" />
@@ -32,6 +55,7 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_view_pager.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/product_item.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/viewpager_image_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/activity_shopping.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/best_deal_item.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/chair_extra_ads_item.xml" value="0.1410859341598974" />

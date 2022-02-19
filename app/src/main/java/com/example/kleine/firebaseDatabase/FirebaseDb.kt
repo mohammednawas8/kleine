@@ -83,6 +83,6 @@ class FirebaseDb {
 
     }
 
-    fun getItemsInCart() = userCartCollection!!.get()
+    fun getItemsInCart() = userCartCollection!!
 
 }

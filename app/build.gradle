@@ -83,6 +83,9 @@ dependencies {
     //viewpager2 indicatior
     implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
 
+    //lifecycle
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+
 
 
 }

@@ -24,7 +24,7 @@ class ShoppingViewModel(
     val chairs = MutableLiveData<List<Product>>()
     val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
-
+    val cartBadge = MutableLiveData<Resource<Int>>()
     val addToCart = MutableLiveData<Resource<Boolean>>()
 
     private var chairsPagingPage: Long = 10
@@ -33,6 +33,7 @@ class ShoppingViewModel(
 
     private var cupboardPaging: Long = 4
     private var mostOrderCupboardPaging: Long = 5
+
 
     init {
         getClothesProducts()
@@ -184,5 +185,6 @@ class ShoppingViewModel(
                 }
             }
         }
+
 
 }

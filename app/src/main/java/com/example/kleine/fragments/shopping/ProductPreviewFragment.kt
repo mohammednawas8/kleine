@@ -1,7 +1,5 @@
 package com.example.kleine.fragments.shopping
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,14 +10,12 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.example.kleine.R
-import com.example.kleine.SpacingDecorator.SpacingItemDecorator
+import com.example.kleine.SpacingDecorator.HorizantalSpacingItemDecorator
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.ColorsAndSizesAdapter
 import com.example.kleine.adapters.viewpager.ViewPager2Images
 import com.example.kleine.databinding.FragmentProductPreviewBinding
-import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Product
 import com.example.kleine.resource.Resource
@@ -30,8 +26,6 @@ import com.example.kleine.util.Constants.Companion.SIZES
 import com.example.kleine.util.Constants.Companion.SIZES_TYPE
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import io.github.vejei.viewpagerindicator.indicator.CircleIndicator
 
 class ProductPreviewFragment : Fragment() {
@@ -190,7 +184,7 @@ class ProductPreviewFragment : Fragment() {
         binding.rvSizes.apply {
             adapter = sizesAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(SpacingItemDecorator(45))
+            addItemDecoration(HorizantalSpacingItemDecorator(45))
         }
     }
 
@@ -198,7 +192,7 @@ class ProductPreviewFragment : Fragment() {
         binding.rvColors.apply {
             adapter = colorsAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(SpacingItemDecorator(45))
+            addItemDecoration(HorizantalSpacingItemDecorator(45))
         }
     }
 
