@@ -20,6 +20,7 @@ import com.example.kleine.adapters.recyclerview.CartRecyclerAdapter
 import com.example.kleine.databinding.FragmentCartBinding
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartFragment : Fragment() {
     private lateinit var binding:FragmentCartBinding
@@ -43,6 +44,8 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        onHomeClick()
 
         setupRecyclerView()
         observeCart()
@@ -228,6 +231,14 @@ class CartFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
             linear.visibility = View.INVISIBLE
             btnCheckout.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun onHomeClick() {
+        val btm =  activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        btm?.menu?.getItem(0)?.setOnMenuItemClickListener {
+            activity?.onBackPressed()
+            true
         }
     }
 

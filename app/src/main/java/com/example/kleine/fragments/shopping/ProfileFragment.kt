@@ -14,6 +14,7 @@ import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.google.android.gms.tasks.Task
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,12 +40,22 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        onHomeClick()
+
         val btnLogout = view.findViewById<Button>(R.id.button)
         btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(context,LunchActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        }
+    }
+
+    private fun onHomeClick() {
+        val btm =  activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        btm?.menu?.getItem(0)?.setOnMenuItemClickListener {
+            activity?.onBackPressed()
+            true
         }
     }
 

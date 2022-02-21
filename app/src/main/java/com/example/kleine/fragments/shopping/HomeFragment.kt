@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.adapters.viewpager.HomeViewpagerAdapter
 import com.example.kleine.databinding.FragmentHomeBinding
@@ -58,6 +59,9 @@ class HomeFragment : Fragment() {
             }
         }.attach()
 
+        binding.tvSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
 
     }
 

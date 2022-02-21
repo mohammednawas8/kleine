@@ -7,8 +7,8 @@
     android:fillViewport="true"
     tools:context=".fragments.shopping.HomeFragment">
 
-    <EditText
-        android:id="@+id/ed_search"
+    <TextView
+        android:id="@+id/tv_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/search_box_background"
@@ -18,6 +18,7 @@
         android:singleLine="true"
         android:textColor="@color/g_icon_tint"
         android:textSize="@dimen/_12ssp"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="@id/guideline4"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,9 +31,9 @@
         android:layout_height="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@id/ed_search"
-        app:layout_constraintEnd_toEndOf="@id/ed_search"
-        app:layout_constraintTop_toTopOf="@id/ed_search" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_search"
+        app:layout_constraintEnd_toEndOf="@id/tv_search"
+        app:layout_constraintTop_toTopOf="@id/tv_search" />
 
     <FrameLayout
         android:id="@+id/linear"
@@ -94,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ed_search"
+        app:layout_constraintTop_toBottomOf="@id/tv_search"
         app:tabIndicatorHeight="0dp"
         app:tabMode="scrollable"
         app:tabRippleColor="@color/white"
