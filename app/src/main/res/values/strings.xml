@@ -56,4 +56,8 @@
     <string name="g_checkout">Checkout</string>
     <string name="g_total">Total:</string>
     <string name="g_your_shopping_cart_is_empty">Your Shopping Cart\n Is Empty</string>
+    <string name="g_delete_item">Delete item</string>
+    <string name="g_are_you_sure_you_want_to_delete_this_item_from_cart">Are you sure you want to delete this item from cart ?</string>
+    <string name="g_no">No</string>
+    <string name="g_yes">Yes</string>
 </resources>

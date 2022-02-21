@@ -9,7 +9,6 @@ import com.example.kleine.model.Category
 import com.example.kleine.model.Product
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ShoppingViewModel(
@@ -152,7 +151,7 @@ class ShoppingViewModel(
         onSuccess: (Boolean, String) -> Unit
     ) {
         addToCart.postValue(Resource.Loading())
-        firebaseDatabase.checkIfProductInCart(product).addOnCompleteListener {
+        firebaseDatabase.getProductInCart(product).addOnCompleteListener {
             if (it.isSuccessful) {
                 val documents = it.result!!.documents
                 if (documents.isNotEmpty())
@@ -169,7 +168,7 @@ class ShoppingViewModel(
     fun addProductToCart(product: CartProduct) =
         checkIfProductAlreadyAdded(product) { isAdded, id ->
             if (isAdded) {
-                firebaseDatabase.increaseProductQuantity(product, id).addOnCompleteListener {
+                firebaseDatabase.increaseProductQuantity(id).addOnCompleteListener {
                     if (it.isSuccessful)
                         addToCart.postValue(Resource.Success(true))
                     else

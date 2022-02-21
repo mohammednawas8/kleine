@@ -9,6 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/progressbar_plus_minus"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:indeterminateTint="@color/g_hint"
+            app:layout_constraintEnd_toEndOf="@id/img_plus"
+            app:layout_constraintStart_toStartOf="@id/img_plus"
+            app:layout_constraintTop_toBottomOf="@id/img_minus"
+            app:layout_constraintBottom_toTopOf="@id/img_plus"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/img_cart_product"
@@ -51,7 +61,7 @@
 
 
         <ImageView
-            android:id="@+id/img_minus"
+            android:id="@+id/img_plus"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:src="@drawable/ic_plus"
@@ -60,7 +70,7 @@
             android:layout_marginBottom="5dp"/>
 
         <ImageView
-            android:id="@+id/img_plus"
+            android:id="@+id/img_minus"
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
             android:src="@drawable/ic_minus"
@@ -73,10 +83,10 @@
             android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/img_minus"
-            app:layout_constraintBottom_toTopOf="@id/img_plus"
-            app:layout_constraintStart_toStartOf="@id/img_plus"
-            app:layout_constraintEnd_toEndOf="@id/img_plus"
+            app:layout_constraintTop_toBottomOf="@id/img_plus"
+            app:layout_constraintBottom_toTopOf="@id/img_minus"
+            app:layout_constraintStart_toStartOf="@id/img_minus"
+            app:layout_constraintEnd_toEndOf="@id/img_minus"
             android:text="1"/>
 
         <View

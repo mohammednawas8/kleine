@@ -19,7 +19,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class ShoppingActivity : AppCompatActivity() {
     val TAG = "ShoppingActivity"
 
-    lateinit var viewModel: ShoppingViewModel
+    val viewModel by lazy {
+        val fDatabase = FirebaseDb()
+        val providerFactory = ShoppingViewModelProviderFactory(fDatabase)
+        ViewModelProvider(this, providerFactory)[ShoppingViewModel::class.java]
+    }
     lateinit var cartViewModel: CartViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +36,7 @@ class ShoppingActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.host_fragment)
         NavigationUI.setupWithNavController(bottomNavigation, navController)
 
-        val fDatabase = FirebaseDb()
-        val providerFactory = ShoppingViewModelProviderFactory(fDatabase)
-        viewModel = ViewModelProvider(this, providerFactory)[ShoppingViewModel::class.java]
+
 
         observeCartProductsCount(bottomNavigation)
     }

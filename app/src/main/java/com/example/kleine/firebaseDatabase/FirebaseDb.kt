@@ -1,5 +1,6 @@
 package com.example.kleine.firebaseDatabase
 
+import android.util.Log
 import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Product
 import com.example.kleine.model.User
@@ -19,6 +20,7 @@ import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
@@ -67,22 +69,41 @@ class FirebaseDb {
 
     fun addProductToCart(product: CartProduct) = userCartCollection?.document()!!.set(product)
 
-    fun checkIfProductInCart(product: CartProduct) = userCartCollection!!
+    fun getProductInCart(product: CartProduct) = userCartCollection!!
         .whereEqualTo(ID, product.id)
         .whereEqualTo(COLOR, product.color)
         .whereEqualTo(SIZE, product.size).get()
 
-    fun increaseProductQuantity(product: CartProduct,documentId:String): Task<Transaction> {
+    fun increaseProductQuantity(documentId: String): Task<Transaction> {
         val document = userCartCollection!!.document(documentId)
         return Firebase.firestore.runTransaction { transaction ->
             val productBefore = transaction.get(document)
             var quantity = productBefore.getLong(QUANTITY)
-            quantity = quantity!!+1
-            transaction.update(document, QUANTITY,quantity)
+            quantity = quantity!! + 1
+            transaction.update(document, QUANTITY, quantity)
         }
 
     }
 
     fun getItemsInCart() = userCartCollection!!
+
+    fun decreaseProductQuantity(documentId: String): Task<Transaction> {
+        val document = userCartCollection!!.document(documentId)
+        return Firebase.firestore.runTransaction { transaction ->
+            val productBefore = transaction.get(document)
+            var quantity = productBefore.getLong(QUANTITY)
+            quantity = if (quantity!!.toInt() == 1)
+                1
+            else
+                quantity!! - 1
+            transaction.update(document, QUANTITY, quantity)
+
+        }
+
+    }
+
+    fun deleteProductFromCart(documentId: String) =
+        userCartCollection!!.document(documentId).delete()
+
 
 }
