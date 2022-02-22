@@ -25,7 +25,6 @@ class ShoppingViewModel(
     val cupboard = MutableLiveData<Resource<List<Product>>>()
     val cartBadge = MutableLiveData<Resource<Int>>()
     val addToCart = MutableLiveData<Resource<Boolean>>()
-
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -184,6 +183,8 @@ class ShoppingViewModel(
                 }
             }
         }
+
+
 
 
 }

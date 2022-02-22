@@ -73,7 +73,6 @@ class ChairFragment : Fragment() {
         productsAdapter.onItemClick= { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
-            Log.d("test",product.id.toString())
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 

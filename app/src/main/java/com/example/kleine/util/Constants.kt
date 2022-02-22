@@ -7,6 +7,7 @@ class Constants {
         const val SHOULD_SHOW = "shouldShow"
         const val USERS_COLLECTION = "users"
         const val PRODUCTS_COLLECTION = "products"
+        const val CATEGORIES_COLLECTION = "categories"
         const val CART_COLLECTION = "cart"
         const val CATEGORY = "category"
         const val ID = "id"

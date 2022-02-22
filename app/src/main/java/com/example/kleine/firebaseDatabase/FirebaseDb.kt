@@ -6,6 +6,7 @@ import com.example.kleine.model.Product
 import com.example.kleine.model.User
 import com.example.kleine.util.Constants.Companion.BEST_DEALS
 import com.example.kleine.util.Constants.Companion.CART_COLLECTION
+import com.example.kleine.util.Constants.Companion.CATEGORIES_COLLECTION
 import com.example.kleine.util.Constants.Companion.CATEGORY
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.CLOTHES
@@ -29,6 +30,8 @@ import com.google.firebase.ktx.Firebase
 class FirebaseDb {
     private val usersCollectionRef = Firebase.firestore.collection(USERS_COLLECTION)
     private val productsCollection = Firebase.firestore.collection(PRODUCTS_COLLECTION)
+    private val categoriesCollection = Firebase.firestore.collection(CATEGORIES_COLLECTION)
+
     val userUid = FirebaseAuth.getInstance().currentUser?.uid
     private val userCartCollection = userUid?.let {
         Firebase.firestore.collection(USERS_COLLECTION).document(it).collection(CART_COLLECTION)
@@ -106,4 +109,12 @@ class FirebaseDb {
         userCartCollection!!.document(documentId).delete()
 
 
+    fun searchProducts(searchQuery:String) = productsCollection
+        .orderBy("title")
+        .startAt(searchQuery)
+        .endAt("\u03A9+$searchQuery")
+        .limit(5)
+        .get()
+
+    fun getCategories() = categoriesCollection.get()
 }
