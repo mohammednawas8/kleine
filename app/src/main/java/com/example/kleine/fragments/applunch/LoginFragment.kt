@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -50,15 +50,18 @@ class LoginFragment : Fragment() {
     }
 
     private fun observerLoginError() {
-        viewModel.loginError.observe(viewLifecycleOwner, Observer { error->
+         viewModel.loginError.observe(viewLifecycleOwner, Observer { error->
             Log.e(TAG,error)
-            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Please check your information", Toast.LENGTH_LONG).show()
             btnLogin.revertAnimation()
+
         })
+
+
     }
 
     private fun observerLogin() {
-        viewModel.login.observe(viewLifecycleOwner, Observer {
+         viewModel.login.observe(viewLifecycleOwner, Observer {
             if(it == true){
                 btnLogin.revertAnimation()
                 val intent = Intent(activity,ShoppingActivity::class.java)
@@ -70,10 +73,9 @@ class LoginFragment : Fragment() {
 
     private fun onLoginClick() {
         btnLogin.setOnClickListener {
-            btnLogin.apply {
-                spinningBarColor = resources.getColor(R.color.white)
-                spinningBarWidth = resources.getDimension(R.dimen._20sdp)
-            }
+            btnLogin.spinningBarColor = resources.getColor(R.color.white)
+            btnLogin.spinningBarWidth = resources.getDimension(R.dimen._3sdp)
+
             val email = getEmail()?.trim()
             val password = getPassword()
             email?.let {

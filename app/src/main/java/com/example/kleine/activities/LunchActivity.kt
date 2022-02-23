@@ -35,7 +35,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LunchActivity : AppCompatActivity() {
-    lateinit var viewModel: KleineViewModel
+    val viewModel by lazy {
+        val firebaseDb = FirebaseDb()
+        val viewModelFactory = ViewModelProviderFactory(firebaseDb)
+        ViewModelProvider(this,viewModelFactory)[KleineViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +54,7 @@ class LunchActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
-        val firebaseDb = FirebaseDb()
-        val viewModelFactory = ViewModelProviderFactory(firebaseDb)
-        viewModel = ViewModelProvider(this,viewModelFactory)[KleineViewModel::class.java]
+
 
 //        val random = Random.nextInt(from = 10000, until = 99999)
 
