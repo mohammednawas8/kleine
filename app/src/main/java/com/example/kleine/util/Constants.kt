@@ -11,6 +11,7 @@ class Constants {
         const val CART_COLLECTION = "cart"
         const val CATEGORY = "category"
         const val ID = "id"
+        const val TITLE = "title"
         const val COLOR = "color"
         const val SIZE = "size"
         const val QUANTITY = "quantity"
@@ -34,5 +35,8 @@ class Constants {
 
         const val COLORS_TYPE = "colors"
         const val SIZES_TYPE = "sizes"
+
+        const val PRODUCT_FLAG = "from_product_click"
+        const val CART_FLAG = "from_cart_clicl"
     }
 }

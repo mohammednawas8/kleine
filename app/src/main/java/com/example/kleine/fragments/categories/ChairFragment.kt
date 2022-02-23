@@ -21,6 +21,7 @@ import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentChairBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.example.kleine.viewmodel.shopping.ShoppingViewModelProviderFactory
 
@@ -73,6 +74,7 @@ class ChairFragment : Fragment() {
         productsAdapter.onItemClick= { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
+            bundle.putString("flag",PRODUCT_FLAG)
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 

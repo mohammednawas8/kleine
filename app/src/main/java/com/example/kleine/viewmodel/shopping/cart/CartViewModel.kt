@@ -14,6 +14,7 @@ class CartViewModel(
     val plus = MutableLiveData<Resource<Int>>()
     val minus = MutableLiveData<Resource<Int>>()
     val deleteProduct = MutableLiveData<Resource<Boolean>>()
+    val product = MutableLiveData<Resource<Product>>()
     var firebaseDb: FirebaseDb = FirebaseDb()
 
 
@@ -85,9 +86,19 @@ class CartViewModel(
                         deleteProduct.postValue(Resource.Error(it.exception.toString()))
                 }
 
-            }
-            else
+            } else
                 deleteProduct.postValue(Resource.Error(productToDelete.exception.toString()))
+        }
+    }
+
+    fun getProductFromCartProduct(cartProduct: CartProduct) {
+        product.postValue(Resource.Loading())
+        firebaseDb.getProductFromCartProduct(cartProduct).addOnCompleteListener {
+            if (it.isSuccessful) {
+                val tempProduct = it.result!!.toObjects(Product::class.java)[0]
+                product.postValue(Resource.Success(tempProduct))
+            } else
+                product.postValue(Resource.Error(it.exception.toString()))
         }
     }
 }

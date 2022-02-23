@@ -17,6 +17,7 @@ import com.example.kleine.util.Constants.Companion.ORDERS
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.QUANTITY
 import com.example.kleine.util.Constants.Companion.SIZE
+import com.example.kleine.util.Constants.Companion.TITLE
 import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -109,7 +110,7 @@ class FirebaseDb {
         userCartCollection!!.document(documentId).delete()
 
 
-    fun searchProducts(searchQuery:String) = productsCollection
+    fun searchProducts(searchQuery: String) = productsCollection
         .orderBy("title")
         .startAt(searchQuery)
         .endAt("\u03A9+$searchQuery")
@@ -117,4 +118,8 @@ class FirebaseDb {
         .get()
 
     fun getCategories() = categoriesCollection.get()
+
+    fun getProductFromCartProduct(cartProduct: CartProduct) =
+        productsCollection.whereEqualTo(ID, cartProduct.id)
+            .whereEqualTo(TITLE, cartProduct.name).get()
 }

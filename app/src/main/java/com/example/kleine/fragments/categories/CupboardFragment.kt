@@ -18,6 +18,7 @@ import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentCupboardBinding
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 
 class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
@@ -58,12 +59,15 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         cupboardAdapter.onItemClick = { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
+            bundle.putString("flag", Constants.PRODUCT_FLAG)
+
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 
         mostOrderedCupboardsAdapter.onItemClick = { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
+            bundle.putString("flag", Constants.PRODUCT_FLAG)
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 

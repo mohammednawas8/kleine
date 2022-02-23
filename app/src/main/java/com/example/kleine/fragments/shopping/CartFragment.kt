@@ -19,6 +19,7 @@ import com.example.kleine.SpacingDecorator.VerticalSpacingItemDecorator
 import com.example.kleine.adapters.recyclerview.CartRecyclerAdapter
 import com.example.kleine.databinding.FragmentCartBinding
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -56,6 +57,44 @@ class CartFragment : Fragment() {
         onMinusClick()
         onItemClick()
 
+        observeGetProductNavigation()
+
+    }
+
+    private fun observeGetProductNavigation() {
+        viewModel.product.observe(viewLifecycleOwner, Observer {
+                response->
+
+            when (response) {
+                is Resource.Success -> {
+                    binding.apply {
+                        progressPlusMinus.visibility = View.INVISIBLE
+                        val product = response.data
+                        val bundle = Bundle()
+                        bundle.putParcelable("product",product)
+                        findNavController().navigate(R.id.action_cartFragment_to_productPreviewFragment2,bundle)
+                        viewModel.product.postValue(null)
+                    }
+                    return@Observer
+                }
+
+                is Resource.Loading -> {
+                    binding.apply {
+                        progressPlusMinus.visibility = View.VISIBLE
+
+                    }
+                    return@Observer
+                }
+
+                is Resource.Error -> {
+                    binding.apply {
+                        progressPlusMinus.visibility = View.INVISIBLE
+                        Log.e(TAG,response.message.toString())
+                    }
+                    return@Observer
+                }
+            }
+        })
     }
 
     private fun observePlus() {
@@ -120,10 +159,12 @@ class CartFragment : Fragment() {
 
 
     private fun onItemClick() {
-        cartAdapter.onItemClick = {
-            Toast.makeText(activity, "Item click", Toast.LENGTH_SHORT).show()
+        cartAdapter.onItemClick = { cartProduct ->
+            viewModel.getProductFromCartProduct(cartProduct)
         }
     }
+
+
 
     private fun onMinusClick() {
         cartAdapter.onMinusesClick = { cartProduct->
@@ -164,7 +205,7 @@ class CartFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        cartAdapter = CartRecyclerAdapter(viewLifecycleOwner,viewModel)
+        cartAdapter = CartRecyclerAdapter()
         binding.apply {
             rvCart.layoutManager = LinearLayoutManager(context)
             rvCart.adapter = cartAdapter

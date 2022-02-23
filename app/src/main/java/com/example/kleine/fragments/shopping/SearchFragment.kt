@@ -30,8 +30,8 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var inputMethodManger: InputMethodManager
     private lateinit var viewModel: SearchViewModel
-    private lateinit var categoriesAdapter:CategoriesRecyclerAdapter
-    private lateinit var searchAdapter:SearchRecyclerAdapter
+    private lateinit var categoriesAdapter: CategoriesRecyclerAdapter
+    private lateinit var searchAdapter: SearchRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,21 +61,35 @@ class SearchFragment : Fragment() {
 
         onSearchTextClick()
 
+        onCancelTvClick()
+
+    }
+
+    private fun onCancelTvClick() {
+        binding.tvCancel.setOnClickListener {
+            searchAdapter.differ.submitList(emptyList())
+            binding.edSearch.setText("")
+            hideCancelTv()
+        }
     }
 
     private fun onSearchTextClick() {
         searchAdapter.onItemClick = { product ->
             val bundle = Bundle()
-            bundle.putParcelable("product",product)
+            bundle.putParcelable("product", product)
 
             /**
              * Hide the keyboard
              */
 
-            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            val imm =
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm!!.hideSoftInputFromWindow(requireView().windowToken, 0)
 
-            findNavController().navigate(R.id.action_searchFragment_to_productPreviewFragment2,bundle)
+            findNavController().navigate(
+                R.id.action_searchFragment_to_productPreviewFragment2,
+                bundle
+            )
 
         }
     }
@@ -92,14 +106,13 @@ class SearchFragment : Fragment() {
         categoriesAdapter = CategoriesRecyclerAdapter()
         binding.rvCategories.apply {
             adapter = categoriesAdapter
-            layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             addItemDecoration(VerticalSpacingItemDecorator(40))
         }
     }
 
     private fun observeCategories() {
-        viewModel.categories.observe(viewLifecycleOwner, Observer {
-                response->
+        viewModel.categories.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
                     showCategoriesLoading()
@@ -120,7 +133,7 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-        }
+    }
 
     private fun hideCategoriesLoading() {
         binding.progressbarCategories.visibility = View.GONE
@@ -133,9 +146,8 @@ class SearchFragment : Fragment() {
     }
 
 
-
     private fun observeSearch() {
-        viewModel.search.observe(viewLifecycleOwner, Observer { response->
+        viewModel.search.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
                     Log.d("test", "Loading")
@@ -145,33 +157,53 @@ class SearchFragment : Fragment() {
                 is Resource.Success -> {
                     val products = response.data
                     searchAdapter.differ.submitList(products)
+                    showChancelTv()
                     return@Observer
                 }
 
                 is Resource.Error -> {
                     Log.e(TAG, response.message.toString())
+                    showChancelTv()
                     return@Observer
                 }
             }
         })
     }
+
     var job: Job? = null
     private fun searchProducts() {
         binding.edSearch.addTextChangedListener { query ->
-            if (query!!.isNotEmpty()) {
-                val searchQuery = query.toString().substring(0,1).toUpperCase().plus(query.toString().substring(1))
+            val queryTrim = query.toString().trim()
+            if (queryTrim.isNotEmpty()) {
+                val searchQuery = query.toString().substring(0, 1).toUpperCase()
+                    .plus(query.toString().substring(1))
                 job?.cancel()
-                 job = CoroutineScope(Dispatchers.IO).launch {
+                job = CoroutineScope(Dispatchers.IO).launch {
                     delay(500L)
                     viewModel.searchProducts(searchQuery)
                 }
+            } else {
+                searchAdapter.differ.submitList(emptyList())
+                hideCancelTv()
             }
         }
 
 
+    }
+
+    private fun showChancelTv() {
+        binding.tvCancel.visibility = View.VISIBLE
+        binding.imgMic.visibility = View.GONE
+        binding.imgScan.visibility = View.GONE
 
     }
 
+    private fun hideCancelTv() {
+        binding.tvCancel.visibility = View.GONE
+        binding.imgMic.visibility = View.VISIBLE
+        binding.imgScan.visibility = View.VISIBLE
+
+    }
 
     private fun onHomeClick() {
         val btm = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -197,5 +229,11 @@ class SearchFragment : Fragment() {
         binding.edSearch.clearFocus()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav?.visibility = View.VISIBLE
+    }
 
 }

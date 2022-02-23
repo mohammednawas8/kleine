@@ -1,5 +1,8 @@
 package com.example.kleine.adapters.recyclerview
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +19,6 @@ import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 
 class CartRecyclerAdapter(
-    private val viewLifecycleOwner: LifecycleOwner,
-    private val viewModel: CartViewModel
 ) : RecyclerView.Adapter<CartRecyclerAdapter.CartRecyclerAdapterViewHolder>() {
 
     var onPlusClick: ((CartProduct) -> Unit)? = null
@@ -50,13 +51,18 @@ class CartRecyclerAdapter(
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartRecyclerAdapterViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.binding.apply {
+            val color = Color.parseColor(product.color)
+            val imageDrawable = ColorDrawable(color)
             Glide.with(holder.itemView).load(product.image).into(imgCartProduct)
             tvCartProductName.text = product.name
             tvProductCartPrice.text = "$${product.price}"
             tvQuantity.text = product.quantity.toString()
+            tvCartSize.text = product.size
+            imgColor.setImageDrawable(imageDrawable)
 
             imgPlus.setOnClickListener {
                 onPlusClick!!.invoke(product)

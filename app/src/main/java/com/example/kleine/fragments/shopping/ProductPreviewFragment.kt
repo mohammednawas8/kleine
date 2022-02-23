@@ -22,6 +22,7 @@ import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.COLORS
 import com.example.kleine.util.Constants.Companion.COLORS_TYPE
 import com.example.kleine.util.Constants.Companion.IMAGES
+import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.util.Constants.Companion.SIZES
 import com.example.kleine.util.Constants.Companion.SIZES_TYPE
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
@@ -65,10 +66,10 @@ class ProductPreviewFragment : Fragment() {
 
         val product = args.product
 
-
         setupViewpager()
         setupColorsRecyclerview()
         setupSizesRecyclerview()
+
 
         setProductInformation(product)
 

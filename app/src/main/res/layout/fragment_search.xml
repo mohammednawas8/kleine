@@ -83,6 +83,22 @@
 
     </FrameLayout>
 
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="@id/ed_search"
+            app:layout_constraintBottom_toBottomOf="@id/ed_search"
+            android:gravity="center"
+            android:text="@string/g_cancel"
+            android:fontFamily="@font/poppins_light"
+            android:textColor="#919394"
+            android:visibility="gone"
+            />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search"
