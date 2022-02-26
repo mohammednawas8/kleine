@@ -9,7 +9,7 @@
     <color name="white">#FFFFFF</color>
 
     <color name="g_hint">#666666</color>
-    <color name="g_black">#000000</color>
+    <color name="g_black">#171717</color>
     <color name="g_blue">#000DAE</color>
     <color name="g_white">#F5F8FA</color>
     <color name="g_dark_blue">#000759</color>
@@ -21,5 +21,6 @@
     <color name="g_circle_shadow">#B8D9FA</color>
     <color name="g_red">#FF0000</color>
     <color name="g_text_hint">#969899</color>
+
 
 </resources>

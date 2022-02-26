@@ -1,9 +1,11 @@
 package com.example.kleine.firebaseDatabase
 
 import android.util.Log
+import com.example.kleine.model.Address
 import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Product
 import com.example.kleine.model.User
+import com.example.kleine.util.Constants.Companion.ADDRESS_COLLECTION
 import com.example.kleine.util.Constants.Companion.BEST_DEALS
 import com.example.kleine.util.Constants.Companion.CART_COLLECTION
 import com.example.kleine.util.Constants.Companion.CATEGORIES_COLLECTION
@@ -34,9 +36,16 @@ class FirebaseDb {
     private val categoriesCollection = Firebase.firestore.collection(CATEGORIES_COLLECTION)
 
     val userUid = FirebaseAuth.getInstance().currentUser?.uid
+
     private val userCartCollection = userUid?.let {
         Firebase.firestore.collection(USERS_COLLECTION).document(it).collection(CART_COLLECTION)
     }
+    private val userAddressesCollection = userUid?.let {
+        Firebase.firestore.collection(USERS_COLLECTION).document(it).collection(ADDRESS_COLLECTION)
+
+    }
+
+
     private val firebaseAuth = Firebase.auth
 
     fun createNewUser(
@@ -122,4 +131,8 @@ class FirebaseDb {
     fun getProductFromCartProduct(cartProduct: CartProduct) =
         productsCollection.whereEqualTo(ID, cartProduct.id)
             .whereEqualTo(TITLE, cartProduct.name).get()
+
+    fun saveNewAddress(address: Address) = userAddressesCollection?.add(address)
+
+    fun getAddresses() = userAddressesCollection
 }

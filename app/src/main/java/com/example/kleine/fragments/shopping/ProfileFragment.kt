@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.activities.LunchActivity
+import com.example.kleine.databinding.FragmentProfileBinding
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
@@ -23,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot
 
 
 class ProfileFragment : Fragment() {
+    private lateinit var binding:FragmentProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +35,9 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,12 +45,16 @@ class ProfileFragment : Fragment() {
 
         onHomeClick()
 
-        val btnLogout = view.findViewById<Button>(R.id.button)
+        val btnLogout = view.findViewById<Button>(R.id.btn_logout)
         btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(context,LunchActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        }
+
+        binding.btnBilling.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_billingFragment)
         }
     }
 
@@ -57,6 +64,12 @@ class ProfileFragment : Fragment() {
             activity?.onBackPressed()
             true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation?.visibility = View.VISIBLE
     }
 
 

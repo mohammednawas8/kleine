@@ -62,4 +62,14 @@
     <string name="g_yes">Yes</string>
     <string name="g_categories">Categories</string>
     <string name="g_cancel">Cancel</string>
+    <string name="g_payment_methods">Payment methods</string>
+    <string name="payment_explanation">Currently Keline only supports payments when receiving the product, more options are coming soon.</string>
+    <string name="g_shipping">Shipping</string>
+    <string name="g_full_name">Full Name</string>
+    <string name="g_city">City</string>
+    <string name="g_phone">Phone</string>
+    <string name="g_state">State</string>
+    <string name="g_save">Save</string>
+    <string name="g_address">Address</string>
+    <string name="g_address_location_ie_home">Address Location ie. Home</string>
 </resources>

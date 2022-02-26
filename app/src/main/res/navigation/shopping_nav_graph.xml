@@ -31,7 +31,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.kleine.fragments.shopping.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_billingFragment"
+            app:destination="@id/billingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.kleine.fragments.shopping.CartFragment"
@@ -53,4 +57,18 @@
 
 
     </fragment>
+    <fragment
+        android:id="@+id/billingFragment"
+        android:name="com.example.kleine.fragments.shopping.BillingFragment"
+        android:label="fragment_billing"
+        tools:layout="@layout/fragment_billing" >
+        <action
+            android:id="@+id/action_billingFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.kleine.fragments.shopping.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" />
 </navigation>

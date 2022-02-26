@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.shopping.AddressFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_address_close"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/g_black" />
+
+
+            <TextView
+                android:id="@+id/tv_payment_methods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/poppins_thin"
+                android:text="@string/g_address"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/img_address_close"
+                app:layout_constraintStart_toEndOf="@id/img_address_close"
+                app:layout_constraintTop_toTopOf="@+id/img_address_close" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/g_icon_tint"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_address" />
+
+    <EditText
+        android:id="@+id/ed_address_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="start|center_vertical"
+        android:hint="@string/g_address_location_ie_home"
+        android:paddingStart="20dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/ed_full_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="start|center_vertical"
+        android:hint="@string/g_full_name"
+        android:paddingStart="20dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/ed_address_title"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/ed_street"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="start|center_vertical"
+        android:hint="Street"
+        android:paddingStart="20dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/ed_full_name" />
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/ed_phone"
+        android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/ed_city"
+        android:layout_width="378dp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="start|center_vertical"
+        android:hint="@string/g_city"
+        android:paddingStart="20dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="5dp" />
+
+        <EditText
+            android:id="@+id/ed_state"
+            android:layout_width="378dp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/btn_white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|center_vertical"
+            android:hint="@string/g_state"
+            android:paddingStart="20dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/ed_phone"
+        android:layout_width="378dp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/btn_white_background"
+        android:fontFamily="@font/poppins_light"
+        android:layout_marginTop="10dp"
+        android:gravity="start|center_vertical"
+        android:hint="@string/g_phone"
+        android:paddingStart="20dp"
+        android:phoneNumber="true"
+        android:singleLine="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/ed_street" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_new_address"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/poppins_thin"
+        android:text="@string/g_save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        app:layout_constraintVertical_bias="0.494"
+        android:layout_marginTop="45dp"
+        android:visibility="visible"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressbar_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/g_hint"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        android:layout_marginTop="45dp"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

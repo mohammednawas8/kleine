@@ -48,7 +48,7 @@ class ColorsAndSizesAdapter(var type: String = COLORS_TYPE) :
     override fun onBindViewHolder(holder: ColorsAndSizesAdapterViewHolder, position: Int) {
         if (type == COLORS_TYPE) {
             val color = differ.currentList[position]
-            if(position == selectedPosition) {
+            if(position == selectedPosition) { //Select case
                 holder.binding.apply {
                     val color = Color.parseColor(color)
                     val imageDrawable = ColorDrawable(color)

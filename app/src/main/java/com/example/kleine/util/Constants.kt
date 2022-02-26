@@ -6,6 +6,7 @@ class Constants {
         const val SPLASH_SHARED_PREF = "showSplash"
         const val SHOULD_SHOW = "shouldShow"
         const val USERS_COLLECTION = "users"
+        const val ADDRESS_COLLECTION = "addresses"
         const val PRODUCTS_COLLECTION = "products"
         const val CATEGORIES_COLLECTION = "categories"
         const val CART_COLLECTION = "cart"

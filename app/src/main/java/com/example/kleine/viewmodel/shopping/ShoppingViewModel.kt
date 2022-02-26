@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.model.Address
 import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Category
 import com.example.kleine.model.Product
@@ -25,6 +26,10 @@ class ShoppingViewModel(
     val cupboard = MutableLiveData<Resource<List<Product>>>()
     val cartBadge = MutableLiveData<Resource<Int>>()
     val addToCart = MutableLiveData<Resource<Boolean>>()
+
+
+    val addresses = MutableLiveData<Resource<Address>>()
+
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -185,6 +190,14 @@ class ShoppingViewModel(
         }
 
 
-
+        fun saveAddress(address:Address) {
+            addresses.postValue(Resource.Loading())
+            firebaseDatabase.saveNewAddress(address)?.addOnCompleteListener {
+                if (it.isSuccessful)
+                    addresses.postValue(Resource.Success(address))
+                 else
+                    addresses.postValue(Resource.Error(it.exception.toString()))
+            }
+        }
 
 }
