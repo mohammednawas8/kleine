@@ -16,6 +16,7 @@ import com.example.kleine.util.Constants.Companion.COLOR
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.example.kleine.util.Constants.Companion.ID
 import com.example.kleine.util.Constants.Companion.ORDERS
+import com.example.kleine.util.Constants.Companion.PRICE
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.QUANTITY
 import com.example.kleine.util.Constants.Companion.SIZE
@@ -130,7 +131,8 @@ class FirebaseDb {
 
     fun getProductFromCartProduct(cartProduct: CartProduct) =
         productsCollection.whereEqualTo(ID, cartProduct.id)
-            .whereEqualTo(TITLE, cartProduct.name).get()
+            .whereEqualTo(TITLE, cartProduct.name)
+            .whereEqualTo(PRICE,cartProduct.price).get()
 
     fun saveNewAddress(address: Address) = userAddressesCollection?.add(address)
 

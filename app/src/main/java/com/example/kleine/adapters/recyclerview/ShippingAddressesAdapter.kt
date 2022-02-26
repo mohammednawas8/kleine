@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kleine.R
 import com.example.kleine.databinding.RecyclerviewShippingItemBinding
 import com.example.kleine.model.Address
+import com.example.kleine.util.Constants.Companion.SELECT_ADDRESS_FLAG
 
-class ShippingAddressesAdapter() :
+class ShippingAddressesAdapter(
+    val ADDRESS_CLICK_FLAG : String
+) :
     RecyclerView.Adapter<ShippingAddressesAdapter.ShippingAddressesAdapterViewHolder>() {
     inner class ShippingAddressesAdapterViewHolder(val binding: RecyclerviewShippingItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -41,31 +44,43 @@ class ShippingAddressesAdapter() :
             )
         )
     }
-
+    var selectedAddress = -1
     override fun onBindViewHolder(holder: ShippingAddressesAdapterViewHolder, position: Int) {
-        var selectedAddress = -1
         val address = differ.currentList[position]
 
-        if (selectedAddress == position) {
-            holder.binding.btnAddress.apply {
-                setBackgroundColor(resources.getColor(R.color.g_dark_blue))
-                text = address.addressTitle
-                setTextColor(resources.getColor(R.color.white))
+        if(ADDRESS_CLICK_FLAG == SELECT_ADDRESS_FLAG) {
+            if (selectedAddress == position) {
+                holder.binding.btnAddress.apply {
+                    setBackgroundColor(resources.getColor(R.color.g_dark_blue))
+                    text = address.addressTitle
+                    setTextColor(resources.getColor(R.color.white))
+                }
+            } else {
+                holder.binding.btnAddress.apply {
+                    setBackgroundResource(R.drawable.unselected_button_background)
+                    text = address.addressTitle
+                    setTextColor(resources.getColor(R.color.g_icon_tint))
+                }
             }
-        } else {
+
+            holder.binding.btnAddress.setOnClickListener {
+
+                if (selectedAddress >= 0)
+                    notifyItemChanged(selectedAddress)
+                selectedAddress = holder.adapterPosition
+                notifyItemChanged(selectedAddress)
+
+            }
+        }else {
             holder.binding.btnAddress.apply {
                 setBackgroundResource(R.drawable.unselected_button_background)
                 text = address.addressTitle
                 setTextColor(resources.getColor(R.color.g_icon_tint))
             }
-        }
 
-        holder.itemView.setOnClickListener {
-            if (selectedAddress >= 0)
-                notifyItemChanged(selectedAddress)
-            selectedAddress = holder.adapterPosition
-            notifyItemChanged(selectedAddress)
-
+            holder.binding.btnAddress.setOnClickListener {
+                onBtnClick?.invoke(address)
+            }
         }
 
 
@@ -74,4 +89,6 @@ class ShippingAddressesAdapter() :
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+    var onBtnClick : ((Address)->Unit)?=null
 }

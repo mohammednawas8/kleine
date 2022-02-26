@@ -65,10 +65,15 @@
         <action
             android:id="@+id/action_billingFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <argument
+            android:name="clickFlag"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
         android:name="com.example.kleine.fragments.shopping.AddressFragment"
         android:label="fragment_address"
-        tools:layout="@layout/fragment_address" />
+        tools:layout="@layout/fragment_address" >
+
+    </fragment>
 </navigation>

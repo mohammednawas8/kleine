@@ -10,20 +10,23 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kleine.R
 import com.example.kleine.SpacingDecorator.HorizantalSpacingItemDecorator
 import com.example.kleine.adapters.recyclerview.ShippingAddressesAdapter
 import com.example.kleine.databinding.FragmentBillingBinding
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
 import com.example.kleine.viewmodel.billingViewmodel.BillingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BillingFragment : Fragment() {
+    val args by navArgs<BillingFragmentArgs>()
     val TAG = "BillingFragment"
     private lateinit var binding: FragmentBillingBinding
-    private lateinit var shippingAddressesAdapter:ShippingAddressesAdapter
-    private lateinit var viewModel:BillingViewModel
+    private lateinit var shippingAddressesAdapter: ShippingAddressesAdapter
+    private lateinit var viewModel: BillingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +52,18 @@ class BillingFragment : Fragment() {
         setupRecyclerview()
 
         observeAddresses()
+        onShippingItemClick()
+
+    }
+
+    private fun onShippingItemClick() {
+        shippingAddressesAdapter.onBtnClick = { address ->
+
+        }
     }
 
     private fun observeAddresses() {
-        viewModel.addresses.observe(viewLifecycleOwner, Observer {
-                response ->
+        viewModel.addresses.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
                     showLoading()
@@ -68,7 +78,7 @@ class BillingFragment : Fragment() {
 
                 is Resource.Error -> {
                     hideLoading()
-                    Log.e(TAG,response.message.toString())
+                    Log.e(TAG, response.message.toString())
                     Toast.makeText(activity, "Error occurred", Toast.LENGTH_SHORT).show()
                     return@Observer
                 }
@@ -85,10 +95,10 @@ class BillingFragment : Fragment() {
     }
 
     private fun setupRecyclerview() {
-        shippingAddressesAdapter = ShippingAddressesAdapter()
+        shippingAddressesAdapter = ShippingAddressesAdapter(args.clickFlag)
         binding.rvAdresses.apply {
             adapter = shippingAddressesAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             addItemDecoration(HorizantalSpacingItemDecorator(23))
         }
     }

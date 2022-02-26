@@ -15,6 +15,7 @@ import com.example.kleine.databinding.FragmentProfileBinding
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
+import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -54,7 +55,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnBilling.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_billingFragment)
+            val bundle = Bundle()
+            bundle.putString("clickFlag", UPDATE_ADDRESS_FLAG)
+            findNavController().navigate(R.id.action_profileFragment_to_billingFragment,bundle)
         }
     }
 
