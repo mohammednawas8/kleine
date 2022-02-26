@@ -20,6 +20,7 @@ import com.example.kleine.adapters.recyclerview.CartRecyclerAdapter
 import com.example.kleine.databinding.FragmentCartBinding
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
+import com.example.kleine.util.Constants.Companion.SELECT_ADDRESS_FLAG
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -59,6 +60,17 @@ class CartFragment : Fragment() {
 
         observeGetProductNavigation()
 
+        onCheckoutClick()
+
+    }
+
+    private fun onCheckoutClick() {
+        binding.btnCheckout.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("price",binding.tvTotalprice.text.toString())
+            bundle.putString("clickFlag",SELECT_ADDRESS_FLAG)
+            findNavController().navigate(R.id.action_cartFragment_to_billingFragment,bundle)
+        }
     }
 
     private fun observeGetProductNavigation() {
@@ -281,6 +293,13 @@ class CartFragment : Fragment() {
             activity?.onBackPressed()
             true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation?.visibility = View.VISIBLE
     }
 
 }

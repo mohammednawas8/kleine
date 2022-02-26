@@ -45,6 +45,9 @@
             android:id="@+id/action_cartFragment_to_productPreviewFragment2"
             app:destination="@id/productPreviewFragment2"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_cartFragment_to_billingFragment"
+            app:destination="@id/billingFragment" />
     </fragment>
     <fragment
         android:id="@+id/productPreviewFragment2"
@@ -68,6 +71,11 @@
         <argument
             android:name="clickFlag"
             app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -75,5 +83,10 @@
         android:label="fragment_address"
         tools:layout="@layout/fragment_address" >
 
+        <argument
+            android:name="address"
+            app:argType="com.example.kleine.model.Address"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

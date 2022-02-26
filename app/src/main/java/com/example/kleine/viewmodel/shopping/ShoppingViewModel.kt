@@ -24,11 +24,11 @@ class ShoppingViewModel(
     val chairs = MutableLiveData<List<Product>>()
     val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
-    val cartBadge = MutableLiveData<Resource<Int>>()
     val addToCart = MutableLiveData<Resource<Boolean>>()
 
-
-    val addresses = MutableLiveData<Resource<Address>>()
+    val addAddress = MutableLiveData<Resource<Address>>()
+    val updateAddress = MutableLiveData<Resource<Address>>()
+    val deleteAddress = MutableLiveData<Resource<Address>>()
 
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
@@ -190,14 +190,52 @@ class ShoppingViewModel(
         }
 
 
-        fun saveAddress(address:Address) {
-            addresses.postValue(Resource.Loading())
-            firebaseDatabase.saveNewAddress(address)?.addOnCompleteListener {
-                if (it.isSuccessful)
-                    addresses.postValue(Resource.Success(address))
-                 else
-                    addresses.postValue(Resource.Error(it.exception.toString()))
-            }
+    fun saveAddress(address: Address) {
+        addAddress.postValue(Resource.Loading())
+        firebaseDatabase.saveNewAddress(address)?.addOnCompleteListener {
+            if (it.isSuccessful)
+                addAddress.postValue(Resource.Success(address))
+            else
+                addAddress.postValue(Resource.Error(it.exception.toString()))
         }
+    }
+
+    fun updateAddress(oldAddress:Address,newAddress: Address) {
+        updateAddress.postValue(Resource.Loading())
+        firebaseDatabase.findAddress(oldAddress).addOnCompleteListener { addressResponse ->
+            if (addressResponse.isSuccessful) {
+                val documentUid = addressResponse.result!!.documents[0].id
+                firebaseDatabase.updateAddress(documentUid, newAddress)?.addOnCompleteListener {
+                    if (it.isSuccessful)
+                        updateAddress.postValue(Resource.Success(newAddress))
+                    else
+                        updateAddress.postValue(Resource.Error(it.exception.toString()))
+
+                }
+
+            } else
+                updateAddress.postValue(Resource.Error(addressResponse.exception.toString()))
+
+        }
+    }
+
+    fun deleteAddress(address:Address) {
+        deleteAddress.postValue(Resource.Loading())
+        firebaseDatabase.findAddress(address).addOnCompleteListener { addressResponse ->
+            if (addressResponse.isSuccessful) {
+                val documentUid = addressResponse.result!!.documents[0].id
+                firebaseDatabase.deleteAddress(documentUid, address)?.addOnCompleteListener {
+                    if (it.isSuccessful)
+                        deleteAddress.postValue(Resource.Success(address))
+                    else
+                        deleteAddress.postValue(Resource.Error(it.exception.toString()))
+
+                }
+
+            } else
+                deleteAddress.postValue(Resource.Error(addressResponse.exception.toString()))
+
+        }
+    }
 
 }

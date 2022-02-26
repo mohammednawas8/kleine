@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.databinding.FragmentAddressBinding
@@ -19,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class AddressFragment : Fragment() {
+    val args by navArgs<AddressFragmentArgs>()
     val TAG = "AddressFragment"
     private lateinit var binding: FragmentAddressBinding
     private lateinit var viewModel: ShoppingViewModel
@@ -43,15 +45,28 @@ class AddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onImgCloseClick()
-        onSaveClick()
+        val address = args.address
+        if (address == null) {
+            onSaveClick()
+            binding.btnDelete.visibility = View.GONE
+            observeAddAddress()
+        } else {
+            setInformation(address)
+            updateAddress(address)
+            observeUpdateAddress()
+            onDeleteClick(address)
+            observeDeleteAddress()
+        }
 
-        observeAddresses()
+        onImgCloseClick()
+
+
+
 
     }
 
-    private fun observeAddresses() {
-        viewModel.addresses.observe(viewLifecycleOwner, Observer { response ->
+    private fun observeDeleteAddress() {
+        viewModel.deleteAddress.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
                     showLoading()
@@ -61,13 +76,97 @@ class AddressFragment : Fragment() {
                 is Resource.Success -> {
                     hideLoading()
                     findNavController().navigateUp()
-                    viewModel.addresses.postValue(null)
+                    viewModel.deleteAddress.postValue(null)
                     return@Observer
                 }
 
                 is Resource.Error -> {
                     hideLoading()
-                    Log.e(TAG,response.message.toString())
+                    Log.e(TAG, response.message.toString())
+                    Toast.makeText(activity, "Error occurred", Toast.LENGTH_SHORT).show()
+                    return@Observer
+                }
+            }
+        })    }
+
+    private fun onDeleteClick(address: Address) {
+        binding.btnDelete.setOnClickListener {
+            viewModel.deleteAddress(address)
+        }
+    }
+
+    private fun observeUpdateAddress() {
+        viewModel.updateAddress.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showLoading()
+                    return@Observer
+                }
+
+                is Resource.Success -> {
+                    hideLoading()
+                    findNavController().navigateUp()
+                    viewModel.updateAddress.postValue(null)
+                    return@Observer
+                }
+
+                is Resource.Error -> {
+                    hideLoading()
+                    Log.e(TAG, response.message.toString())
+                    Toast.makeText(activity, "Error occurred", Toast.LENGTH_SHORT).show()
+                    return@Observer
+                }
+            }
+        })
+    }
+
+    private fun updateAddress(oldAddress: Address) {
+        binding.btnAddNewAddress.setOnClickListener {
+            binding.apply {
+                val title = edAddressTitle.text.toString()
+                val fullName = edFullName.text.toString()
+                val street = edStreet.text.toString()
+                val phone = edPhone.text.toString()
+                val city = edCity.text.toString()
+                val state = edState.text.toString()
+
+                val newAddress = Address(title, fullName, street, phone, city, state)
+                viewModel.updateAddress(oldAddress,newAddress)
+            }
+        }
+    }
+
+    private fun setInformation(address: Address) {
+        binding.apply {
+            edAddressTitle.setText(address.addressTitle)
+            edFullName.setText(address.fullName)
+            edPhone.setText(address.phone)
+            edCity.setText(address.city)
+            edState.setText(address.state)
+            edStreet.setText(address.street)
+
+            btnAddNewAddress.text = resources.getText(R.string.g_update)
+        }
+    }
+
+    private fun observeAddAddress() {
+        viewModel.addAddress.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showLoading()
+                    return@Observer
+                }
+
+                is Resource.Success -> {
+                    hideLoading()
+                    findNavController().navigateUp()
+                    viewModel.addAddress.postValue(null)
+                    return@Observer
+                }
+
+                is Resource.Error -> {
+                    hideLoading()
+                    Log.e(TAG, response.message.toString())
                     Toast.makeText(activity, "Error occurred", Toast.LENGTH_SHORT).show()
                     return@Observer
                 }
@@ -78,12 +177,15 @@ class AddressFragment : Fragment() {
     private fun hideLoading() {
         binding.apply {
             btnAddNewAddress.visibility = View.VISIBLE
+            btnDelete.visibility = View.VISIBLE
             progressbarAddress.visibility = View.INVISIBLE
-        }    }
+        }
+    }
 
     private fun showLoading() {
         binding.apply {
             btnAddNewAddress.visibility = View.INVISIBLE
+            btnDelete.visibility = View.INVISIBLE
             progressbarAddress.visibility = View.VISIBLE
         }
     }

@@ -47,6 +47,24 @@ class BillingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val price = args.price
+
+        if(price == "null"){
+            binding.apply {
+                linear.visibility = View.GONE
+                btnPlaceOlder.visibility = View.GONE
+                line2.visibility = View.GONE
+            }
+        }else{
+            binding.apply {
+                linear.visibility = View.VISIBLE
+                btnPlaceOlder.visibility = View.VISIBLE
+                line2.visibility = View.VISIBLE
+                btnPlaceOlder.visibility = View.VISIBLE
+                tvTotalpriceBilling.text = price
+            }
+        }
+
         onAddAddressImgClick()
         onImgCloseClick()
         setupRecyclerview()
@@ -54,11 +72,24 @@ class BillingFragment : Fragment() {
         observeAddresses()
         onShippingItemClick()
 
+        onPlaceOrderClick()
+
+
     }
+
+    private fun onPlaceOrderClick() {
+        binding.btnPlaceOlder.setOnClickListener {
+
+        }
+    }
+
 
     private fun onShippingItemClick() {
         shippingAddressesAdapter.onBtnClick = { address ->
+            val bundle = Bundle()
+            bundle.putParcelable("address",address)
 
+            findNavController().navigate(R.id.action_billingFragment_to_addressFragment,bundle)
         }
     }
 

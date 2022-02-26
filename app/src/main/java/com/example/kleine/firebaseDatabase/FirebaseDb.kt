@@ -25,6 +25,7 @@ import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Transaction
@@ -137,4 +138,13 @@ class FirebaseDb {
     fun saveNewAddress(address: Address) = userAddressesCollection?.add(address)
 
     fun getAddresses() = userAddressesCollection
+
+    fun findAddress(address:Address) = userAddressesCollection!!
+        .whereEqualTo("addressTitle",address.addressTitle)
+        .whereEqualTo("fullName",address.fullName).get()
+
+    fun updateAddress(documentUid:String,address:Address) = userAddressesCollection?.document(documentUid)?.set(address)
+
+    fun deleteAddress(documentUid:String,address:Address) = userAddressesCollection?.document(documentUid)?.delete()
+
 }

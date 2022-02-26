@@ -165,25 +165,53 @@
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/ed_street" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_add_new_address"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_background"
-        android:fontFamily="@font/poppins_thin"
-        android:text="@string/g_save"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12sdp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/linear"
         app:layout_constraintVertical_bias="0.494"
         android:layout_marginTop="45dp"
-        android:visibility="visible"
-        />
+        android:orientation="horizontal">
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_delete"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_white_background"
+            android:fontFamily="@font/poppins_thin"
+            android:text="@string/g_delete"
+            android:textAllCaps="false"
+            android:textColor="@color/g_hint"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_new_address"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/poppins_thin"
+            android:text="@string/g_save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            />
+
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressbar_address"

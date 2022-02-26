@@ -72,4 +72,7 @@
     <string name="g_save">Save</string>
     <string name="g_address">Address</string>
     <string name="g_address_location_ie_home">Address Location ie. Home</string>
+    <string name="g_update">Update</string>
+    <string name="g_place_order">Place Order</string>
+    <string name="g_delete">Delete</string>
 </resources>
