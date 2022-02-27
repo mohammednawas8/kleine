@@ -76,6 +76,11 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="null" />
+        <argument
+            android:name="products"
+            app:argType="com.example.kleine.model.CartProductsList"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"

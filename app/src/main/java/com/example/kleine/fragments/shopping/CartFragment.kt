@@ -1,6 +1,5 @@
 package com.example.kleine.fragments.shopping
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,16 +17,16 @@ import com.example.kleine.R
 import com.example.kleine.SpacingDecorator.VerticalSpacingItemDecorator
 import com.example.kleine.adapters.recyclerview.CartRecyclerAdapter
 import com.example.kleine.databinding.FragmentCartBinding
+import com.example.kleine.model.CartProductsList
 import com.example.kleine.resource.Resource
-import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.util.Constants.Companion.SELECT_ADDRESS_FLAG
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartFragment : Fragment() {
-    private lateinit var binding:FragmentCartBinding
-    private lateinit var viewModel:CartViewModel
-    private lateinit var cartAdapter:CartRecyclerAdapter
+    private lateinit var binding: FragmentCartBinding
+    private lateinit var viewModel: CartViewModel
+    private lateinit var cartAdapter: CartRecyclerAdapter
     private val TAG = "CartFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,15 +66,15 @@ class CartFragment : Fragment() {
     private fun onCheckoutClick() {
         binding.btnCheckout.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("price",binding.tvTotalprice.text.toString())
-            bundle.putString("clickFlag",SELECT_ADDRESS_FLAG)
-            findNavController().navigate(R.id.action_cartFragment_to_billingFragment,bundle)
+                bundle.putString("price", binding.tvTotalprice.text.toString())
+            bundle.putString("clickFlag", SELECT_ADDRESS_FLAG)
+            bundle.putParcelable("products",cartProducts)
+            findNavController().navigate(R.id.action_cartFragment_to_billingFragment, bundle)
         }
     }
 
     private fun observeGetProductNavigation() {
-        viewModel.product.observe(viewLifecycleOwner, Observer {
-                response->
+        viewModel.product.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
                 is Resource.Success -> {
@@ -83,8 +82,11 @@ class CartFragment : Fragment() {
                         progressPlusMinus.visibility = View.INVISIBLE
                         val product = response.data
                         val bundle = Bundle()
-                        bundle.putParcelable("product",product)
-                        findNavController().navigate(R.id.action_cartFragment_to_productPreviewFragment2,bundle)
+                        bundle.putParcelable("product", product)
+                        findNavController().navigate(
+                            R.id.action_cartFragment_to_productPreviewFragment2,
+                            bundle
+                        )
                         viewModel.product.postValue(null)
                     }
                     return@Observer
@@ -101,7 +103,7 @@ class CartFragment : Fragment() {
                 is Resource.Error -> {
                     binding.apply {
                         progressPlusMinus.visibility = View.INVISIBLE
-                        Log.e(TAG,response.message.toString())
+                        Log.e(TAG, response.message.toString())
                     }
                     return@Observer
                 }
@@ -110,7 +112,7 @@ class CartFragment : Fragment() {
     }
 
     private fun observePlus() {
-        viewModel.plus.observe(viewLifecycleOwner, Observer { response->
+        viewModel.plus.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
                 is Resource.Success -> {
@@ -131,7 +133,7 @@ class CartFragment : Fragment() {
                 is Resource.Error -> {
                     binding.apply {
                         progressPlusMinus.visibility = View.INVISIBLE
-                        Log.e(TAG,response.message.toString())
+                        Log.e(TAG, response.message.toString())
                     }
                     return@Observer
                 }
@@ -140,7 +142,7 @@ class CartFragment : Fragment() {
     }
 
     private fun observeMinus() {
-        viewModel.minus.observe(viewLifecycleOwner, Observer { response->
+        viewModel.minus.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
                 is Resource.Success -> {
@@ -161,7 +163,7 @@ class CartFragment : Fragment() {
                 is Resource.Error -> {
                     binding.apply {
                         progressPlusMinus.visibility = View.INVISIBLE
-                        Log.e(TAG,response.message.toString())
+                        Log.e(TAG, response.message.toString())
                     }
                     return@Observer
                 }
@@ -177,16 +179,16 @@ class CartFragment : Fragment() {
     }
 
 
-
     private fun onMinusClick() {
-        cartAdapter.onMinusesClick = { cartProduct->
-            if(cartProduct.quantity > 1) {
+        cartAdapter.onMinusesClick = { cartProduct ->
+            if (cartProduct.quantity > 1) {
                 viewModel.decreaseQuantity(cartProduct)
                 observeMinus()
-            }else{
+            } else {
                 val alertDialog = AlertDialog.Builder(requireContext()).create()
                 alertDialog.setTitle("")
-                val view = LayoutInflater.from(context).inflate(R.layout.delete_alert_dialog,null,false)
+                val view =
+                    LayoutInflater.from(context).inflate(R.layout.delete_alert_dialog, null, false)
                 alertDialog.setView(view)
 
                 view.findViewById<Button>(R.id.btn_no).setOnClickListener {
@@ -204,7 +206,7 @@ class CartFragment : Fragment() {
     }
 
     private fun onPlusClick() {
-        cartAdapter.onPlusClick = { cartProduct->
+        cartAdapter.onPlusClick = { cartProduct ->
             viewModel.increaseQuantity(cartProduct)
             observePlus()
         }
@@ -225,9 +227,10 @@ class CartFragment : Fragment() {
         }
     }
 
+    private var cartProducts: CartProductsList? = null
     private fun observeCart() {
-        viewModel.cartProducts.observe(viewLifecycleOwner, Observer { response->
-            when(response){
+        viewModel.cartProducts.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
                 is Resource.Loading -> {
                     showLoading()
                     return@Observer
@@ -237,14 +240,15 @@ class CartFragment : Fragment() {
                     hideLoading()
 
                     val products = response.data
-                    if(products!!.isNotEmpty()) {
+                    if (products!!.isNotEmpty()) {
+                        cartProducts = CartProductsList(products)
                         cartAdapter.differ.submitList(products)
                         var totalPrice = 0
-                        products!!.forEach {
+                        products.forEach {
                             totalPrice += it.price.toInt() * it.quantity
                             binding.tvTotalprice.text = "$ $totalPrice"
                         }
-                    }else{
+                    } else {
                         cartAdapter.differ.submitList(products)
                         binding.apply {
                             btnCheckout.visibility = View.INVISIBLE
@@ -260,7 +264,7 @@ class CartFragment : Fragment() {
 
                 is Resource.Error -> {
                     hideLoading()
-                    Log.e(TAG,response.message.toString())
+                    Log.e(TAG, response.message.toString())
                     Toast.makeText(activity, "Oops error occurred", Toast.LENGTH_SHORT).show()
                     return@Observer
                 }
@@ -288,7 +292,7 @@ class CartFragment : Fragment() {
     }
 
     private fun onHomeClick() {
-        val btm =  activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val btm = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         btm?.menu?.getItem(0)?.setOnMenuItemClickListener {
             activity?.onBackPressed()
             true

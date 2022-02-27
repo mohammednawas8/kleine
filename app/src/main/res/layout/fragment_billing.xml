@@ -129,8 +129,6 @@
             android:indeterminateTint="@color/g_hint"
             android:visibility="gone"/>
 
-
-
         <View
             android:id="@+id/line2"
             android:layout_width="0dp"
@@ -143,13 +141,35 @@
             android:backgroundTint="@color/g_icon_tint"
             />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line2"
+            android:layout_marginTop="20dp"
+            />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/line"
+            app:layout_constraintTop_toBottomOf="@id/rv_products"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            android:backgroundTint="@color/g_icon_tint"
+            />
+
         <LinearLayout
             android:id="@+id/linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
-            app:layout_constraintTop_toBottomOf="@id/line2"
+            app:layout_constraintTop_toBottomOf="@id/line3"
             >
 
             <TextView
@@ -193,6 +213,21 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/guideline1"
             />
+
+        <TextView
+            android:id="@+id/tv_select_address_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10ssp"
+            android:text="@string/g_select_address_error"
+            app:layout_constraintStart_toEndOf="@id/tv_shopping_addresses"
+            app:layout_constraintTop_toTopOf="@id/tv_shopping_addresses"
+            app:layout_constraintBottom_toBottomOf="@id/tv_shopping_addresses"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/g_red"
+            android:visibility="gone"/>
+
+
 
         <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

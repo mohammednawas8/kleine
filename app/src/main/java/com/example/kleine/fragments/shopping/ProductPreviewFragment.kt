@@ -154,7 +154,7 @@ class ProductPreviewFragment : Fragment() {
 
                 val product = args.product
                 val image = (product.images?.get(IMAGES) as List<String>)[0]
-                val cartProduct = CartProduct(product.id,product.title!!,image,product.price!!,1,selectedColor,selectedSize)
+                val cartProduct = CartProduct(product.id,product.title!!,product.seller!!,image,product.price!!,1,selectedColor,selectedSize)
                 viewModel.addProductToCart(cartProduct)
                 setBackgroundResource(R.color.g_black)
             }

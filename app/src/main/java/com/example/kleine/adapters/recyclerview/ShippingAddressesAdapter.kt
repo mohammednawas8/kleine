@@ -69,8 +69,9 @@ class ShippingAddressesAdapter(
                     notifyItemChanged(selectedAddress)
                 selectedAddress = holder.adapterPosition
                 notifyItemChanged(selectedAddress)
-
+                onBtnClick?.invoke(address)
             }
+
         }else {
             holder.binding.btnAddress.apply {
                 setBackgroundResource(R.drawable.unselected_button_background)
