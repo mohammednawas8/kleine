@@ -78,4 +78,5 @@
     <string name="g_select_address_error">Select or add new address !</string>
     <string name="g_place_order_confirmation">Are you sure you want to place this order ?</string>
     <string name="g_confirm">Confirm</string>
+    <string name="place_order_error">Error occured try again later or contanct us</string>
 </resources>

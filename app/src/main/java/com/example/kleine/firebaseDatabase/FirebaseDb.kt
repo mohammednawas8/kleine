@@ -1,10 +1,7 @@
 package com.example.kleine.firebaseDatabase
 
 import android.util.Log
-import com.example.kleine.model.Address
-import com.example.kleine.model.CartProduct
-import com.example.kleine.model.Product
-import com.example.kleine.model.User
+import com.example.kleine.model.*
 import com.example.kleine.util.Constants.Companion.ADDRESS_COLLECTION
 import com.example.kleine.util.Constants.Companion.BEST_DEALS
 import com.example.kleine.util.Constants.Companion.CART_COLLECTION
@@ -20,6 +17,7 @@ import com.example.kleine.util.Constants.Companion.PRICE
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.QUANTITY
 import com.example.kleine.util.Constants.Companion.SIZE
+import com.example.kleine.util.Constants.Companion.STORES_COLLECTION
 import com.example.kleine.util.Constants.Companion.TITLE
 import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
@@ -36,6 +34,7 @@ class FirebaseDb {
     private val usersCollectionRef = Firebase.firestore.collection(USERS_COLLECTION)
     private val productsCollection = Firebase.firestore.collection(PRODUCTS_COLLECTION)
     private val categoriesCollection = Firebase.firestore.collection(CATEGORIES_COLLECTION)
+    private val storesCollection = Firebase.firestore.collection(STORES_COLLECTION)
 
     val userUid = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -133,18 +132,50 @@ class FirebaseDb {
     fun getProductFromCartProduct(cartProduct: CartProduct) =
         productsCollection.whereEqualTo(ID, cartProduct.id)
             .whereEqualTo(TITLE, cartProduct.name)
-            .whereEqualTo(PRICE,cartProduct.price).get()
+            .whereEqualTo(PRICE, cartProduct.price).get()
 
     fun saveNewAddress(address: Address) = userAddressesCollection?.add(address)
 
     fun getAddresses() = userAddressesCollection
 
-    fun findAddress(address:Address) = userAddressesCollection!!
-        .whereEqualTo("addressTitle",address.addressTitle)
-        .whereEqualTo("fullName",address.fullName).get()
+    fun findAddress(address: Address) = userAddressesCollection!!
+        .whereEqualTo("addressTitle", address.addressTitle)
+        .whereEqualTo("fullName", address.fullName).get()
 
-    fun updateAddress(documentUid:String,address:Address) = userAddressesCollection?.document(documentUid)?.set(address)
+    fun updateAddress(documentUid: String, address: Address) =
+        userAddressesCollection?.document(documentUid)?.set(address)
 
-    fun deleteAddress(documentUid:String,address:Address) = userAddressesCollection?.document(documentUid)?.delete()
+    fun deleteAddress(documentUid: String, address: Address) =
+        userAddressesCollection?.document(documentUid)?.delete()
 
+    fun placeOrder(products: List<CartProduct>, address: Address, order: Order) =
+        Firebase.firestore.runBatch { batch ->
+            //filter every product to its store
+
+            val stores = ArrayList<String>()
+            products.forEach { cartProduct ->
+                if (!stores.contains(cartProduct.name))
+                    stores.add(cartProduct.name)
+            }
+
+            val storeDocument = storesCollection.document()
+            val userOrderDocument = usersCollectionRef.document()
+            batch.set(storeDocument, order)
+            batch.set(userOrderDocument, order)
+
+            products.forEach {
+                val storeProductsDocument = storeDocument.collection(PRODUCTS_COLLECTION).document()
+                val userProductDocument =
+                    userOrderDocument.collection(PRODUCTS_COLLECTION).document()
+                batch.set(storeProductsDocument, it)
+                batch.set(userProductDocument, it)
+            }
+
+            val storeAddressDocument = storeDocument.collection(ADDRESS_COLLECTION).document()
+            val userAddressDocument = userOrderDocument.collection(ADDRESS_COLLECTION).document()
+
+            batch.set(storeAddressDocument, address)
+            batch.set(userAddressDocument, address)
+
+        }
 }

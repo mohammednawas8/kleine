@@ -25,6 +25,7 @@ import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
 import com.example.kleine.viewmodel.billingViewmodel.BillingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class BillingFragment : Fragment() {
     val args by navArgs<BillingFragmentArgs>()
@@ -61,7 +62,7 @@ class BillingFragment : Fragment() {
                 btnPlaceOlder.visibility = View.GONE
                 line2.visibility = View.GONE
                 rvProducts.visibility = View.GONE
-
+                line3.visibility = View.GONE
             }
         } else {
             binding.apply {
@@ -83,7 +84,46 @@ class BillingFragment : Fragment() {
         onShippingItemClick()
         onPlaceOrderClick()
 
+        observePlaceOrder()
+    }
 
+    private fun observePlaceOrder() {
+        viewModel.placeOrder.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                    is Resource.Loading -> {
+                        showPlaceOrderLoading()
+                        return@Observer
+                    }
+
+                    is Resource.Success -> {
+                        hidePlaceOrderLoading()
+                        Toast.makeText(activity, "Order was placed", Toast.LENGTH_SHORT).show()
+                        return@Observer
+                    }
+
+                    is Resource.Error -> {
+                        hidePlaceOrderLoading()
+                        Log.e(TAG,response.message.toString())
+                        Toast.makeText(activity, resources.getText(R.string.place_order_error), Toast.LENGTH_LONG).show()
+                        return@Observer
+                    }
+                }
+        })
+    }
+
+    private fun hidePlaceOrderLoading() {
+        binding.apply {
+            progressbarPlaceOrder.visibility = View.GONE
+            btnPlaceOlder.visibility = View.VISIBLE
+        }
+
+    }
+
+    private fun showPlaceOrderLoading() {
+        binding.apply {
+            progressbarPlaceOrder.visibility = View.VISIBLE
+            btnPlaceOlder.visibility = View.INVISIBLE
+        }
     }
 
     private fun setupProductsRecyclerview() {
@@ -124,7 +164,7 @@ class BillingFragment : Fragment() {
 
         btnConfirm.setOnClickListener {
           val products = args.products
-
+            viewModel.placeOrder(args.products!!.products,selectedAddress!!,args.price!!)
             alertDialog.dismiss()
         }
 

@@ -4,12 +4,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.Address
+import com.example.kleine.model.CartProduct
+import com.example.kleine.model.Order
+import com.example.kleine.model.Product
 import com.example.kleine.resource.Resource
+import java.util.*
+import kotlin.random.Random
 
 //change this later and add view model provider factory
 
 class BillingViewModel : ViewModel() {
-
+    val placeOrder = MutableLiveData<Resource<Order>>()
     val firebaseDatabase = FirebaseDb()
     val addresses = MutableLiveData<Resource<List<Address>>>()
 
@@ -28,6 +33,20 @@ class BillingViewModel : ViewModel() {
                 val addressesList = value.toObjects(Address::class.java)
                 addresses.postValue(Resource.Success(addressesList))
             }
+        }
+    }
+
+    fun placeOrder(products:List<CartProduct>,address: Address,price:String){
+        placeOrder.postValue(Resource.Loading())
+        val id = Random.nextInt(9999999)
+        val date = Calendar.getInstance().time
+        val order = Order(id.toString(),date.toString(),price)
+
+        firebaseDatabase.placeOrder(products, address, order).addOnCompleteListener {
+            if(it.isSuccessful)
+                placeOrder.postValue(Resource.Success(order))
+            else
+                placeOrder.postValue(Resource.Error(it.exception.toString()))
         }
     }
 }
