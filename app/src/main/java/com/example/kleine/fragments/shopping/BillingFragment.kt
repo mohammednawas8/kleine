@@ -22,10 +22,11 @@ import com.example.kleine.adapters.recyclerview.ShippingAddressesAdapter
 import com.example.kleine.databinding.FragmentBillingBinding
 import com.example.kleine.model.Address
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.ORDER_FAILED_FLAG
+import com.example.kleine.util.Constants.Companion.ORDER_SUCCESS_FLAG
 import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
 import com.example.kleine.viewmodel.billingViewmodel.BillingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
 
 class BillingFragment : Fragment() {
     val args by navArgs<BillingFragmentArgs>()
@@ -97,14 +98,19 @@ class BillingFragment : Fragment() {
 
                     is Resource.Success -> {
                         hidePlaceOrderLoading()
-                        Toast.makeText(activity, "Order was placed", Toast.LENGTH_SHORT).show()
+                        val bundle = Bundle()
+                        bundle.putString("order_completion_flag", ORDER_SUCCESS_FLAG)
+                        bundle.putString("orderNumber",response.data?.id)
+                        findNavController().navigate(R.id.action_billingFragment_to_orderCompletion,bundle)
                         return@Observer
                     }
 
                     is Resource.Error -> {
                         hidePlaceOrderLoading()
                         Log.e(TAG,response.message.toString())
-                        Toast.makeText(activity, resources.getText(R.string.place_order_error), Toast.LENGTH_LONG).show()
+                        val bundle = Bundle()
+                        bundle.putString("order_completion_flag", ORDER_FAILED_FLAG)
+                        findNavController().navigate(R.id.action_billingFragment_to_orderCompletion,bundle)
                         return@Observer
                     }
                 }
@@ -163,7 +169,6 @@ class BillingFragment : Fragment() {
 
 
         btnConfirm.setOnClickListener {
-          val products = args.products
             viewModel.placeOrder(args.products!!.products,selectedAddress!!,args.price!!)
             alertDialog.dismiss()
         }
@@ -204,7 +209,7 @@ class BillingFragment : Fragment() {
 
                     is Resource.Success -> {
                         hideLoading()
-                        shippingAddressesAdapter.differ.submitList(response.data!!.toList())
+                        shippingAddressesAdapter.differ.submitList(response.data.toList())
                         return@Observer
                     }
 

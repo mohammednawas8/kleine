@@ -32,7 +32,7 @@
     <string name="signed_up_successfully">you have created new account, login now</string>
     <string name="g_home">Home</string>
     <string name="g_search">search</string>
-    <string name="g_cart">cart</string>
+    <string name="g_cart">Cart</string>
     <string name="g_profile">profile</string>
     <string name="g_add_to_cart">Add to cart</string>
     <string name="g_search_now">Search Now</string>
@@ -78,5 +78,12 @@
     <string name="g_select_address_error">Select or add new address !</string>
     <string name="g_place_order_confirmation">Are you sure you want to place this order ?</string>
     <string name="g_confirm">Confirm</string>
-    <string name="place_order_error">Error occured try again later or contanct us</string>
+    <string name="place_order_error">Error occurred try again later or contact us</string>
+    <string name="g_payment_failed">Your Order is Failed !</string>
+    <string name="g_payment_success">Your Order is Completed</string>
+    <string name="order_error_message">Try again later, if this error keeps showing up please contact us .</string>
+    <string name="order_success_message">We received your order and we will contact you through a phone call in the next 24H
+    \n your order number is #</string>
+    <string name="g_track_order">You can track your order by going to your profile and select orders then select your recent order.</string>
+
 </resources>

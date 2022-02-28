@@ -40,7 +40,7 @@ class BillingViewModel : ViewModel() {
         placeOrder.postValue(Resource.Loading())
         val id = Random.nextInt(9999999)
         val date = Calendar.getInstance().time
-        val order = Order(id.toString(),date.toString(),price)
+        val order = Order(id.toString(),date,price)
 
         firebaseDatabase.placeOrder(products, address, order).addOnCompleteListener {
             if(it.isSuccessful)

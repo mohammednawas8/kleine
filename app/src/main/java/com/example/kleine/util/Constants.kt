@@ -50,5 +50,8 @@ class Constants {
         const val UPDATE_ADDRESS_FLAG = "update"
         const val SELECT_ADDRESS_FLAG = "select"
         const val STORES_COLLECTION = "stores"
+
+        const val ORDER_FAILED_FLAG = "order_failed"
+        const val ORDER_SUCCESS_FLAG = "order_success"
     }
 }

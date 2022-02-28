@@ -81,6 +81,11 @@
             app:argType="com.example.kleine.model.CartProductsList"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_billingFragment_to_orderCompletion"
+            app:destination="@id/orderCompletion"
+            app:popUpTo="@id/billingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -93,5 +98,19 @@
             app:argType="com.example.kleine.model.Address"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderCompletion"
+        android:name="com.example.kleine.fragments.shopping.OrderCompletion"
+        android:label="fragment_order_completion"
+        tools:layout="@layout/fragment_order_completion" >
+        <argument
+            android:name="order_completion_flag"
+            app:argType="string" />
+        <argument
+            android:name="orderNumber"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
     </fragment>
 </navigation>

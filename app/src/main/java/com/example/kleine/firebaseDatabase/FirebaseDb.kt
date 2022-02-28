@@ -192,15 +192,13 @@ class FirebaseDb {
                 val orderNum = Random.nextInt(9999999)
                 var price = 0
 
-                Log.d("test", "size ${orderProducts.size.toString()}")
-
                 orderProducts.forEach {
                     price += it.price.toInt()
                 }
 
                 val storeOrder = Order(
                     orderNum.toString(),
-                    Calendar.getInstance().time.toString(),
+                    Calendar.getInstance().time,
                     price.toString()
                 )
 
@@ -216,7 +214,6 @@ class FirebaseDb {
 
 
                 orderProducts.forEach {
-                    Log.d("test", "order ${it.name} store ${it.store}")
                     val storeOrderProducts =
                         storeDocument.collection(PRODUCTS_COLLECTION).document()
                     batch.set(storeOrderProducts, it)
