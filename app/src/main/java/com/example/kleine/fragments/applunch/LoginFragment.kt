@@ -109,7 +109,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun getEmail(): String? {
-        val email = binding.edEmailLogin.text.toString()
+        val email = binding.edEmailLogin.text.toString().trim()
 
         if (email.isEmpty()) {
             binding.edEmailLogin.apply {
@@ -118,6 +118,7 @@ class LoginFragment : Fragment() {
             }
             return null
         }
+
 
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             binding.edEmailLogin.apply {

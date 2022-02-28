@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.activities.LunchActivity
@@ -46,7 +47,7 @@ class ProfileFragment : Fragment() {
 
         onHomeClick()
 
-        val btnLogout = view.findViewById<Button>(R.id.btn_logout)
+        val btnLogout = view.findViewById<LinearLayout>(R.id.linear_out)
         btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(context,LunchActivity::class.java)
@@ -54,7 +55,7 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.btnBilling.setOnClickListener {
+        binding.linearBilling.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("clickFlag", UPDATE_ADDRESS_FLAG)
             findNavController().navigate(R.id.action_profileFragment_to_billingFragment,bundle)

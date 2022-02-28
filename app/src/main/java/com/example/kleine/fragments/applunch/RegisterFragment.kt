@@ -104,9 +104,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun getUser(): User? {
-        val firstName = binding.edFirstName.text.toString()
-        val lastName = binding.edLastName.text.toString()
-        val email = binding.edEmail.text.toString()
+        val firstName = binding.edFirstName.text.toString().trim()
+        val lastName = binding.edLastName.text.toString().trim()
+        val email = binding.edEmail.text.toString().trim()
 
         if (firstName.isEmpty()) {
             binding.edFirstName.apply {
@@ -145,7 +145,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun getPassword(): String? {
-        val password = binding.edPassword.text.toString()
+        val password = binding.edPassword.text.toString().trim()
         if (password.isEmpty()) {
             binding.edPassword.apply {
                 error = resources.getString(R.string.password_cant_be_empty)

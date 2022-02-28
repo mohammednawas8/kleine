@@ -1,6 +1,5 @@
 package com.example.kleine.firebaseDatabase
 
-import android.util.Log
 import com.example.kleine.model.*
 import com.example.kleine.util.Constants.Companion.ADDRESS_COLLECTION
 import com.example.kleine.util.Constants.Companion.BEST_DEALS
@@ -23,17 +22,10 @@ import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -118,7 +110,7 @@ class FirebaseDb {
             quantity = if (quantity!!.toInt() == 1)
                 1
             else
-                quantity!! - 1
+                quantity - 1
             transaction.update(document, QUANTITY, quantity)
 
         }

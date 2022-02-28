@@ -1,35 +1,378 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".fragments.shopping.ProfileFragment">
 
 
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Log out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_billing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Billing inormation"
-
-        app:layout_constraintEnd_toEndOf="@+id/btn_logout"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toStartOf="@+id/btn_logout"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logout"
-        app:layout_constraintVertical_bias="0.058" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_settings"
+            style="@style/BigTextViewThin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/g_settings"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user"
+            android:layout_width="@dimen/_43sdp"
+            android:layout_height="@dimen/_43sdp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/profile_img_background"
+            android:src="@drawable/test_image"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/tv_settings" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            style="@style/MediumTextViewThin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Name"
+            app:layout_constraintStart_toEndOf="@id/img_user"
+            app:layout_constraintTop_toTopOf="@+id/img_user" />
+
+
+
+        <TextView
+            android:id="@+id/tv_edit_personal_details"
+            style="@style/SmallTextViewThin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/g_edit_personal_details"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_user_name" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="@id/tv_user_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_edit_personal_details"
+            app:tint="@color/g_icon_tint" />
+
+
+        <TextView
+            android:id="@+id/tv_orders"
+            style="@style/MediumTextViewThin"
+            android:textColor="@color/g_hint"
+            android:textStyle="normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/g_orders"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/img_user" />
+
+        <LinearLayout
+            android:id="@+id/linear_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/tv_orders"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_all_orders"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/settings_items_background"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_all_orders"
+                style="@style/MediumTextViewThin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/g_all_orders"
+                android:textColor="@color/g_hint"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/ic_arrow"
+                app:tint="@color/g_icon_tint"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_search"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    android:backgroundTint="@color/g_hint"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_track_order"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/g__track_order"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/g_icon_tint"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_billing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_billing"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    android:backgroundTint="#FF9800"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_billing"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/g_billing"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/g_icon_tint"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tv_notifications"
+            style="@style/MediumTextViewThin"
+            android:textColor="@color/g_hint"
+            android:textStyle="normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/g_notifications"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/linear_orders" />
+
+        <LinearLayout
+            android:id="@+id/linear_notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/tv_notifications"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_notification"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    app:tint="@color/white"
+                    android:backgroundTint="#4cd964"/>
+
+                <TextView
+                    android:id="@+id/tv_notifications2"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/g_notifications"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <Switch
+                    android:id="@+id/switch_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:buttonTint="#4cd964"
+                    android:checked="true" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tv_regional"
+            style="@style/MediumTextViewThin"
+            android:textColor="@color/g_hint"
+            android:textStyle="normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/g_regional"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/linear_notifications" />
+
+        <LinearLayout
+            android:id="@+id/fth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/tv_regional"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_language"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    app:tint="@color/white"
+                    android:backgroundTint="#5856d6"/>
+
+                <TextView
+                    android:id="@+id/dfgh"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/g_language"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/g_icon_tint"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_logout"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    android:backgroundTint="#ff5823"
+                    app:tint="@color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/logout"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/g_logout"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/g_icon_tint"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>
