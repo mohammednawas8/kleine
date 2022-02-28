@@ -86,6 +86,8 @@ dependencies {
     //lifecycle
     implementation "android.arch.lifecycle:extensions:1.1.0"
 
+    //Firebase coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
 
 }
