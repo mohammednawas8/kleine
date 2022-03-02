@@ -142,7 +142,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save_profile"
-        android:layout_width="378dp"
+        android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/poppins_light"

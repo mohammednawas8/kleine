@@ -273,24 +273,33 @@ class FirebaseDb {
         imageName: String,
         onResult: (User?, String?) -> Unit,
     ) {
+        if (imageName.isNotEmpty())
+            firebaseStorage.child("profileImages")
+                .child(firebaseAuth.currentUser!!.uid)
+                .child(imageName).downloadUrl.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val imageUrl = it.result.toString()
+                        val user = User(firstName, lastName, email, imageUrl)
+                        onResult(user, null)
+                    } else
+                        onResult(null, it.exception.toString())
 
-        firebaseStorage.child("profileImages")
-            .child(firebaseAuth.currentUser!!.uid)
-            .child(imageName).downloadUrl.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val imageUrl = it.result.toString()
-                    val user = User(firstName, lastName, email, imageUrl)
-                    onResult(user, null)
-                } else
-                    onResult(null, it.exception.toString())
-
-            }
+                } else {
+            val user = User(firstName, lastName, email, "")
+            onResult(user, null)
+        }
     }
 
     fun updateUserInformation(user: User) =
-        Firebase.firestore.runBatch { batch ->
+        Firebase.firestore.runTransaction { transaction ->
             val userPath = usersCollectionRef.document(Firebase.auth.currentUser!!.uid)
-            batch.set(userPath, user)
+            if (user.imagePath.isNotEmpty()) {
+                transaction.set(userPath, user)
+            }else{
+                val imagePath = transaction.get(userPath)["imagePath"] as String
+                user.imagePath = imagePath
+                transaction.set(userPath, user)
+            }
 
         }
 

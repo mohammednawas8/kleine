@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-    val firstName:String,
-    val lastName:String,
-    val email:String,
-    val imagePath:String=""
+    var firstName:String,
+    var lastName:String,
+    var email:String,
+    var imagePath:String=""
 ):Parcelable{
 
     constructor() : this("","","")

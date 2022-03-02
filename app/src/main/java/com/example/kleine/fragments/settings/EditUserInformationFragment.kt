@@ -155,7 +155,15 @@ class EditUserInformationFragment : Fragment() {
 
     private fun onSaveClick() {
         binding.btnSaveProfile.setOnClickListener {
-            imageArray?.let { viewModel.uploadProfileImage(it) }
+            if (isPicked)
+                imageArray?.let { viewModel.uploadProfileImage(it) }
+            else {
+                val firstName = binding.edFirstName.text.toString()
+                val lastName = binding.edLastName.text.toString()
+                val email = binding.edEmail.text.toString()
+                val image=""
+                viewModel.updateInformation(firstName,lastName,email,image)
+            }
         }
 
     }
@@ -179,12 +187,14 @@ class EditUserInformationFragment : Fragment() {
     }
 
     var imageArray: ByteArray? = null
+    private var isPicked = false
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 val imageUri = data.data
+                isPicked = true
                 Glide.with(this).load(imageUri).error(R.drawable.ic_default_profile_picture)
                     .into(binding.imgUser)
                 val imageByteArray: ByteArray = compressImage(imageUri)

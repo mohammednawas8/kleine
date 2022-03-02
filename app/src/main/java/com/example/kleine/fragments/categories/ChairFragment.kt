@@ -71,13 +71,15 @@ class ChairFragment : Fragment() {
 
         setUpTimer()
 
-        productsAdapter.onItemClick= { product ->
+        productsAdapter.onItemClick = { product ->
             val bundle = Bundle()
-            bundle.putParcelable("product",product)
-            bundle.putString("flag",PRODUCT_FLAG)
-            findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
+            bundle.putParcelable("product", product)
+            bundle.putString("flag", PRODUCT_FLAG)
+            findNavController().navigate(
+                R.id.action_homeFragment_to_productPreviewFragment2,
+                bundle
+            )
         }
-
 
 
     }
@@ -157,16 +159,18 @@ class ChairFragment : Fragment() {
         }
     }
 
+    var timer: CountDownTimer? = null
+    var isRunning = false
     private fun setUpTimer() {
-        object : CountDownTimer(43140000, 1000) {
+        if (timer == null && !isRunning)
+            timer = object : CountDownTimer(43140000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    updateTimer(millisUntilFinished)
+                }
 
-            override fun onTick(millisUntilFinished: Long) {
-                updateTimer(millisUntilFinished)
-            }
-
-            override fun onFinish() {
-            }
-        }.start()
+                override fun onFinish() {
+                }
+            }.start().also { isRunning=true }
     }
 
     private fun updateTimer(millis: Long) {
