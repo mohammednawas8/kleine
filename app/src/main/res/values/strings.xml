@@ -95,5 +95,11 @@
     <string name="g_language">Language</string>
     <string name="g_logout">Logout</string>
     <string name="g_billing">Billing And Addresses</string>
+    <string name="g_version">Version</string>
+    <string name="error_occurred">Oops error occurred</string>
+    <string name="g_edit_profile">Edit Profile</string>
+    <string name="g_change_forgot_password">Forgot/Change password</string>
+    <string name="g_cant_change_email_message">You cannot change your email address, if you are looking to change it please contact with us</string>
+    <string name="select_profile_image">Select profile image</string>
 
 </resources>

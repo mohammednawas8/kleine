@@ -246,4 +246,9 @@ class FirebaseDb {
             }
         }
     }
+
+
+    fun getUser() = usersCollectionRef
+        .document(FirebaseAuth.getInstance().currentUser!!.uid)
+        .get()
 }

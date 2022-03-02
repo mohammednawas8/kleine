@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_profileFragment_to_billingFragment"
             app:destination="@id/billingFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editUserInformation"
+            app:destination="@id/editUserInformation" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -112,5 +115,14 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="null" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUserInformation"
+        android:name="com.example.kleine.fragments.settings.EditUserInformation"
+        android:label="fragment_edit_user_information"
+        tools:layout="@layout/fragment_edit_user_information" >
+        <argument
+            android:name="user"
+            app:argType="com.example.kleine.model.User" />
     </fragment>
 </navigation>

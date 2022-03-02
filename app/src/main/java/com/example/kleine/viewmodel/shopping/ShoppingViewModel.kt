@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
-import com.example.kleine.model.Address
-import com.example.kleine.model.CartProduct
-import com.example.kleine.model.Category
-import com.example.kleine.model.Product
+import com.example.kleine.model.*
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,6 +27,8 @@ class ShoppingViewModel(
     val updateAddress = MutableLiveData<Resource<Address>>()
     val deleteAddress = MutableLiveData<Resource<Address>>()
 
+    val profile = MutableLiveData<Resource<User>>()
+
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -44,6 +43,7 @@ class ShoppingViewModel(
         getChairs()
         getCupboardsByOrders(3)
         getCupboardProduct(4)
+        getUser()
     }
 
     fun getClothesProducts() =
@@ -235,6 +235,16 @@ class ShoppingViewModel(
             } else
                 deleteAddress.postValue(Resource.Error(addressResponse.exception.toString()))
 
+        }
+    }
+
+    fun getUser(){
+        profile.postValue(Resource.Loading())
+        firebaseDatabase.getUser().addOnCompleteListener {
+            if(it.isSuccessful)
+                profile.postValue(Resource.Success(it.result?.toObject(User::class.java)))
+            else
+                profile.postValue(Resource.Error(it.exception.toString()))
         }
     }
 

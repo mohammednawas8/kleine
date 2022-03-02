@@ -26,7 +26,7 @@ class OrderCompletion : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOrderCompletionBinding.inflate(inflater, container, false)
-        activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)?.visibility = View.VISIBLE
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)?.visibility = View.GONE
         return binding.root
     }
 

@@ -85,7 +85,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/ed_email_login" />
+        app:layout_constraintTop_toBottomOf="@id/ed_email_login"
+        android:singleLine="true"/>
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btn_login_fragment"

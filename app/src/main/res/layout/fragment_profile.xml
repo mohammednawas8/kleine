@@ -5,13 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".fragments.shopping.ProfileFragment">
+    tools:context=".fragments.shopping.ProfileFragment"
+    android:background="#F4F4F4">
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/progressbar_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:indeterminateTint="@color/g_hint"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_parnet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_settings"
@@ -23,16 +39,24 @@
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_user"
             android:layout_width="@dimen/_43sdp"
             android:layout_height="@dimen/_43sdp"
-            android:layout_marginTop="8dp"
             android:background="@drawable/profile_img_background"
             android:src="@drawable/test_image"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/tv_settings" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -57,26 +81,31 @@
             app:layout_constraintStart_toStartOf="@+id/tv_user_name" />
 
         <ImageView
+            android:id="@+id/arrow"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:src="@drawable/ic_arrow"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintEnd_toEndOf="@id/constraint_profile"
             app:layout_constraintTop_toTopOf="@id/tv_user_name"
             app:layout_constraintBottom_toBottomOf="@id/tv_edit_personal_details"
             app:tint="@color/g_icon_tint" />
 
 
-        <TextView
-            android:id="@+id/tv_orders"
-            style="@style/MediumTextViewThin"
-            android:textColor="@color/g_hint"
-            android:textStyle="normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/g_orders"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/img_user" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_orders"
+                style="@style/MediumTextViewThin"
+                android:textColor="@color/g_hint"
+                android:textStyle="normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/g_orders"
+                app:layout_constraintStart_toStartOf="@id/guideline1"
+                app:layout_constraintTop_toBottomOf="@id/constraint_profile" />
+
 
         <LinearLayout
             android:id="@+id/linear_orders"
@@ -86,40 +115,41 @@
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintTop_toBottomOf="@id/tv_orders"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="@drawable/search_box_background">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_all_orders"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/settings_items_background"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/tv_all_orders"
-                style="@style/MediumTextViewThin"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/g_all_orders"
-                android:textColor="@color/g_hint"
-                android:textStyle="bold"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_gravity="center_vertical"/>
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/ic_arrow"
-                app:tint="@color/g_icon_tint"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/ic_all_orders"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_all_orders"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/g_all_orders"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/g_icon_tint"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
 
 
             <LinearLayout
@@ -216,7 +246,8 @@
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintTop_toBottomOf="@id/tv_notifications"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="@drawable/search_box_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -244,13 +275,14 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_gravity="center_vertical"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switch_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:buttonTint="#4cd964"
-                    android:checked="true" />
+                    android:checked="true"
+                    />
 
             </LinearLayout>
         </LinearLayout>
@@ -270,7 +302,8 @@
             app:layout_constraintTop_toBottomOf="@id/linear_notifications" />
 
         <LinearLayout
-            android:id="@+id/fth"
+            android:background="@drawable/search_box_background"
+            android:id="@+id/linear_regional"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -353,23 +386,37 @@
         </LinearLayout>
 
 
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
+        <TextView
+            android:id="@+id/tv_version_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.04" />
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/sf_pro_display"
+            android:text="Version 1.0"
+            android:textColor="@color/g_hint"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/linear_regional" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.96" />
 
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.04" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.96" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,4 +20,17 @@
         <item name="android:textSize">@dimen/_10ssp</item>
         <item name="fontFamily">@font/sf_pro_display</item>
     </style>
+
+
+    <style name="EditTextSettings">
+        <item name="android:width">0dp</item>
+        <item name="height">@dimen/_45sdp</item>
+        <item name="fontFamily">@font/sf_pro_display</item>
+        <item name="background">@drawable/btn_white_background</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textStyle">bold</item>
+        <item name="singleLine">true</item>
+        <item name="paddingStart">@dimen/_10sdp</item>
+    </style>
+
 </resources>

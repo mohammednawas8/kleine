@@ -1,5 +1,6 @@
 package com.example.kleine.fragments.shopping
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,38 +8,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.kleine.BuildConfig
 import com.example.kleine.R
 import com.example.kleine.activities.LunchActivity
+import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.databinding.FragmentProfileBinding
-import com.example.kleine.model.Product
-import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
-import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
+import com.example.kleine.model.User
+import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
-import com.google.android.gms.tasks.Task
+import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
 
 
 class ProfileFragment : Fragment() {
-    private lateinit var binding:FragmentProfileBinding
+    val TAG = "ProfileFragment"
+    private lateinit var binding: FragmentProfileBinding
+    private lateinit var viewModel: ShoppingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel = (activity as ShoppingActivity).viewModel
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -46,24 +48,98 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         onHomeClick()
+        onLogoutClick()
+        onBillingAndAddressesClick()
+        onProfileClick()
 
-        val btnLogout = view.findViewById<LinearLayout>(R.id.linear_out)
-        btnLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(context,LunchActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+        observeProfile()
+        binding.tvVersionCode.text =
+            "${resources.getText(R.string.g_version)} ${BuildConfig.VERSION_NAME}"
+
+
+    }
+
+    private fun onProfileClick() {
+        binding.constraintProfile.setOnClickListener {
+            user?.let {
+                val bundle = Bundle()
+                bundle.putParcelable("user",user)
+                findNavController().navigate(R.id.action_profileFragment_to_editUserInformation,bundle)
+            }
         }
 
+
+    }
+
+    var user: User?=null
+    private fun observeProfile() {
+        viewModel.profile.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showLoading()
+                    return@observe
+                }
+
+                is Resource.Success -> {
+                    hideLoading()
+                    val user = response.data
+                    this.user = user
+                    binding.apply {
+                        tvUserName.text = user?.firstName + " " + user?.lastName
+                        Glide.with(requireView()).load(user?.imagePath)
+                            .error(R.drawable.ic_default_profile_picture).into(binding.imgUser)
+                    }
+                    return@observe
+                }
+
+                is Resource.Error -> {
+                    hideLoading()
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.error_occurred),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(TAG, response.message.toString())
+                    return@observe
+                }
+            }
+        }
+    }
+
+    private fun hideLoading() {
+        binding.apply {
+            binding.progressbarSettings.visibility = View.GONE
+            constraintParnet.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showLoading() {
+        binding.apply {
+            binding.progressbarSettings.visibility = View.VISIBLE
+            constraintParnet.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun onBillingAndAddressesClick() {
         binding.linearBilling.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("clickFlag", UPDATE_ADDRESS_FLAG)
-            findNavController().navigate(R.id.action_profileFragment_to_billingFragment,bundle)
+            findNavController().navigate(R.id.action_profileFragment_to_billingFragment, bundle)
+        }
+    }
+
+    private fun onLogoutClick() {
+
+        binding.linearOut.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(context, LunchActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 
     private fun onHomeClick() {
-        val btm =  activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val btm = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         btm?.menu?.getItem(0)?.setOnMenuItemClickListener {
             activity?.onBackPressed()
             true
