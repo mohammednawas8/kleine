@@ -1,5 +1,6 @@
 package com.example.kleine.firebaseDatabase
 
+import android.util.Log
 import com.example.kleine.model.*
 import com.example.kleine.util.Constants.Companion.ADDRESS_COLLECTION
 import com.example.kleine.util.Constants.Companion.BEST_DEALS
@@ -26,6 +27,9 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import com.google.firebase.storage.ktx.storage
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -36,6 +40,7 @@ class FirebaseDb {
     private val productsCollection = Firebase.firestore.collection(PRODUCTS_COLLECTION)
     private val categoriesCollection = Firebase.firestore.collection(CATEGORIES_COLLECTION)
     private val storesCollection = Firebase.firestore.collection(STORES_COLLECTION)
+    private val firebaseStorage = Firebase.storage.reference
 
     val userUid = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -238,7 +243,7 @@ class FirebaseDb {
 
     private fun deleteCartItems() {
         userCartCollection?.get()?.addOnSuccessListener {
-            Firebase.firestore.runBatch { batch->
+            Firebase.firestore.runBatch { batch ->
                 it.documents.forEach {
                     val document = userCartCollection.document(it.id)
                     batch.delete(document)
@@ -250,5 +255,43 @@ class FirebaseDb {
 
     fun getUser() = usersCollectionRef
         .document(FirebaseAuth.getInstance().currentUser!!.uid)
-        .get()
+
+
+    fun uploadUserProfileImage(image: ByteArray, imageName: String): UploadTask {
+        val imageRef = firebaseStorage.child("profileImages")
+            .child(firebaseAuth.currentUser!!.uid)
+            .child(imageName)
+
+        return imageRef.putBytes(image)
+
+    }
+
+    fun getImageUrl(
+        firstName: String,
+        lastName: String,
+        email: String,
+        imageName: String,
+        onResult: (User?, String?) -> Unit,
+    ) {
+
+        firebaseStorage.child("profileImages")
+            .child(firebaseAuth.currentUser!!.uid)
+            .child(imageName).downloadUrl.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val imageUrl = it.result.toString()
+                    val user = User(firstName, lastName, email, imageUrl)
+                    onResult(user, null)
+                } else
+                    onResult(null, it.exception.toString())
+
+            }
+    }
+
+    fun updateUserInformation(user: User) =
+        Firebase.firestore.runBatch { batch ->
+            val userPath = usersCollectionRef.document(Firebase.auth.currentUser!!.uid)
+            batch.set(userPath, user)
+
+        }
+
 }

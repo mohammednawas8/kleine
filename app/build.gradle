@@ -65,6 +65,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.0.1'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
 
     //smooth bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'

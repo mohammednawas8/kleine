@@ -118,7 +118,7 @@
     </fragment>
     <fragment
         android:id="@+id/editUserInformation"
-        android:name="com.example.kleine.fragments.settings.EditUserInformation"
+        android:name="com.example.kleine.fragments.settings.EditUserInformationFragment"
         android:label="fragment_edit_user_information"
         tools:layout="@layout/fragment_edit_user_information" >
         <argument

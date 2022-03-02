@@ -145,6 +145,7 @@ class ProductPreviewFragment : Fragment() {
 
                 if(selectedColor.isEmpty()){
                     binding.tvColorError.visibility = View.VISIBLE
+                    return@setOnClickListener
                 }
 
                 if(selectedSize.isEmpty()){

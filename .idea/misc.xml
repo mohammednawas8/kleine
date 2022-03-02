@@ -8,7 +8,7 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/btn_background.xml" value="0.2703125" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/btn_white_background.xml" value="0.22179487179487178" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ellips1_backround.xml" value="0.536" />
-        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/empty_box_background.xml" value="0.233" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/empty_box_background.xml" value="0.2" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/favorite_background.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_cart.xml" value="0.233" />
@@ -29,6 +29,7 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_texture_left.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_texture_right.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/line.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/order_error_box.xml" value="0.2595" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/search_box_background.xml" value="0.233" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/total_box_background.xml" value="0.2435" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/drawable/viewpager_background.xml" value="0.233" />
@@ -42,14 +43,17 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/color_and_sizes.xml" value="0.4" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/delete_alert_dialog.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_accessory.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_billing.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_cart.xml" value="0.4" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_chair.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_cupboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_edit_user_information.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_enlightening.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_first_screen.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_furniture.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_order_completion.xml" value="0.2" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_product_preview.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_profile.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_register.xml" value="0.264" />
@@ -64,30 +68,14 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recyclerview_shipping_item.xml" value="0.1628901239846088" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/viewpager_image_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/btn_white_background.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_default_profile_picture.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_edit.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_ellipse1.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/ic_kleine_shape.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/profile_img_background.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/search_box_background.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/drawable/settings_items_background.xml" value="0.2915" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout-v28/fragment_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/activity_shopping.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/best_deal_item.xml" value="0.3009833262077811" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/cart_item.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/chair_extra_ads_item.xml" value="0.1410859341598974" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/delete_alert_dialog.xml" value="0.248396750748183" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_address.xml" value="0.3009833262077811" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_billing.xml" value="0.33" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_cart.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_chair.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_cupboard.xml" value="0.3344418052256532" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_edit_user_information.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_home.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_profile.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/kleine/app/src/main/res/layout/product_item.xml" value="0.33" />
       </map>

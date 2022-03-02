@@ -35,7 +35,7 @@ class ProfileFragment : Fragment() {
         viewModel = (activity as ShoppingActivity).viewModel
     }
 
-    override fun onCreateView(
+    override fun onCreateView (
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {

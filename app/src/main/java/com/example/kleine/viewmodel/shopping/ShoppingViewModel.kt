@@ -8,6 +8,7 @@ import com.example.kleine.model.*
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class ShoppingViewModel(
     private val firebaseDatabase: FirebaseDb
@@ -26,6 +27,9 @@ class ShoppingViewModel(
     val addAddress = MutableLiveData<Resource<Address>>()
     val updateAddress = MutableLiveData<Resource<Address>>()
     val deleteAddress = MutableLiveData<Resource<Address>>()
+
+    val uploadProfileImage = MutableLiveData<Resource<String>>()
+    val updateUserInformation = MutableLiveData<Resource<User>>()
 
     val profile = MutableLiveData<Resource<User>>()
 
@@ -200,7 +204,7 @@ class ShoppingViewModel(
         }
     }
 
-    fun updateAddress(oldAddress:Address,newAddress: Address) {
+    fun updateAddress(oldAddress: Address, newAddress: Address) {
         updateAddress.postValue(Resource.Loading())
         firebaseDatabase.findAddress(oldAddress).addOnCompleteListener { addressResponse ->
             if (addressResponse.isSuccessful) {
@@ -219,7 +223,7 @@ class ShoppingViewModel(
         }
     }
 
-    fun deleteAddress(address:Address) {
+    fun deleteAddress(address: Address) {
         deleteAddress.postValue(Resource.Loading())
         firebaseDatabase.findAddress(address).addOnCompleteListener { addressResponse ->
             if (addressResponse.isSuccessful) {
@@ -238,14 +242,50 @@ class ShoppingViewModel(
         }
     }
 
-    fun getUser(){
+    private fun getUser() {
         profile.postValue(Resource.Loading())
-        firebaseDatabase.getUser().addOnCompleteListener {
-            if(it.isSuccessful)
-                profile.postValue(Resource.Success(it.result?.toObject(User::class.java)))
+        firebaseDatabase.getUser().addSnapshotListener { value, error ->
+            if (error != null)
+                profile.postValue(Resource.Error(error.message))
             else
-                profile.postValue(Resource.Error(it.exception.toString()))
+                profile.postValue(Resource.Success(value?.toObject(User::class.java)))
+
         }
     }
 
+    fun uploadProfileImage(image: ByteArray) {
+        uploadProfileImage.postValue(Resource.Loading())
+        val name = UUID.nameUUIDFromBytes(image).toString()
+        firebaseDatabase.uploadUserProfileImage(image, name).addOnCompleteListener {
+            if (it.isSuccessful)
+                uploadProfileImage.postValue(Resource.Success(name))
+            else
+                uploadProfileImage.postValue(Resource.Error(it.exception.toString()))
+        }
+    }
+
+    fun updateInformation(firstName: String, lastName: String, email: String, imageName: String) {
+        updateUserInformation.postValue(Resource.Loading())
+
+        firebaseDatabase.getImageUrl(firstName, lastName, email, imageName) { user, exception ->
+
+            if (exception != null)
+                updateUserInformation.postValue(Resource.Error(exception))
+                    .also { Log.d("test1", "up") }
+            else
+                user?.let {
+                    onUpdateInformation(user).also { Log.d("test1", "down") }
+                }
+        }
+    }
+
+    private fun onUpdateInformation(user: User) {
+        firebaseDatabase.updateUserInformation(user).addOnCompleteListener {
+            if (it.isSuccessful)
+                updateUserInformation.postValue(Resource.Success(user))
+            else
+                updateUserInformation.postValue(Resource.Error(it.exception.toString()))
+
+        }
+    }
 }
