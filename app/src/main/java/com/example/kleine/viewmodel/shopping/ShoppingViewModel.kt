@@ -28,10 +28,12 @@ class ShoppingViewModel(
     val updateAddress = MutableLiveData<Resource<Address>>()
     val deleteAddress = MutableLiveData<Resource<Address>>()
 
+    val profile = MutableLiveData<Resource<User>>()
+
     val uploadProfileImage = MutableLiveData<Resource<String>>()
     val updateUserInformation = MutableLiveData<Resource<User>>()
 
-    val profile = MutableLiveData<Resource<User>>()
+    val userOrders = MutableLiveData<Resource<List<Order>>>()
 
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
@@ -286,6 +288,16 @@ class ShoppingViewModel(
             else
                 updateUserInformation.postValue(Resource.Error(it.exception.toString()))
 
+        }
+    }
+
+    fun getUserOrders(){
+        userOrders.postValue(Resource.Loading())
+        firebaseDatabase.getUserOrders().addOnCompleteListener {
+            if(it.isSuccessful)
+                userOrders.postValue(Resource.Success(it.result?.toObjects(Order::class.java)))
+            else
+                userOrders.postValue(Resource.Error(it.exception.toString()))
         }
     }
 }

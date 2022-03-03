@@ -43,6 +43,7 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/color_and_sizes.xml" value="0.4" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/delete_alert_dialog.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_accessory.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_all_orders.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_billing.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_cart.xml" value="0.4" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_chair.xml" value="0.264" />
@@ -62,9 +63,10 @@
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_table.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/fragment_view_pager.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/product_item.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recycler_view_all_orders_item.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recycler_view_category_item.xml" value="0.264" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recycler_view_search_item.xml" value="0.264" />
-        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recyclerview_search_item.xml" value="0.4" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recyclerview_search_item.xml" value="0.176" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/recyclerview_shipping_item.xml" value="0.1628901239846088" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/layout/viewpager_image_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mo/AndroidStudioProjects/kleine/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />

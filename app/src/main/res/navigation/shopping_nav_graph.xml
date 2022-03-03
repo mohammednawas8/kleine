@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editUserInformation"
             app:destination="@id/editUserInformation" />
+        <action
+            android:id="@+id/action_profileFragment_to_allOrdersFragment"
+            app:destination="@id/allOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -125,4 +128,9 @@
             android:name="user"
             app:argType="com.example.kleine.model.User" />
     </fragment>
+    <fragment
+        android:id="@+id/allOrdersFragment"
+        android:name="com.example.kleine.fragments.settings.AllOrdersFragment"
+        android:label="fragment_all_orders"
+        tools:layout="@layout/fragment_all_orders" />
 </navigation>

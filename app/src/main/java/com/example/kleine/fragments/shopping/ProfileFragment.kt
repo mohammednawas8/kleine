@@ -51,12 +51,19 @@ class ProfileFragment : Fragment() {
         onLogoutClick()
         onBillingAndAddressesClick()
         onProfileClick()
+        onAllOrderClick()
 
         observeProfile()
         binding.tvVersionCode.text =
             "${resources.getText(R.string.g_version)} ${BuildConfig.VERSION_NAME}"
 
 
+    }
+
+    private fun onAllOrderClick() {
+        binding.allOrders.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_allOrdersFragment)
+        }
     }
 
     private fun onProfileClick() {

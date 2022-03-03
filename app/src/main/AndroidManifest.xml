@@ -8,11 +8,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Kleine">
+        android:theme="@style/Theme.Kleine"
+        >
 
         <activity android:name=".activities.ShoppingActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateVisible|adjustPan">
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            >
 
         </activity>
 

@@ -303,4 +303,10 @@ class FirebaseDb {
 
         }
 
+
+    fun getUserOrders() = usersCollectionRef
+        .document(FirebaseAuth.getInstance().currentUser!!.uid)
+        .collection(ORDERS)
+        .get()
+
 }

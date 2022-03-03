@@ -7,4 +7,6 @@ data class Order(
     val date:Date,
     val totalPrice:String,
 ) {
+
+    constructor():this("",Date(),"")
 }

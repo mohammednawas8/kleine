@@ -88,6 +88,7 @@
     <string name="g_settings">Settings</string>
     <string name="g_edit_personal_details">Edit personal details</string>
     <string name="g_orders">Orders</string>
+    <string name="g_order">Order</string>
     <string name="g_all_orders">All Orders</string>
     <string name="g__track_order">Track Order</string>
     <string name="g_notifications">Notifications</string>
