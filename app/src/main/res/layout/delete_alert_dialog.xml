@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="10dp"
         android:textStyle="bold"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_10ssp"
         android:fontFamily="@font/poppins_light"
         android:textColor="@color/black"
         />

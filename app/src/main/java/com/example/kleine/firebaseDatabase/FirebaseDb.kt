@@ -307,6 +307,9 @@ class FirebaseDb {
     fun getUserOrders() = usersCollectionRef
         .document(FirebaseAuth.getInstance().currentUser!!.uid)
         .collection(ORDERS)
+        .orderBy("date",Query.Direction.DESCENDING)
         .get()
+
+    fun resetPassword(email:String) = firebaseAuth.sendPasswordResetEmail(email)
 
 }

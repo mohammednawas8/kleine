@@ -20,9 +20,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AllOrdersFragment : Fragment() {
     val TAG = "AllOrdersFragment"
-    private lateinit var viewModel:ShoppingViewModel
-    private lateinit var binding:FragmentAllOrdersBinding
-    private lateinit var allOrdersAdapter:AllOrdersAdapter
+    private lateinit var viewModel: ShoppingViewModel
+    private lateinit var binding: FragmentAllOrdersBinding
+    private lateinit var allOrdersAdapter: AllOrdersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +65,20 @@ class AllOrdersFragment : Fragment() {
 
                 is Resource.Success -> {
                     hideLoading()
-                    allOrdersAdapter.differ.submitList(response.data)
+                    val orders = response.data
+                    if (orders!!.isEmpty())
+                        binding.apply {
+                            imgEmptyBox.visibility = View.VISIBLE
+                            imgEmptyBoxTexture.visibility = View.VISIBLE
+                            tvEmptyOrders.visibility = View.VISIBLE
+                            return@observe
+                        }
+                    binding.apply {
+                        imgEmptyBox.visibility = View.GONE
+                        imgEmptyBoxTexture.visibility = View.GONE
+                        tvEmptyOrders.visibility = View.GONE
+                    }
+                    allOrdersAdapter.differ.submitList(orders)
                     return@observe
                 }
 

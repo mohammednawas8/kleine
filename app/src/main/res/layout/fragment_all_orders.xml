@@ -77,4 +77,43 @@
         android:indeterminateTint="@color/g_hint"
         android:visibility="gone"/>
 
+    <TextView
+        android:id="@+id/tv_empty_orders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/g_no_orders_to_show"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/black"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/img_empty_box_texture"
+        app:layout_constraintStart_toStartOf="@id/img_empty_box_texture"
+        app:layout_constraintEnd_toEndOf="@id/img_empty_box_texture"
+        android:textSize="@dimen/_15ssp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/img_empty_box_texture"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_250sdp"
+        android:src="@drawable/ic_emprt_box_texture"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_all_orders"
+        app:layout_constraintStart_toStartOf="@id/img_empty_box"
+        app:layout_constraintEnd_toEndOf="@id/img_empty_box"
+        app:layout_constraintTop_toTopOf="@id/img_empty_box"
+        app:layout_constraintBottom_toBottomOf="@id/img_empty_box"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/img_empty_box"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:src="@drawable/ic_empty_box"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_all_orders"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/empty_box_background"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,178 +8,167 @@
     android:fillViewport="true">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_billing"
-        android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_billing"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/img_close_edit_profile"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/ic_close"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/g_black" />
+                <ImageView
+                    android:id="@+id/img_close_edit_profile"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/g_black" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:fontFamily="@font/poppins_light"
-                android:text="@string/g_edit_profile"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp"
-                app:layout_constraintStart_toEndOf="@id/img_close_edit_profile"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/g_edit_profile"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_close_edit_profile"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.appcompat.widget.Toolbar>
-
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_user"
-        android:layout_width="@dimen/_85sdp"
-        android:layout_height="@dimen/_85sdp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/test_image"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_billing" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_edit"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/settings_items_background"
-        android:backgroundTint="#5E85F9"
-        android:src="@drawable/ic_edit"
-        app:layout_constraintBottom_toBottomOf="@id/img_user"
-        app:layout_constraintEnd_toEndOf="@id/img_user" />
+        </androidx.appcompat.widget.Toolbar>
 
 
-    <EditText
-        android:id="@+id/ed_first_name"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/btn_white_background"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="center"
-        android:hint="@string/g_first_name"
-        android:singleLine="true"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/img_user" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_85sdp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/test_image"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_billing" />
 
-    <EditText
-        android:id="@+id/ed_last_name"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/btn_white_background"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="center"
-        android:hint="@string/g_second_name"
-        android:singleLine="true"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/ed_first_name" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_edit"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/settings_items_background"
+            android:backgroundTint="#5E85F9"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/img_user"
+            app:layout_constraintEnd_toEndOf="@id/img_user" />
 
-    <EditText
-        android:id="@+id/ed_email"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/btn_white_background"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="center"
-        android:hint="@string/g_email"
-        android:textColor="@color/g_hint"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/ed_last_name"
-        android:singleLine="true"
-        android:editable="false"/>
 
-    <TextView
-        android:id="@+id/tv_update_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/g_change_forgot_password"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/ed_email"
-        android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/ed_first_name"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/btn_white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:hint="@string/g_first_name"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/img_user" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/g_cant_change_email_message"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_update_password"
-        android:layout_marginBottom="10dp"/>
+        <EditText
+            android:id="@+id/ed_last_name"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_white_background"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:hint="@string/g_second_name"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/ed_first_name" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_save_profile"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:background="@drawable/btn_background"
-        android:fontFamily="@font/poppins_light"
-        android:text="@string/g_save"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12sdp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginTop="10dp"
-        android:textAllCaps="false"/>
+        <EditText
+            android:id="@+id/ed_email"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/btn_white_background"
+            android:editable="false"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:hint="@string/g_email"
+            android:singleLine="true"
+            android:textColor="@color/g_hint"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/ed_last_name" />
 
-    <ProgressBar
-        android:id="@+id/progressbar_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_save_profile"
-        app:layout_constraintEnd_toEndOf="@+id/btn_save_profile"
-        app:layout_constraintStart_toStartOf="@+id/btn_save_profile"
-        app:layout_constraintTop_toTopOf="@+id/btn_save_profile"
-        android:indeterminateTint="@color/g_hint"
-        android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_update_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/g_change_forgot_password"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/ed_email" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save_profile"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/g_save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_update_password"
+            android:layout_marginBottom="20dp"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        <ProgressBar
+            android:id="@+id/progressbar_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/g_hint"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_save_profile"
+            app:layout_constraintEnd_toEndOf="@+id/btn_save_profile"
+            app:layout_constraintStart_toStartOf="@+id/btn_save_profile"
+            app:layout_constraintTop_toTopOf="@+id/btn_save_profile" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

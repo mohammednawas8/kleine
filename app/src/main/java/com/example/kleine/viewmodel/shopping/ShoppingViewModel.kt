@@ -35,6 +35,8 @@ class ShoppingViewModel(
 
     val userOrders = MutableLiveData<Resource<List<Order>>>()
 
+    val passwordReset = MutableLiveData<Resource<String>>()
+
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -291,13 +293,23 @@ class ShoppingViewModel(
         }
     }
 
-    fun getUserOrders(){
+    fun getUserOrders() {
         userOrders.postValue(Resource.Loading())
         firebaseDatabase.getUserOrders().addOnCompleteListener {
-            if(it.isSuccessful)
+            if (it.isSuccessful)
                 userOrders.postValue(Resource.Success(it.result?.toObjects(Order::class.java)))
             else
                 userOrders.postValue(Resource.Error(it.exception.toString()))
+        }
+    }
+
+    fun resetPassword(email: String) {
+        passwordReset.postValue(Resource.Loading())
+        firebaseDatabase.resetPassword(email).addOnCompleteListener {
+            if(it.isSuccessful)
+                passwordReset.postValue(Resource.Success(email))
+            else
+                passwordReset.postValue(Resource.Error(it.exception.toString()))
         }
     }
 }

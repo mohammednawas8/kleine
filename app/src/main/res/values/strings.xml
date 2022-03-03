@@ -102,5 +102,10 @@
     <string name="g_change_forgot_password">Forgot/Change password</string>
     <string name="g_cant_change_email_message">You cannot change your email address, if you are looking to change it please contact with us</string>
     <string name="select_profile_image">Select profile image</string>
+    <string name="g_no_orders_to_show">No orders to show</string>
+    <string name="g_reset_password">Reset Password</string>
+    <string name="g_reset_password_message">We will send you password reset link on your Email</string>
+    <string name="g_send">Send</string>
+    <string name="g_password_reset">We sent reset password link to your email</string>
 
 </resources>

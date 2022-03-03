@@ -1,6 +1,7 @@
 package com.example.kleine.fragments.settings
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,6 +26,7 @@ import com.example.kleine.model.User
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import java.io.ByteArrayOutputStream
 
@@ -58,8 +62,84 @@ class EditUserInformationFragment : Fragment() {
         onSaveClick()
         onEditImageClick()
         observeUploadImage()
+        onEmailClick()
+        onForgotPasswordClick()
+        observeResetPassword()
 
         observeUpdateInformation()
+    }
+
+    private fun observeResetPassword() {
+        viewModel.passwordReset.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showLoading()
+                    return@observe
+                }
+
+                is Resource.Success -> {
+                    hideLoading()
+                    Snackbar.make(
+                        requireView(),
+                        resources.getText(R.string.g_password_reset).toString().plus("\n ${response.data}")
+                        ,4000).show()
+                    viewModel.passwordReset.postValue(null)
+                    return@observe
+                }
+
+                is Resource.Error -> {
+                    hideLoading()
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.error_occurred),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(TAG, response.message.toString())
+                    return@observe
+                }
+            }
+        }    }
+
+    private fun onForgotPasswordClick() {
+        binding.tvUpdatePassword.setOnClickListener {
+            setupAlertDialog()
+        }
+    }
+
+    private fun setupAlertDialog() {
+
+            val alertDialog = AlertDialog.Builder(context).create()
+            val view = LayoutInflater.from(context).inflate(R.layout.delete_alert_dialog,null,false)
+            alertDialog.setView(view)
+            val title = view.findViewById<TextView>(R.id.tv_delete_item)
+            val message = view.findViewById<TextView>(R.id.tv_delete_message)
+            val btnConfirm = view.findViewById<Button>(R.id.btn_yes)
+            val btnCancel = view.findViewById<Button>(R.id.btn_no)
+            title.text = resources.getText(R.string.g_reset_password)
+            message.text = resources.getText(R.string.g_reset_password_message).toString().plus("\n ${args.user.email}")
+            btnConfirm.text = resources.getText(R.string.g_send)
+            btnCancel.text = resources.getText(R.string.g_cancel)
+
+
+            btnConfirm.setOnClickListener {
+                viewModel.resetPassword(args.user.email.trim())
+                alertDialog.dismiss()
+            }
+
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+
+            alertDialog.show()
+
+    }
+
+    private fun onEmailClick() {
+        binding.edEmail.setOnClickListener {
+            binding.edEmail.apply {
+                Snackbar.make(requireView(),resources.getText(R.string.g_cant_change_email_message),4500).show()
+            }
+        }
     }
 
     private fun observeUpdateInformation() {

@@ -9,10 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.kleine.fragments.shopping.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_productPreviewFragment2"
-            app:destination="@id/productPreviewFragment2" />
+            app:destination="@id/productPreviewFragment2"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
@@ -22,7 +26,7 @@
         android:id="@+id/searchFragment"
         android:name="com.example.kleine.fragments.shopping.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_productPreviewFragment2"
             app:destination="@id/productPreviewFragment2" />
@@ -31,22 +35,34 @@
         android:id="@+id/profileFragment"
         android:name="com.example.kleine.fragments.shopping.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_billingFragment"
-            app:destination="@id/billingFragment" />
+            app:destination="@id/billingFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_profileFragment_to_editUserInformation"
-            app:destination="@id/editUserInformation" />
+            app:destination="@id/editUserInformation"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_profileFragment_to_allOrdersFragment"
-            app:destination="@id/allOrdersFragment" />
+            app:destination="@id/allOrdersFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.kleine.fragments.shopping.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_productPreviewFragment2"
             app:destination="@id/productPreviewFragment2"
@@ -59,7 +75,7 @@
         android:id="@+id/productPreviewFragment2"
         android:name="com.example.kleine.fragments.shopping.ProductPreviewFragment"
         android:label="fragment_product_preview"
-        tools:layout="@layout/fragment_product_preview" >
+        tools:layout="@layout/fragment_product_preview">
         <argument
             android:name="product"
             app:argType="com.example.kleine.model.Product" />
@@ -70,23 +86,27 @@
         android:id="@+id/billingFragment"
         android:name="com.example.kleine.fragments.shopping.BillingFragment"
         android:label="fragment_billing"
-        tools:layout="@layout/fragment_billing" >
+        tools:layout="@layout/fragment_billing">
         <action
             android:id="@+id/action_billingFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
+            app:destination="@id/addressFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <argument
             android:name="clickFlag"
             app:argType="string" />
         <argument
             android:name="price"
+            android:defaultValue="null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null" />
+            app:nullable="true" />
         <argument
             android:name="products"
+            android:defaultValue="@null"
             app:argType="com.example.kleine.model.CartProductsList"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <action
             android:id="@+id/action_billingFragment_to_orderCompletion"
             app:destination="@id/orderCompletion"
@@ -97,33 +117,33 @@
         android:id="@+id/addressFragment"
         android:name="com.example.kleine.fragments.shopping.AddressFragment"
         android:label="fragment_address"
-        tools:layout="@layout/fragment_address" >
+        tools:layout="@layout/fragment_address">
 
         <argument
             android:name="address"
+            android:defaultValue="@null"
             app:argType="com.example.kleine.model.Address"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/orderCompletion"
         android:name="com.example.kleine.fragments.shopping.OrderCompletion"
         android:label="fragment_order_completion"
-        tools:layout="@layout/fragment_order_completion" >
+        tools:layout="@layout/fragment_order_completion">
         <argument
             android:name="order_completion_flag"
             app:argType="string" />
         <argument
             android:name="orderNumber"
+            android:defaultValue="null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/editUserInformation"
         android:name="com.example.kleine.fragments.settings.EditUserInformationFragment"
         android:label="fragment_edit_user_information"
-        tools:layout="@layout/fragment_edit_user_information" >
+        tools:layout="@layout/fragment_edit_user_information">
         <argument
             android:name="user"
             app:argType="com.example.kleine.model.User" />

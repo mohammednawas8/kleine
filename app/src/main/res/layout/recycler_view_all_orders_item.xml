@@ -30,4 +30,13 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       tools:text="@tools:sample/lorem" />
+
+  <View
+      android:id="@+id/line"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_1sdp"
+      android:layout_marginTop="15dp"
+      android:background="@drawable/line"
+      android:backgroundTint="@color/g_icon_tint"
+      />
 </LinearLayout>
