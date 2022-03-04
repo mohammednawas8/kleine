@@ -94,5 +94,8 @@ dependencies {
     //Firebase coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
+    //stepView
+    implementation 'com.anton46:stepsview:0.0.2'
+
 
 }

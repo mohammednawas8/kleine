@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class AllOrdersFragment : Fragment() {
+
     val TAG = "AllOrdersFragment"
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var binding: FragmentAllOrdersBinding
@@ -47,6 +48,16 @@ class AllOrdersFragment : Fragment() {
         setupRecyclerView()
         observeAllOrders()
         onCloseClick()
+        onItemClick()
+    }
+
+    private fun onItemClick() {
+        allOrdersAdapter.onItemClick = {order ->
+            val bundle = Bundle()
+            bundle.putParcelable("order",order)
+            findNavController().navigate(R.id.action_allOrdersFragment_to_orderDetails,bundle)
+
+        }
     }
 
     private fun onCloseClick() {

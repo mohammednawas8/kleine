@@ -16,9 +16,11 @@ import com.bumptech.glide.Glide
 import com.example.kleine.databinding.CartItemBinding
 import com.example.kleine.model.CartProduct
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.CART_FLAG
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 
 class CartRecyclerAdapter(
+    val itemFlag: String = CART_FLAG
 ) : RecyclerView.Adapter<CartRecyclerAdapter.CartRecyclerAdapterViewHolder>() {
 
     var onPlusClick: ((CartProduct) -> Unit)? = null
@@ -64,19 +66,28 @@ class CartRecyclerAdapter(
             tvCartSize.text = product.size
             imgColor.setImageDrawable(imageDrawable)
 
-            imgPlus.setOnClickListener {
-                onPlusClick!!.invoke(product)
+            if (itemFlag != CART_FLAG)
+                holder.binding.apply {
+                    imgPlus.visibility = View.INVISIBLE
+                    imgMinus.visibility = View.INVISIBLE
+                    tvQuantity.text = product.quantity.toString()
+                }
+            else {
+
+                imgPlus.setOnClickListener {
+                    onPlusClick!!.invoke(product)
+                }
+
+                imgMinus.setOnClickListener {
+                    onMinusesClick!!.invoke(product)
+                }
+
+
+                holder.itemView.setOnClickListener {
+                    onItemClick!!.invoke(product)
+                }
             }
-
-            imgMinus.setOnClickListener {
-                onMinusesClick!!.invoke(product)
-            }
-
         }
-        holder.itemView.setOnClickListener {
-            onItemClick!!.invoke(product)
-        }
-
 
 
     }

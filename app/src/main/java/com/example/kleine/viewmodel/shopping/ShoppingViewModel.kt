@@ -37,6 +37,10 @@ class ShoppingViewModel(
 
     val passwordReset = MutableLiveData<Resource<String>>()
 
+    val orderAddress = MutableLiveData<Resource<Address>>()
+    val orderProducts = MutableLiveData<Resource<List<CartProduct>>>()
+
+
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -311,5 +315,23 @@ class ShoppingViewModel(
             else
                 passwordReset.postValue(Resource.Error(it.exception.toString()))
         }
+    }
+
+    fun getOrderAddressAndProducts(order:Order) {
+        orderAddress.postValue(Resource.Loading())
+        orderProducts.postValue(Resource.Loading())
+        firebaseDatabase.getOrderAddressAndProducts(order,{ address,aError->
+            if(aError != null)
+                orderAddress.postValue(Resource.Error(aError))
+            else
+                orderAddress.postValue(Resource.Success(address))
+        },{ products,pError->
+
+            if(pError != null)
+                orderProducts.postValue(Resource.Error(pError))
+            else
+                orderProducts.postValue(Resource.Success(products))
+
+        })
     }
 }

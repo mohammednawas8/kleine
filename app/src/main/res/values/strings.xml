@@ -10,7 +10,7 @@
     <string name="g_start">Start</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="all_your_orders">All your orders in one\nsaved package</string>
+    <string name="all_your_orders">All your orders in one \n saved package</string>
     <string name="g_register">Register</string>
     <string name="g_let_s_register">Let\'s Register</string>
     <string name="g_do_you_have_an_account_log_in">Do you have an account? log in</string>
@@ -107,5 +107,9 @@
     <string name="g_reset_password_message">We will send you password reset link on your Email</string>
     <string name="g_send">Send</string>
     <string name="g_password_reset">We sent reset password link to your email</string>
+    <string name="g_order_placed">Order Placed</string>
+    <string name="g_shipped">Shipped</string>
+    <string name="g_delivered">Delivered</string>
+    <string name="g_products">Products</string>
 
 </resources>

@@ -43,9 +43,14 @@ class AllOrdersAdapter : RecyclerView.Adapter<AllOrdersAdapter.AllOrdersAdapterV
             tvOrderId.text = holder.itemView.context.resources.getText(R.string.g_order).toString().plus(" #${order.id}")
             tvOrderDate.text = date
         }
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(order)
+        }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+    var onItemClick:((Order)->Unit)?=null
 }

@@ -8,6 +8,7 @@ import com.example.kleine.model.CartProduct
 import com.example.kleine.model.Order
 import com.example.kleine.model.Product
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.ORDER_PLACED_STATE
 import java.util.*
 import kotlin.random.Random
 
@@ -40,7 +41,7 @@ class BillingViewModel : ViewModel() {
         placeOrder.postValue(Resource.Loading())
         val id = Random.nextInt(9999999)
         val date = Calendar.getInstance().time
-        val order = Order(id.toString(),date,price)
+        val order = Order(id.toString(),date,price,ORDER_PLACED_STATE)
 
         firebaseDatabase.placeOrder(products, address, order).addOnCompleteListener {
             if(it.isSuccessful)

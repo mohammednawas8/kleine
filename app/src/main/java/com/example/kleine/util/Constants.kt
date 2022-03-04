@@ -53,5 +53,11 @@ class Constants {
 
         const val ORDER_FAILED_FLAG = "order_failed"
         const val ORDER_SUCCESS_FLAG = "order_success"
+
+        const val ORDER_PLACED_STATE = "Order Placed"
+        const val ORDER_CONFIRM_STATE = "Confirm"
+        const val ORDER_SHIPPED_STATE = "Shipped"
+        const val ORDER_Delivered_STATE = "Delivered"
+
     }
 }

@@ -13,6 +13,8 @@ import com.example.kleine.util.Constants.Companion.COLOR
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.example.kleine.util.Constants.Companion.ID
 import com.example.kleine.util.Constants.Companion.ORDERS
+import com.example.kleine.util.Constants.Companion.ORDER_CONFIRM_STATE
+import com.example.kleine.util.Constants.Companion.ORDER_PLACED_STATE
 import com.example.kleine.util.Constants.Companion.PRICE
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.QUANTITY
@@ -196,7 +198,8 @@ class FirebaseDb {
                 val storeOrder = Order(
                     orderNum.toString(),
                     Calendar.getInstance().time,
-                    price.toString()
+                    price.toString(),
+                    ORDER_PLACED_STATE
                 )
 
                 val storeDocument = storesCollection
@@ -295,7 +298,7 @@ class FirebaseDb {
             val userPath = usersCollectionRef.document(Firebase.auth.currentUser!!.uid)
             if (user.imagePath.isNotEmpty()) {
                 transaction.set(userPath, user)
-            }else{
+            } else {
                 val imagePath = transaction.get(userPath)["imagePath"] as String
                 user.imagePath = imagePath
                 transaction.set(userPath, user)
@@ -307,9 +310,51 @@ class FirebaseDb {
     fun getUserOrders() = usersCollectionRef
         .document(FirebaseAuth.getInstance().currentUser!!.uid)
         .collection(ORDERS)
-        .orderBy("date",Query.Direction.DESCENDING)
+        .orderBy("date", Query.Direction.DESCENDING)
         .get()
 
-    fun resetPassword(email:String) = firebaseAuth.sendPasswordResetEmail(email)
+    fun resetPassword(email: String) = firebaseAuth.sendPasswordResetEmail(email)
+
+    fun getOrderAddressAndProducts(
+        order: Order,
+        address: (Address?, String?) -> Unit,
+        products: (List<CartProduct>?, String?) -> Unit
+    ) {
+        usersCollectionRef
+            .document(Firebase.auth.currentUser!!.uid).collection(ORDERS)
+            .whereEqualTo("id", order.id)
+            .get().addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val id = it.result?.documents?.get(0)?.id
+                    usersCollectionRef.document(Firebase.auth.currentUser!!.uid)
+                        .collection(ORDERS).document(id!!).collection(ADDRESS_COLLECTION).get()
+                        .addOnCompleteListener { it2 ->
+                            if (it2.isSuccessful) {
+                                val address2 = it2.result?.toObjects(Address::class.java)
+                                Log.d("test",address2!!.size.toString())
+                                address(address2?.get(0), null)
+                            } else
+                                address(null, it2.exception.toString())
+                        }
+
+                    usersCollectionRef.document(Firebase.auth.currentUser!!.uid)
+                        .collection(ORDERS).document(id).collection(PRODUCTS_COLLECTION).get()
+                        .addOnCompleteListener { it2 ->
+                            if (it2.isSuccessful) {
+                                val products2 = it2.result?.toObjects(CartProduct::class.java)
+                                Log.d("test",products2!!.size.toString())
+                                products(products2, null)
+                            } else
+                                products(null, it2.exception.toString())
+                        }
+
+
+                } else {
+                    address(null, it.exception.toString())
+                    products(null, it.exception.toString())
+                }
+            }
+    }
+
 
 }

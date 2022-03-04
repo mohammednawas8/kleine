@@ -13,10 +13,10 @@
         <action
             android:id="@+id/action_homeFragment_to_productPreviewFragment2"
             app:destination="@id/productPreviewFragment2"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"/>
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
@@ -29,7 +29,11 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_productPreviewFragment2"
-            app:destination="@id/productPreviewFragment2" />
+            app:destination="@id/productPreviewFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -66,7 +70,11 @@
         <action
             android:id="@+id/action_cartFragment_to_productPreviewFragment2"
             app:destination="@id/productPreviewFragment2"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         <action
             android:id="@+id/action_cartFragment_to_billingFragment"
             app:destination="@id/billingFragment" />
@@ -152,5 +160,22 @@
         android:id="@+id/allOrdersFragment"
         android:name="com.example.kleine.fragments.settings.AllOrdersFragment"
         android:label="fragment_all_orders"
-        tools:layout="@layout/fragment_all_orders" />
+        tools:layout="@layout/fragment_all_orders" >
+        <action
+            android:id="@+id/action_allOrdersFragment_to_orderDetails"
+            app:destination="@id/orderDetails"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetails"
+        android:name="com.example.kleine.fragments.settings.OrderDetails"
+        android:label="fragment_order_details"
+        tools:layout="@layout/fragment_order_details" >
+        <argument
+            android:name="order"
+            app:argType="com.example.kleine.model.Order" />
+    </fragment>
 </navigation>
