@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.User
+import com.example.kleine.resource.Resource
 
 class KleineViewModel(
     private val firebaseDatabase: FirebaseDb
@@ -18,6 +19,7 @@ class KleineViewModel(
     val login = MutableLiveData<Boolean>()
     val loginError = MutableLiveData<String>()
 
+    val resetPassword = MutableLiveData<Resource<String>>()
 
     fun registerNewUser(
         user: User,
@@ -49,6 +51,17 @@ class KleineViewModel(
             login.postValue(true)
         else
             loginError.postValue(it.exception.toString())
+    }
+
+    fun resetPassword(email:String) {
+        resetPassword.postValue(Resource.Loading())
+        firebaseDatabase.resetPassword(email).addOnCompleteListener {
+            if (it.isSuccessful)
+                resetPassword.postValue(Resource.Success(email))
+            else
+                resetPassword.postValue(Resource.Error(it.exception.toString()))
+
+        }
     }
 
 

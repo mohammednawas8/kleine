@@ -114,5 +114,8 @@
     <string name="g_coming_soon">This feature is not available yet</string>
     <string name="g_english">English</string>
     <string name="g_arabic">عربي</string>
+    <string name="g_forgot_password">Forgot Password</string>
+    <string name="g_check_your_email">Check your Email</string>
+    <string name="street">Street</string>
 
 </resources>

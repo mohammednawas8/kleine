@@ -113,5 +113,8 @@
     <string name="g_coming_soon">هذه الميزة غير متاحة الان</string>
     <string name="g_english">English</string>
     <string name="g_arabic">عربي</string>
+    <string name="g_forgot_password">نسيت كلمة المرور</string>
+    <string name="g_check_your_email">تأكد من بريدك الالكتروني</string>
+    <string name="street">الشارع</string>
 
 </resources>

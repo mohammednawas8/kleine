@@ -47,6 +47,13 @@ class RegisterFragment : Fragment() {
         observeRegisterError()
         observeSaveUserInformation()
         observeSaveUserInformationError()
+        onLoginClick()
+    }
+
+    private fun onLoginClick() {
+        binding.tvDontHaveAnAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
     }
 
 

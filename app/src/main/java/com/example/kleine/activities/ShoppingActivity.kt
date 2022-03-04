@@ -1,5 +1,6 @@
 package com.example.kleine.activities
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -33,8 +34,7 @@ class ShoppingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping)
 
-        val currentLanguage =getSharedPreferences("Language", Context.MODE_PRIVATE).getString("language","en")
-        LocaleHelper.setLocale(this,currentLanguage!!)
+
 
         cartViewModel = CartViewModel()
         supportActionBar!!.hide()
@@ -62,7 +62,7 @@ class ShoppingActivity : AppCompatActivity() {
                             backgroundColor = resources.getColor(R.color.g_dark_blue)
                             number = response.data!!
                         }
-                    else{
+                    else {
                         bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
                             backgroundColor = resources.getColor(R.color.g_white)
                             number = response.data!!
@@ -78,5 +78,14 @@ class ShoppingActivity : AppCompatActivity() {
                 }
             }
         })
-}
+    }
+
+    private fun setLocal(activity: Activity, langCode: String) {
+        val locale = Locale(langCode)
+        Locale.setDefault(locale)
+        val resources = resources
+        val config = resources?.configuration
+        config?.locale = locale
+        resources?.updateConfiguration(config,resources?.displayMetrics)
+    }
 }

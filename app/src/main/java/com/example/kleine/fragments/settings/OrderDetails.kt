@@ -48,7 +48,6 @@ class OrderDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupStepView()
         binding.tvOrderId.text = resources.getText(R.string.g_order)
             .toString().plus("# ${args.order.id}")
         setupRecyclerview()
@@ -56,6 +55,7 @@ class OrderDetails : Fragment() {
 
         observeProducts()
         onCloseImageClick()
+        setupStepView()
 
     }
 
@@ -181,6 +181,9 @@ class OrderDetails : Fragment() {
             ORDER_SHIPPED_STATE -> 2
             else -> {3}
         }
+
+        Log.d("test2",args.order.state)
+        Log.d("test2",state.toString())
         val steps = arrayOf<String>(
             resources.getText(R.string.g_order_placed).toString(),
             resources.getText(R.string.g_confirm).toString(),

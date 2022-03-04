@@ -7,21 +7,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.databinding.FragmentLoginBinding
+import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.lunchapp.KleineViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 
 
 class LoginFragment : Fragment() {
-     val TAG:String = "LoginFragment"
+    val TAG: String = "LoginFragment"
 
-    private lateinit var binding : FragmentLoginBinding
-    private lateinit var btnLogin : CircularProgressButton
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var btnLogin: CircularProgressButton
     private lateinit var viewModel: KleineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,12 +53,88 @@ class LoginFragment : Fragment() {
         onLoginClick()
         observerLogin()
         observerLoginError()
+        onDontHaveAccountClick()
+        onForgotPasswordClick()
+        observeResetPassword()
 
     }
 
+    private fun observeResetPassword() {
+        viewModel.resetPassword.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Loading -> {
+
+                    return@Observer
+                }
+
+                is Resource.Success -> {
+                    showSnackBar()
+                    viewModel.resetPassword.postValue(null)
+                    return@Observer
+                }
+
+                is Resource.Error -> {
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.error_occurred),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(TAG, response.message.toString())
+
+                    return@Observer
+                }
+            }
+        })
+    }
+
+    private fun showSnackBar() {
+        Snackbar.make(requireView(),resources.getText(R.string.g_password_reset),Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun onForgotPasswordClick() {
+        binding.tvForgotPassword.setOnClickListener {
+            setupBottomSheetDialog()
+        }
+    }
+
+    private fun setupBottomSheetDialog() {
+        val dialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
+        val view = layoutInflater.inflate(R.layout.forgot_password_dialog, null)
+        dialog.setContentView(view)
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.show()
+
+        val edEmail = view.findViewById<EditText>(R.id.edEmail)
+        val btnSend = view.findViewById<Button>(R.id.btn_send)
+        val btnCancel = view.findViewById<Button>(R.id.btn_cancel)
+
+        btnSend.setOnClickListener {
+            val email = edEmail.text.toString().trim()
+            if (email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                    .matches()
+            ) {
+                viewModel.resetPassword(email)
+                dialog.dismiss()
+            } else {
+                edEmail.requestFocus()
+                edEmail.error = resources.getText(R.string.g_check_your_email)
+            }
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    private fun onDontHaveAccountClick() {
+        binding.tvDontHaveAnAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+    }
+
     private fun observerLoginError() {
-         viewModel.loginError.observe(viewLifecycleOwner, Observer { error->
-            Log.e(TAG,error)
+        viewModel.loginError.observe(viewLifecycleOwner, Observer { error ->
+            Log.e(TAG, error)
             Toast.makeText(activity, "Please check your information", Toast.LENGTH_LONG).show()
             btnLogin.revertAnimation()
 
@@ -61,10 +144,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun observerLogin() {
-         viewModel.login.observe(viewLifecycleOwner, Observer {
-            if(it == true){
+        viewModel.login.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
                 btnLogin.revertAnimation()
-                val intent = Intent(activity,ShoppingActivity::class.java)
+                val intent = Intent(activity, ShoppingActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
@@ -120,7 +203,7 @@ class LoginFragment : Fragment() {
         }
 
 
-        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.edEmailLogin.apply {
                 error = resources.getString(R.string.valid_email)
                 requestFocus()

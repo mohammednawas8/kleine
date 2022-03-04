@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fillViewport="true"
+    android:background="@drawable/secondscreen_background">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/secondscreen_background"/>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/secondscreen_background"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_110sdp"
+        android:layout_marginTop="140dp"
         android:drawableStart="@drawable/ic_kleine_shape"
         android:drawablePadding="@dimen/_5sdp"
         android:fontFamily="@font/poppins_light"
@@ -60,7 +69,7 @@
         android:id="@+id/ed_email_login"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/btn_white_background"
         android:fontFamily="@font/poppins_light"
         android:gravity="center"
@@ -88,11 +97,24 @@
         app:layout_constraintTop_toBottomOf="@id/ed_email_login"
         android:singleLine="true"/>
 
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:text="@string/g_forgot_password"
+        android:textColor="@color/g_hint"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ed_password_login"
+        app:layout_constraintTop_toBottomOf="@+id/ed_password_login"
+        android:layout_marginTop="5dp"/>
+
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btn_login_fragment"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/poppins_light"
         android:text="@string/g_log_in"
@@ -101,7 +123,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/ed_password_login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password"
+        android:layout_marginTop="15dp"/>
 
     <ImageView
         android:id="@+id/btn_facebook"
@@ -152,5 +175,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.89" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

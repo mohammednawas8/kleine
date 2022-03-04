@@ -97,5 +97,8 @@ dependencies {
     //stepView
     implementation 'com.anton46:stepsview:0.0.2'
 
+    //Facebook and google login
+    implementation 'com.facebook.android:facebook-android-sdk:8.x'
+
 
 }

@@ -71,7 +71,7 @@ class BillingFragment : Fragment() {
                 btnPlaceOlder.visibility = View.VISIBLE
                 line2.visibility = View.VISIBLE
                 btnPlaceOlder.visibility = View.VISIBLE
-                tvTotalpriceBilling.text = price
+                tvTotalprice.text = price
                 rvProducts.visibility = View.VISIBLE
                 setupProductsRecyclerview()
                 cartProductsAdapter.differ.submitList(args.products?.products)
