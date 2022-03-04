@@ -28,16 +28,10 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
+        android:drawableEnd="@drawable/ic_search"
+        android:drawablePadding="10dp"
         />
 
-    <ImageView
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@id/ed_search"
-        app:layout_constraintEnd_toEndOf="@id/ed_search"
-        app:layout_constraintTop_toTopOf="@id/ed_search" />
 
     <FrameLayout
         android:id="@+id/linear"

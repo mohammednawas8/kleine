@@ -54,7 +54,7 @@
     <string name="g_please_select_size">يرجى اختيار الحجم !</string>
     <string name="g_my_cart">عربتي</string>
     <string name="g_checkout">الدفع</string>
-    <string name="g_total">المبلغ :</string>
+    <string name="g_total">المبلغ</string>
     <string name="g_your_shopping_cart_is_empty">عربة التسوق الخاصة بك \n فارغة</string>
     <string name="g_delete_item">حذف المنتج</string>
     <string name="g_are_you_sure_you_want_to_delete_this_item_from_cart">هل انت متأكد انك تريد حذف هذا المنتج من عربة التسوق ؟</string>

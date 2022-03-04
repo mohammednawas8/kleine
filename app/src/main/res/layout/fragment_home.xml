@@ -24,16 +24,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="@id/guideline5"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:drawableEnd="@drawable/ic_search"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
+        android:textDirection="anyRtl"/>
 
-    <ImageView
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@id/tv_search"
-        app:layout_constraintEnd_toEndOf="@id/tv_search"
-        app:layout_constraintTop_toTopOf="@id/tv_search" />
 
     <FrameLayout
         android:id="@+id/linear"

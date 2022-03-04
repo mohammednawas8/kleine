@@ -71,7 +71,7 @@
         android:layout_marginTop="5dp"/>
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         android:background="@drawable/total_box_background">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/g_total"
             android:textSize="@dimen/_16ssp"
@@ -91,7 +91,11 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_15sdp"/>
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_gravity="start|center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/tv_totalprice"
@@ -102,9 +106,14 @@
             android:textColor="@color/black"
             android:fontFamily="@font/sf_pro_display"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_15sdp"/>
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_gravity="end|center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_checkout"

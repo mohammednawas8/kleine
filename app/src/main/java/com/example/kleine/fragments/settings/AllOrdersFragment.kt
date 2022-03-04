@@ -49,6 +49,9 @@ class AllOrdersFragment : Fragment() {
         observeAllOrders()
         onCloseClick()
         onItemClick()
+        binding.imgCloseOrders.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun onItemClick() {
