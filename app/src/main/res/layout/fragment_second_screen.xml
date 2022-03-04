@@ -81,7 +81,7 @@
         android:background="@drawable/btn_white_background"
         android:fontFamily="@font/poppins_light"
         android:textStyle="bold"
-        android:text="Log in"
+        android:text="@string/g_log_in"
         android:textColor="@color/g_black"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@id/btn_splash_register"

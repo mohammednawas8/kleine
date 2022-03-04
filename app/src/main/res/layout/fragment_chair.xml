@@ -90,7 +90,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18ssp"
                 app:layout_constraintStart_toStartOf="@id/guideline1"
-                app:layout_constraintTop_toBottomOf="@id/rv_best_deals" />
+                app:layout_constraintTop_toBottomOf="@id/rv_best_deals"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chairs"
