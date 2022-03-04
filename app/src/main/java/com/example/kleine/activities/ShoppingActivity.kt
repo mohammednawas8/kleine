@@ -1,20 +1,24 @@
 package com.example.kleine.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.helpers.LocaleHelper
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.example.kleine.viewmodel.shopping.ShoppingViewModelProviderFactory
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class ShoppingActivity : AppCompatActivity() {
     val TAG = "ShoppingActivity"
@@ -29,6 +33,9 @@ class ShoppingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping)
 
+        val currentLanguage =getSharedPreferences("Language", Context.MODE_PRIVATE).getString("language","en")
+        LocaleHelper.setLocale(this,currentLanguage!!)
+
         cartViewModel = CartViewModel()
         supportActionBar!!.hide()
 
@@ -36,10 +43,9 @@ class ShoppingActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.host_fragment)
         NavigationUI.setupWithNavController(bottomNavigation, navController)
 
-
-
         observeCartProductsCount(bottomNavigation)
     }
+
 
     private fun observeCartProductsCount(bottomNavigation: BottomNavigationView) {
 

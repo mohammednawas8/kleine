@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kleine.R
@@ -54,7 +55,14 @@ class OrderDetails : Fragment() {
         observeOrderAddress()
 
         observeProducts()
+        onCloseImageClick()
 
+    }
+
+    private fun onCloseImageClick() {
+        binding.imgCloseOrder.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun observeProducts() {

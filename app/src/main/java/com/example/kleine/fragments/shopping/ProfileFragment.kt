@@ -21,6 +21,7 @@ import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -52,12 +53,26 @@ class ProfileFragment : Fragment() {
         onBillingAndAddressesClick()
         onProfileClick()
         onAllOrderClick()
+        onTrackOrderClick()
+        onLanguageClick()
 
         observeProfile()
         binding.tvVersionCode.text =
             "${resources.getText(R.string.g_version)} ${BuildConfig.VERSION_NAME}"
 
 
+    }
+
+    private fun onLanguageClick() {
+        binding.linearLanguage.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_languageFragment)
+        }
+    }
+
+    private fun onTrackOrderClick() {
+        binding.linearTrackOrder.setOnClickListener {
+            Snackbar.make(requireView(),resources.getText(R.string.g_coming_soon),Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun onAllOrderClick() {

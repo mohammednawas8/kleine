@@ -61,6 +61,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_languageFragment"
+            app:destination="@id/languageFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -178,4 +185,9 @@
             android:name="order"
             app:argType="com.example.kleine.model.Order" />
     </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.kleine.fragments.settings.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
 </navigation>

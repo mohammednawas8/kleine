@@ -111,5 +111,8 @@
     <string name="g_shipped">Shipped</string>
     <string name="g_delivered">Delivered</string>
     <string name="g_products">Products</string>
+    <string name="g_coming_soon">This feature is not available yet</string>
+    <string name="g_english">English</string>
+    <string name="g_arabic">عربي</string>
 
 </resources>

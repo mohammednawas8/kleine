@@ -43,7 +43,13 @@ class OrderCompletion : Fragment() {
             onSuccessClick()
         }
 
+        onCloseImageClick()
+    }
 
+    private fun onCloseImageClick() {
+        binding.imgCloseOrderCompletion.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun onSuccessClick() {

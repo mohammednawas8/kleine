@@ -188,7 +188,7 @@ class FirebaseDb {
             productsMap.forEach {
                 val store = it.key
                 val orderProducts = it.value
-                val orderNum = Random.nextInt(9999999)
+                val orderNum = order.id
                 var price = 0
 
                 orderProducts.forEach {
