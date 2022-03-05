@@ -7,6 +7,7 @@ plugins {
 
 }
 
+
 android {
     compileSdk 31
 
@@ -69,7 +70,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
 
+    //google play services
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     //smooth bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
@@ -97,8 +101,6 @@ dependencies {
     //stepView
     implementation 'com.anton46:stepsview:0.0.2'
 
-    //Facebook and google login
-    implementation 'com.facebook.android:facebook-android-sdk:8.x'
 
 
 }

@@ -331,7 +331,7 @@ class FirebaseDb {
                         .addOnCompleteListener { it2 ->
                             if (it2.isSuccessful) {
                                 val address2 = it2.result?.toObjects(Address::class.java)
-                                Log.d("test",address2!!.size.toString())
+                                Log.d("test", address2!!.size.toString())
                                 address(address2?.get(0), null)
                             } else
                                 address(null, it2.exception.toString())
@@ -342,7 +342,7 @@ class FirebaseDb {
                         .addOnCompleteListener { it2 ->
                             if (it2.isSuccessful) {
                                 val products2 = it2.result?.toObjects(CartProduct::class.java)
-                                Log.d("test",products2!!.size.toString())
+                                Log.d("test", products2!!.size.toString())
                                 products(products2, null)
                             } else
                                 products(null, it2.exception.toString())
@@ -356,5 +356,19 @@ class FirebaseDb {
             }
     }
 
-
+    //true -> already existed account
+    //false -> new account
+    fun checkUserByEmail(email: String, onResult: (String?, Boolean?) -> Unit) {
+        usersCollectionRef.whereEqualTo("email", email).get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val user = it.result.toObjects(User::class.java)
+                    if (user.isEmpty())
+                        onResult(null, false)
+                    else
+                        onResult(null, true)
+                } else
+                    onResult(it.exception.toString(), null)
+            }
+    }
 }

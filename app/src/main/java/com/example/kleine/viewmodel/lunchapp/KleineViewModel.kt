@@ -32,13 +32,23 @@ class KleineViewModel(
     }
 
     fun saveUserInformation(
-        userUid:String,
+        userUid: String,
         user: User
-    ) = firebaseDatabase.saveUserInformation(userUid,user).addOnCompleteListener {
-        if(it.isSuccessful)
-            saveInformation.postValue(true)
-        else
-            saveInformationError.postValue(it.exception.toString())
+    ) {
+        firebaseDatabase.checkUserByEmail(user.email) { error, isAccountExisted ->
+            if (error != null)
+                saveInformationError.postValue(error)
+            else
+                if (isAccountExisted!!)
+                    saveInformation.postValue(true)
+                else
+                    firebaseDatabase.saveUserInformation(userUid, user).addOnCompleteListener {
+                        if (it.isSuccessful)
+                            saveInformation.postValue(true)
+                        else
+                            saveInformationError.postValue(it.exception.toString())
+                    }
+        }
 
     }
 
@@ -53,7 +63,7 @@ class KleineViewModel(
             loginError.postValue(it.exception.toString())
     }
 
-    fun resetPassword(email:String) {
+    fun resetPassword(email: String) {
         resetPassword.postValue(Resource.Loading())
         firebaseDatabase.resetPassword(email).addOnCompleteListener {
             if (it.isSuccessful)

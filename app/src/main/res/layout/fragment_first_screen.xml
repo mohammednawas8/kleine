@@ -116,5 +116,4 @@
         app:layout_constraintStart_toStartOf="@id/tv_best_quality"
         app:layout_constraintTop_toBottomOf="@id/tv_best_quality" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
