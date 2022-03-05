@@ -54,7 +54,9 @@ class OrderCompletion : Fragment() {
 
     private fun onSuccessClick() {
         binding.btnCompletionAction.setOnClickListener {
-            findNavController().navigateUp()
+            val bundle = Bundle()
+
+            findNavController().navigate(R.id.action_cartFragment_to_productPreviewFragment2)
         }
     }
 

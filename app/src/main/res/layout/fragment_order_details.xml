@@ -58,13 +58,40 @@
             android:indeterminate="true"
             android:visibility="invisible"/>
 
-        <com.anton46.stepsview.StepsView
-            android:id="@+id/steps_view"
+        <LinearLayout
+            android:id="@+id/linear_steps_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_all_order_details" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_all_order_details">
+
+           <com.shuhart.stepview.StepView
+               android:id="@+id/step_view"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="16dp"
+               app:sv_selectedCircleColor="@color/g_orange"
+               app:sv_selectedTextColor="@color/g_hint"
+               app:sv_stepLineWidth="3dp"
+               app:sv_stepPadding="4dp"
+               app:sv_nextTextColor="@color/g_hint"
+               app:sv_nextStepLineColor="@color/g_hint"
+               app:sv_doneCircleColor="@color/g_orange"
+               app:sv_doneStepLineColor="@color/g_orange"
+               app:sv_doneCircleRadius="@dimen/_14sdp"
+               app:sv_selectedCircleRadius="@dimen/_14sdp"
+               app:sv_selectedStepNumberColor="@color/colorPrimary"
+               app:sv_stepViewStyle="@style/StepView"
+               app:sv_doneStepMarkColor="@color/colorPrimary"
+               app:sv_stepNumberTextSize="@dimen/_12ssp"
+               app:sv_animationType="Line"
+               app:sv_doneTextColor="@color/g_hint"
+               />
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/tv_shopping_addresses"
@@ -76,7 +103,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_15ssp"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/steps_view"
+            app:layout_constraintTop_toBottomOf="@id/linear_steps_view"
             app:drawableTint="@color/black"
             app:drawableLeftCompat="@drawable/ic_baseline_location_on_24" />
 

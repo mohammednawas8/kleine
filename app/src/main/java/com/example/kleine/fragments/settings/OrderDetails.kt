@@ -29,7 +29,7 @@ class OrderDetails : Fragment() {
     val args by navArgs<OrderDetailsArgs>()
     private lateinit var binding: FragmentOrderDetailsBinding
     private lateinit var viewModel: ShoppingViewModel
-    private lateinit var productsAdapter:CartRecyclerAdapter
+    private lateinit var productsAdapter: CartRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,13 +83,18 @@ class OrderDetails : Fragment() {
 
                 is Resource.Error -> {
                     hideAddressLoading()
-                    Toast.makeText(activity, resources.getText(R.string.error_occurred), Toast.LENGTH_SHORT).show()
-                    Log.e(TAG,response.message.toString())
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.error_occurred),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(TAG, response.message.toString())
                     return@Observer
                 }
             }
 
-        })    }
+        })
+    }
 
     private fun hideProductsLoading() {
         binding.apply {
@@ -145,8 +150,12 @@ class OrderDetails : Fragment() {
 
                 is Resource.Error -> {
                     hideAddressLoading()
-                    Toast.makeText(activity, resources.getText(R.string.error_occurred), Toast.LENGTH_SHORT).show()
-                    Log.e(TAG,response.message.toString())
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.error_occurred),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(TAG, response.message.toString())
                     return@Observer
                 }
             }
@@ -156,8 +165,8 @@ class OrderDetails : Fragment() {
 
     private fun hideAddressLoading() {
         binding.apply {
-            progressbarOrder.visibility  = View.GONE
-            stepsView.visibility = View.VISIBLE
+            progressbarOrder.visibility = View.GONE
+            stepView.visibility = View.VISIBLE
             tvShoppingAddresses.visibility = View.VISIBLE
             linearAddress.visibility = View.VISIBLE
         }
@@ -166,8 +175,8 @@ class OrderDetails : Fragment() {
     private fun showAddressLoading() {
         binding.apply {
             binding.apply {
-                progressbarOrder.visibility  = View.VISIBLE
-                stepsView.visibility = View.INVISIBLE
+                progressbarOrder.visibility = View.VISIBLE
+                stepView.visibility = View.INVISIBLE
                 tvShoppingAddresses.visibility = View.INVISIBLE
                 linearAddress.visibility = View.INVISIBLE
             }
@@ -175,15 +184,17 @@ class OrderDetails : Fragment() {
     }
 
     private fun setupStepView() {
-        val state = when(args.order.state){
+        var state = when (args.order.state) {
             ORDER_PLACED_STATE -> 0
             ORDER_CONFIRM_STATE -> 1
             ORDER_SHIPPED_STATE -> 2
-            else -> {3}
+            else -> {
+                3
+            }
         }
 
-        Log.d("test2",args.order.state)
-        Log.d("test2",state.toString())
+        Log.d("test2", args.order.state)
+        Log.d("test2", state.toString())
         val steps = arrayOf<String>(
             resources.getText(R.string.g_order_placed).toString(),
             resources.getText(R.string.g_confirm).toString(),
@@ -191,13 +202,14 @@ class OrderDetails : Fragment() {
             resources.getText(R.string.g_delivered).toString()
         )
 
-        binding.stepsView.apply {
-            setLabels(steps)
-                .setBarColorIndicator(requireContext().getResources().getColor(R.color.material_blue_grey_800))
-                .setProgressColorIndicator(requireContext().getResources().getColor(R.color.orange))
-                .setLabelColorIndicator(requireContext().getResources().getColor(R.color.orange))
-                .setCompletedPosition(state)
-                .drawView()
+        binding.stepView.apply {
+            getState().stepsNumber(4)
+                .steps(steps.toMutableList())
+                .commit()
+            go(state, false)
+            if (state == 3)
+                done(true)
+
         }
     }
 }
