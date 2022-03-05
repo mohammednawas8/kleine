@@ -39,6 +39,7 @@ class OrderCompletion : Fragment() {
             showErrorInformation()
             onErrorButtonClick()
         } else if (orderFlag == ORDER_SUCCESS_FLAG) {
+            binding.btnCompletionAction.text = resources.getText(R.string.g_order_details)
             showSuccessInformation()
             onSuccessClick()
         }
@@ -55,8 +56,8 @@ class OrderCompletion : Fragment() {
     private fun onSuccessClick() {
         binding.btnCompletionAction.setOnClickListener {
             val bundle = Bundle()
-
-            findNavController().navigate(R.id.action_cartFragment_to_productPreviewFragment2)
+            bundle.putParcelable("order",args.order)
+            findNavController().navigate(R.id.action_orderCompletion_to_orderDetails,bundle)
         }
     }
 

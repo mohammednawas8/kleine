@@ -101,6 +101,7 @@ class BillingFragment : Fragment() {
                         val bundle = Bundle()
                         bundle.putString("order_completion_flag", ORDER_SUCCESS_FLAG)
                         bundle.putString("orderNumber",response.data?.id)
+                        bundle.putParcelable("order",response.data)
                         findNavController().navigate(R.id.action_billingFragment_to_orderCompletion,bundle)
                         return@Observer
                     }

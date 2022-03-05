@@ -57,7 +57,6 @@ class ShoppingActivity : AppCompatActivity() {
 
                 is Resource.Success -> {
                     if (response.data != 0)
-
                         bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
                             backgroundColor = resources.getColor(R.color.g_dark_blue)
                             number = response.data!!

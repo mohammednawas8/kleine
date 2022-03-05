@@ -116,5 +116,7 @@
     <string name="g_forgot_password">نسيت كلمة المرور</string>
     <string name="g_check_your_email">تأكد من بريدك الالكتروني</string>
     <string name="street">الشارع</string>
+    <string name="g_order_details">تفاصيل الطلب</string>
+
 
 </resources>

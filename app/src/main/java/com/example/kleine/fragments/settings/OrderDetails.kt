@@ -20,6 +20,7 @@ import com.example.kleine.databinding.FragmentOrderDetailsBinding
 import com.example.kleine.model.Address
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.ORDER_CONFIRM_STATE
+import com.example.kleine.util.Constants.Companion.ORDER_Delivered_STATE
 import com.example.kleine.util.Constants.Companion.ORDER_PLACED_STATE
 import com.example.kleine.util.Constants.Companion.ORDER_SHIPPED_STATE
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
@@ -184,12 +185,13 @@ class OrderDetails : Fragment() {
     }
 
     private fun setupStepView() {
-        var state = when (args.order.state) {
-            ORDER_PLACED_STATE -> 0
-            ORDER_CONFIRM_STATE -> 1
-            ORDER_SHIPPED_STATE -> 2
+        val state = when (args.order.state) {
+            ORDER_PLACED_STATE -> 1
+            ORDER_CONFIRM_STATE -> 2
+            ORDER_SHIPPED_STATE -> 3
+            ORDER_Delivered_STATE -> 4
             else -> {
-                3
+                2
             }
         }
 
@@ -206,9 +208,12 @@ class OrderDetails : Fragment() {
             getState().stepsNumber(4)
                 .steps(steps.toMutableList())
                 .commit()
-            go(state, false)
-            if (state == 3)
+            if (state == 4) {
+                go(3,false)
                 done(true)
+            }else{
+                go(state, false)
+            }
 
         }
     }

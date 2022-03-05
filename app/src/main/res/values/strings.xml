@@ -84,7 +84,7 @@
     <string name="order_error_message">Try again later, if this error keeps showing up please contact us .</string>
     <string name="order_success_message">We received your order and we will contact you through a phone call in the next 24H
     \n your order number is #</string>
-    <string name="g_track_order">You can track your order by going to your profile and select orders then select your recent order.</string>
+    <string name="g_track_order">You can track your order by going to your profile and select all orders then select your recent order.</string>
     <string name="g_settings">Settings</string>
     <string name="g_edit_personal_details">Edit personal details</string>
     <string name="g_orders">Orders</string>
@@ -117,5 +117,6 @@
     <string name="g_forgot_password">Forgot Password</string>
     <string name="g_check_your_email">Check your Email</string>
     <string name="street">Street</string>
+    <string name="g_order_details">Order Details</string>
 
 </resources>
