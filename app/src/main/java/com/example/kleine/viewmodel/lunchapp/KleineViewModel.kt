@@ -5,16 +5,19 @@ import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.User
 import com.example.kleine.resource.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class KleineViewModel(
     private val firebaseDatabase: FirebaseDb
 ) : ViewModel() {
 
-    val register = MutableLiveData<User>()
-    val registerError = MutableLiveData<String>()
 
-    val saveInformation = MutableLiveData<Boolean>()
-    val saveInformationError = MutableLiveData<String>()
+    val saveUserInformationGoogleSignIn = MutableLiveData<Resource<String>>()
+    val register = MutableLiveData<Resource<User>>()
+
 
     val login = MutableLiveData<Boolean>()
     val loginError = MutableLiveData<String>()
@@ -24,29 +27,39 @@ class KleineViewModel(
     fun registerNewUser(
         user: User,
         password: String
-    ) = firebaseDatabase.createNewUser(user.email, password).addOnCompleteListener {
-        if (it.isSuccessful)
-            register.postValue(user)
-        else
-            registerError.postValue(it.exception.toString())
+    ) {
+        register.postValue(Resource.Loading())
+        firebaseDatabase.createNewUser(user.email, password).addOnCompleteListener {
+            if (it.isSuccessful)
+                firebaseDatabase.saveUserInformation(Firebase.auth.currentUser!!.uid, user)
+                    .addOnCompleteListener { it2 ->
+                        if (it2.isSuccessful) {
+                            register.postValue(Resource.Success(user))
+                        } else
+                            register.postValue(Resource.Error(it2.exception.toString()))
+
+                    }
+            else
+                register.postValue(Resource.Error(it.exception.toString()))
+        }
     }
 
-    fun saveUserInformation(
+    private fun saveUserInformationGoogleSignIn(
         userUid: String,
         user: User
     ) {
         firebaseDatabase.checkUserByEmail(user.email) { error, isAccountExisted ->
             if (error != null)
-                saveInformationError.postValue(error)
+                saveUserInformationGoogleSignIn.postValue(Resource.Error(error))
             else
                 if (isAccountExisted!!)
-                    saveInformation.postValue(true)
+                    saveUserInformationGoogleSignIn.postValue(Resource.Success(userUid))
                 else
                     firebaseDatabase.saveUserInformation(userUid, user).addOnCompleteListener {
                         if (it.isSuccessful)
-                            saveInformation.postValue(true)
+                            saveUserInformationGoogleSignIn.postValue(Resource.Success(userUid))
                         else
-                            saveInformationError.postValue(it.exception.toString())
+                            saveUserInformationGoogleSignIn.postValue(Resource.Error(it.exception.toString()))
                     }
         }
 
@@ -74,5 +87,32 @@ class KleineViewModel(
         }
     }
 
+    fun signInWithGoogle(idToken: String) {
+        saveUserInformationGoogleSignIn.postValue(Resource.Loading())
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        firebaseDatabase.signInWithGoogle(credential).addOnCompleteListener { task ->
 
+            if (task.isSuccessful) {
+                val userFirebase = FirebaseAuth.getInstance().currentUser
+                val fullNameArray = userFirebase!!.displayName?.split(" ")
+                val firstName = fullNameArray!![0]
+                val size = fullNameArray.size
+                var secondName = ""
+                if (size == 1)
+                    secondName = ""
+                else
+                    secondName = fullNameArray[1]
+
+                val user = User(firstName, secondName, userFirebase.email.toString(), "")
+                saveUserInformationGoogleSignIn(userFirebase.uid, user)
+            } else
+                saveUserInformationGoogleSignIn.postValue(Resource.Error(task.exception.toString()))
+
+
+        }
+    }
+
+    fun logOut(){
+        firebaseDatabase.logout()
+    }
 }

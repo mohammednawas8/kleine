@@ -14,15 +14,16 @@ import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
 import com.example.kleine.databinding.FragmentRegisterBinding
 import com.example.kleine.model.User
+import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.lunchapp.KleineViewModel
-import com.google.firebase.auth.FirebaseAuth
 
-private const val TAG= "RegisterFragment"
+private const val TAG = "RegisterFragment"
+
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
     lateinit var viewModel: KleineViewModel
-    lateinit var btnRegister:CircularProgressButton
+    lateinit var btnRegister: CircularProgressButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,10 +44,7 @@ class RegisterFragment : Fragment() {
         btnRegister = view.findViewById(R.id.btn_login)
 
         onRegisterBtnClick()
-        observeRegister()
-        observeRegisterError()
         observeSaveUserInformation()
-        observeSaveUserInformationError()
         onLoginClick()
     }
 
@@ -63,52 +61,50 @@ class RegisterFragment : Fragment() {
             btnRegister.spinningBarWidth = resources.getDimension(R.dimen._3sdp)
             val user = getUser()
             val password = getPassword()
-            user?.let { user->
-                password?.let { password->
-                    viewModel.registerNewUser(user,password)
+            user?.let { user ->
+                password?.let { password ->
+                    viewModel.registerNewUser(user, password)
                     btnRegister.startAnimation()
                 }
             }
         }
     }
 
-    private fun observeSaveUserInformationError() {
-        viewModel.saveInformationError.observe(viewLifecycleOwner, Observer { error->
-            Log.e(TAG,error)
-            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
-            btnRegister.revertAnimation()
-        })
-    }
-
     private fun observeSaveUserInformation() {
-        viewModel.saveInformation.observe(viewLifecycleOwner, Observer {
-            if(it == true) {
-                btnRegister.revertAnimation()
-                Log.d(TAG, "user signed successfully")
-                Toast.makeText(
-                    activity,
-                    resources.getString(R.string.signed_up_successfully),
-                    Toast.LENGTH_SHORT
-                ).show()
-                btnRegister.revertAnimation()
-                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        viewModel.register.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    Log.d(TAG, "EmailRegister:Loading")
+                    btnRegister.startAnimation()
+                    return@Observer
+                }
+
+                is Resource.Success -> {
+                    Log.d(TAG, "EmailRegister:Successful")
+                    btnRegister.stopAnimation()
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.signed_up_successfully),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    viewModel.logOut()
+                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                    viewModel.register.postValue(null)
+                }
+
+                is Resource.Error -> {
+                    Log.e(TAG, "EmailRegister:Error ${response.message.toString()}")
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.error_occurred),
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@Observer
+                }
             }
         })
     }
 
-    private fun observeRegisterError() {
-        viewModel.registerError.observe(viewLifecycleOwner, Observer { error->
-            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
-            Log.e(TAG,error)
-            btnRegister.revertAnimation()
-        })
-    }
-
-    private fun observeRegister() {
-        viewModel.register.observe(viewLifecycleOwner, Observer { user->
-            viewModel.saveUserInformation(FirebaseAuth.getInstance().currentUser!!.uid,user)
-        })
-    }
 
     private fun getUser(): User? {
         val firstName = binding.edFirstName.text.toString().trim()

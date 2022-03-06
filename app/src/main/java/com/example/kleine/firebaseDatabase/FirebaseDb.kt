@@ -23,6 +23,7 @@ import com.example.kleine.util.Constants.Companion.STORES_COLLECTION
 import com.example.kleine.util.Constants.Companion.TITLE
 import com.example.kleine.util.Constants.Companion.USERS_COLLECTION
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
@@ -371,4 +372,9 @@ class FirebaseDb {
                     onResult(it.exception.toString(), null)
             }
     }
+
+    fun signInWithGoogle(credential: AuthCredential) =
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+
+    fun logout() = Firebase.auth.signOut()
 }

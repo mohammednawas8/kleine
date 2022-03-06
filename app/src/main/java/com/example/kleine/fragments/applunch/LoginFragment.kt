@@ -17,7 +17,6 @@ import com.example.kleine.activities.LunchActivity
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.databinding.FragmentLoginBinding
-import com.example.kleine.model.User
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.lunchapp.KleineViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -26,8 +25,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 
 
 class LoginFragment : Fragment() {
@@ -257,7 +254,7 @@ class LoginFragment : Fragment() {
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d("test,",account.email.toString())
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
+                viewModel.signInWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.e(TAG, "Google sign in failed", e)
@@ -268,40 +265,33 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeSaveUserInformation(){
-        viewModel.saveInformation.observe(viewLifecycleOwner, Observer {
-            binding.btnLoginFragment.revertAnimation()
-            val intent = Intent(activity,ShoppingActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+        viewModel.saveUserInformationGoogleSignIn.observe(viewLifecycleOwner, Observer { response->
+            when(response){
+                is Resource.Loading -> {
+                    Log.d(TAG,"GoogleSignIn:Loading")
+                    binding.btnLoginFragment.startAnimation()
+                    return@Observer
+                }
+
+                is Resource.Success -> {
+                    Log.d(TAG,"GoogleSignIn:Successful")
+                    binding.btnLoginFragment.stopAnimation()
+                    val intent = Intent(activity,ShoppingActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                    return@Observer
+                }
+
+                is Resource.Error ->{
+                    Log.e(TAG,"GoogleSignIn:Error ${response.message.toString()}")
+                    Toast.makeText(activity, resources.getText(R.string.error_occurred), Toast.LENGTH_LONG).show()
+                    return@Observer
+                }
+            }
+
         })
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        FirebaseAuth.getInstance().signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    binding.btnLoginFragment.startAnimation()
-                    Log.d(TAG, "signInWithCredential:success")
-                    val userFirebase = FirebaseAuth.getInstance().currentUser
-                    val fullNameArray = userFirebase!!.displayName?.split(" ")
-                    val firstName = fullNameArray!![0]
-                    val size = fullNameArray.size
-                    var secondName= ""
-                    if(size == 1)
-                        secondName = ""
-                    else
-                        secondName = fullNameArray[1]
 
-                    val user = User(firstName,secondName,userFirebase.email.toString(),"")
-                    viewModel.saveUserInformation(userFirebase.uid,user)
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Toast.makeText(activity, resources.getText(R.string.error_occurred), Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
 
 }
