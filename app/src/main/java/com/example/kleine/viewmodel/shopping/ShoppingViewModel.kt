@@ -40,6 +40,7 @@ class ShoppingViewModel(
     val orderAddress = MutableLiveData<Resource<Address>>()
     val orderProducts = MutableLiveData<Resource<List<CartProduct>>>()
 
+    val categories = MutableLiveData<Resource<List<Category>>>()
 
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
@@ -50,13 +51,25 @@ class ShoppingViewModel(
 
 
     init {
-        getClothesProducts()
-        getBestDealsProduct()
-        getChairs()
-        getCupboardsByOrders(3)
-        getCupboardProduct(4)
+        getCategories()
+//        getClothesProducts()
+//        getBestDealsProduct()
+//        getChairs()
+//        getCupboardsByOrders(3)
+//        getCupboardProduct(4)
         getUser()
     }
+
+    fun getCategories() {
+        categories.postValue(Resource.Loading())
+        firebaseDatabase.getCategories().addOnCompleteListener {
+            if (it.isSuccessful)
+                categories.postValue(Resource.Success(it.result.toObjects(Category::class.java)))
+            else
+                categories.postValue(Resource.Error(it.exception.toString()))
+        }
+    }
+
 
     fun getClothesProducts() =
         firebaseDatabase.getClothesProducts(clothesPaging).addOnCompleteListener {
@@ -310,28 +323,33 @@ class ShoppingViewModel(
     fun resetPassword(email: String) {
         passwordReset.postValue(Resource.Loading())
         firebaseDatabase.resetPassword(email).addOnCompleteListener {
-            if(it.isSuccessful)
+            if (it.isSuccessful)
                 passwordReset.postValue(Resource.Success(email))
             else
                 passwordReset.postValue(Resource.Error(it.exception.toString()))
         }
     }
 
-    fun getOrderAddressAndProducts(order:Order) {
+    fun getOrderAddressAndProducts(order: Order) {
         orderAddress.postValue(Resource.Loading())
         orderProducts.postValue(Resource.Loading())
-        firebaseDatabase.getOrderAddressAndProducts(order,{ address,aError->
-            if(aError != null)
+        firebaseDatabase.getOrderAddressAndProducts(order, { address, aError ->
+            if (aError != null)
                 orderAddress.postValue(Resource.Error(aError))
             else
                 orderAddress.postValue(Resource.Success(address))
-        },{ products,pError->
+        }, { products, pError ->
 
-            if(pError != null)
+            if (pError != null)
                 orderProducts.postValue(Resource.Error(pError))
             else
                 orderProducts.postValue(Resource.Success(products))
 
         })
     }
+
+    fun test(s:String){
+        Log.d("test", s)
+    }
+
 }

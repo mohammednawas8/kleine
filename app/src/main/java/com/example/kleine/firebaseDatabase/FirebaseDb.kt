@@ -136,7 +136,7 @@ class FirebaseDb {
         .limit(5)
         .get()
 
-    fun getCategories() = categoriesCollection.get()
+    fun getCategories() = categoriesCollection.orderBy("rank").get()
 
     fun getProductFromCartProduct(cartProduct: CartProduct) =
         productsCollection.whereEqualTo(ID, cartProduct.id)
