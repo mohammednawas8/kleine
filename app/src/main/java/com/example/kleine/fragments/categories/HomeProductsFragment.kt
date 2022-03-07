@@ -19,14 +19,15 @@ import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
-import com.example.kleine.databinding.FragmentChairBinding
+import com.example.kleine.databinding.FragmentHomeProductsBinding
+import com.example.kleine.databinding.FragmentProductPreviewBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.example.kleine.viewmodel.shopping.ShoppingViewModelProviderFactory
 
-class ChairFragment : Fragment() {
-    private lateinit var binding: FragmentChairBinding
+class HomeProductsFragment : Fragment() {
+    private lateinit var binding: FragmentHomeProductsBinding
     private lateinit var adsAdapter: AdsRecyclerAdapter
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var bestDealsAdapter: BestDealsRecyclerAdapter
@@ -46,7 +47,7 @@ class ChairFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentChairBinding.inflate(inflater, container, false)
+        binding = FragmentHomeProductsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,8 +69,6 @@ class ChairFragment : Fragment() {
 
         observeEmptyAds()
         observeEmptyBestDeals()
-
-        setUpTimer()
 
         productsAdapter.onItemClick = { product ->
             val bundle = Bundle()
@@ -159,27 +158,8 @@ class ChairFragment : Fragment() {
         }
     }
 
-    var timer: CountDownTimer? = null
-    var isRunning = false
-    private fun setUpTimer() {
-        if (timer == null && !isRunning)
-            timer = object : CountDownTimer(43140000, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    updateTimer(millisUntilFinished)
-                }
 
-                override fun onFinish() {
-                }
-            }.start().also { isRunning=true }
-    }
 
-    private fun updateTimer(millis: Long) {
-        val hour = millis / 3600000
-        val minutes = millis % 3600000 / 60000
-        val seconds = millis % 60000 / 1000
-
-        binding.tvOfferTimer.text = "$hour:$minutes:$seconds"
-    }
 
     private fun observeClothes() {
         viewModel.clothes.observe(viewLifecycleOwner, Observer { clothesList ->

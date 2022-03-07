@@ -1,7 +1,11 @@
 package com.example.kleine.adapters.recyclerview
 
+import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +45,7 @@ class ProductsRecyclerAdapter() :
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BestProductsRecyclerAdapterViewHolder, position: Int) {
         val product = differ.currentList[position]
         val image = (product.images?.get(IMAGES) as List<String>)[0]
@@ -48,6 +53,17 @@ class ProductsRecyclerAdapter() :
             Glide.with(holder.itemView).load(image).into(imgProduct)
             tvName.text = product.title
             tvPrice.text = "$${product.price}"
+            tvNewPrice.visibility = View.GONE
+        }
+
+        product.newPrice?.let {
+            if(product.newPrice.isNotEmpty()){
+                holder.binding.apply {
+                    tvPrice.paintFlags = tvPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    tvNewPrice.text = "$${product.newPrice}"
+                    tvNewPrice.visibility = View.VISIBLE
+                }
+            }
         }
 
         holder.itemView.setOnClickListener {

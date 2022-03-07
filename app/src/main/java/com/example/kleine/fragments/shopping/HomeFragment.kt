@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.adapters.viewpager.HomeViewpagerAdapter
 import com.example.kleine.databinding.FragmentHomeBinding
 import com.example.kleine.fragments.categories.*
+import com.example.kleine.fragments.categories.HomeProductsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val categoriesFragments = arrayListOf<Fragment>(
-            ChairFragment(),
+            HomeProductsFragment(),
             CupboardFragment(),
             TableFragment(),
             AccessoryFragment(),
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         binding.viewpagerHome.adapter = fragmentAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewpagerHome) { tab, position ->
             when (position) {
-                0 -> tab.text = resources.getString(R.string.g_chair)
+                0 -> tab.text = resources.getString(R.string.g_home)
                 1 -> tab.text = resources.getString(R.string.g_cupboard)
                 2 -> tab.text = resources.getString(R.string.g_table)
                 3 -> tab.text = resources.getString(R.string.g_accessory)

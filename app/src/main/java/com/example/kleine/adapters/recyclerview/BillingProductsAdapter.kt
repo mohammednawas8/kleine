@@ -47,7 +47,7 @@ class BillingProductsAdapter(): RecyclerView.Adapter<BillingProductsAdapter.Bill
         )
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: BillingProductsAdapterViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.binding.apply {
@@ -62,7 +62,14 @@ class BillingProductsAdapter(): RecyclerView.Adapter<BillingProductsAdapter.Bill
             Glide.with(holder.itemView).load(product.image).into(imgCartProduct)
             tvCartProductName.text = product.name
             tvProductCartPrice.text = "$ ${product.price}"
+
+            if (product.newPrice != null && product.newPrice.isNotEmpty()) {
+                tvProductCartPrice.text = "$${product.newPrice}"
+            } else
+                tvProductCartPrice.text = "$${product.price}"
         }
+
+
     }
 
     override fun getItemCount(): Int {

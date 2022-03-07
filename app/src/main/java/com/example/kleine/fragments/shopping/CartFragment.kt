@@ -66,9 +66,9 @@ class CartFragment : Fragment() {
     private fun onCheckoutClick() {
         binding.btnCheckout.setOnClickListener {
             val bundle = Bundle()
-                bundle.putString("price", binding.tvTotalprice.text.toString())
+            bundle.putString("price", binding.tvTotalprice.text.toString())
             bundle.putString("clickFlag", SELECT_ADDRESS_FLAG)
-            bundle.putParcelable("products",cartProducts)
+            bundle.putParcelable("products", cartProducts)
             findNavController().navigate(R.id.action_cartFragment_to_billingFragment, bundle)
         }
     }
@@ -245,9 +245,16 @@ class CartFragment : Fragment() {
                         cartAdapter.differ.submitList(products)
                         var totalPrice = 0
                         products.forEach {
-                            totalPrice += it.price.toInt() * it.quantity
-                            binding.tvTotalprice.text = "$ $totalPrice"
+                            if (it.newPrice != null && it.newPrice.isNotEmpty()) {
+                                totalPrice += it.newPrice.toInt() * it.quantity
+                            } else
+                                totalPrice += it.price.toInt() * it.quantity
+
+
                         }
+
+                        binding.tvTotalprice.text = "$ $totalPrice"
+
                     } else {
                         cartAdapter.differ.submitList(products)
                         binding.apply {

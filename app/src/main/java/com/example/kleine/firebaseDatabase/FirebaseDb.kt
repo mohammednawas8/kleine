@@ -79,7 +79,7 @@ class FirebaseDb {
         productsCollection.whereEqualTo(CATEGORY, BEST_DEALS).limit(pagingPage).get()
 
     fun getChairs(pagingPage: Long) =
-        productsCollection.whereEqualTo(CATEGORY, CHAIR_CATEGORY).limit(pagingPage).get()
+        productsCollection.limit(pagingPage).get()
 
     //add order by orders
     fun getMostOrderedCupboard(pagingPage: Long) =
@@ -192,9 +192,14 @@ class FirebaseDb {
                 val orderNum = order.id
                 var price = 0
 
-                orderProducts.forEach {
-                    price += it.price.toInt()
+                orderProducts.forEach { it2 ->
+                    if (it2.newPrice != null && it2.newPrice.isNotEmpty()) {
+                        price += it2.newPrice.toInt() * it2.quantity
+                    } else
+                        price += it2.price.toInt() * it2.quantity
                 }
+
+                Log.d("test", "$store $price")
 
                 val storeOrder = Order(
                     orderNum.toString(),

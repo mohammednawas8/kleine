@@ -1,5 +1,7 @@
 package com.example.kleine.fragments.shopping
 
+import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -143,19 +145,29 @@ class ProductPreviewFragment : Fragment() {
         binding.btnAddToCart.apply {
             setOnClickListener {
 
-                if(selectedColor.isEmpty()){
+                if (selectedColor.isEmpty()) {
                     binding.tvColorError.visibility = View.VISIBLE
                     return@setOnClickListener
                 }
 
-                if(selectedSize.isEmpty()){
+                if (selectedSize.isEmpty()) {
                     binding.tvSizeError.visibility = View.VISIBLE
                     return@setOnClickListener
                 }
 
                 val product = args.product
                 val image = (product.images?.get(IMAGES) as List<String>)[0]
-                val cartProduct = CartProduct(product.id,product.title!!,product.seller!!,image,product.price!!,1,selectedColor,selectedSize)
+                val cartProduct = CartProduct(
+                    product.id,
+                    product.title!!,
+                    product.seller!!,
+                    image,
+                    product.price!!,
+                    product.newPrice,
+                    1,
+                    selectedColor,
+                    selectedSize
+                )
                 viewModel.addProductToCart(cartProduct)
                 setBackgroundResource(R.color.g_black)
             }
@@ -168,6 +180,7 @@ class ProductPreviewFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setProductInformation(product: Product) {
         val imagesList = product.images!![IMAGES] as List<String>
         val colors = product.colors!![COLORS] as List<String>
@@ -179,6 +192,15 @@ class ProductPreviewFragment : Fragment() {
             tvProductName.text = product.title
             tvProductDescription.text = product.description
             tvProductPrice.text = "$${product.price}"
+            tvProductOfferPrice.visibility = View.GONE
+            product.newPrice?.let {
+                if (product.newPrice.isNotEmpty()) {
+                    tvProductPrice.paintFlags =
+                        tvProductPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    tvProductOfferPrice.text = "$${product.newPrice}"
+                    tvProductOfferPrice.visibility = View.VISIBLE
+                }
+            }
         }
     }
 

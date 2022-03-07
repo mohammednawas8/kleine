@@ -68,31 +68,57 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.56" />
 
-    <TextView
-        android:id="@+id/tv_product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="Premium chair"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/guideline3" />
 
-    <TextView
-        android:id="@+id/tv_product_price"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear_product_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="$300"
-        android:textColor="@color/g_hint"
-        android:textSize="@dimen/_20ssp"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintBottom_toBottomOf="@id/tv_product_name"
-        app:layout_constraintTop_toTopOf="@+id/tv_product_name"/>
+        app:layout_constraintTop_toBottomOf="@+id/circle_indicator"
+        android:orientation="horizontal"
+        android:layout_marginTop="35dp">
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
+            android:text="Premium chair"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+
+        <TextView
+            android:id="@+id/tv_product_offer_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="$300"
+            android:textColor="@color/g_hint"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_product_name"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="$300"
+            android:textColor="@color/g_hint"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_product_name"/>
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_product_description"
@@ -104,7 +130,7 @@
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+        app:layout_constraintTop_toBottomOf="@id/linear_product_name"
         android:maxHeight="@dimen/_100sdp"/>
 
     <View

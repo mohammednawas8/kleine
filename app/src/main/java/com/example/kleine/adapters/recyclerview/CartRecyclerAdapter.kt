@@ -61,10 +61,14 @@ class CartRecyclerAdapter(
             val imageDrawable = ColorDrawable(color)
             Glide.with(holder.itemView).load(product.image).into(imgCartProduct)
             tvCartProductName.text = product.name
-            tvProductCartPrice.text = "$${product.price}"
             tvQuantity.text = product.quantity.toString()
             tvCartSize.text = product.size
             imgColor.setImageDrawable(imageDrawable)
+
+            if (product.newPrice != null && product.newPrice.isNotEmpty()) {
+                tvProductCartPrice.text = "$${product.newPrice}"
+            } else
+                tvProductCartPrice.text = "$${product.price}"
 
             if (itemFlag != CART_FLAG)
                 holder.binding.apply {
