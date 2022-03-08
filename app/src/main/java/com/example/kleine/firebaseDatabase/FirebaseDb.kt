@@ -58,12 +58,13 @@ class FirebaseDb {
 
     private val firebaseAuth = Firebase.auth
 
-    fun getProductsByCategory(category: String) =
-        productsCollection.whereEqualTo(CATEGORY, category).get()
+    fun getProductsByCategory(category: String,page:Long) =
+        productsCollection.whereEqualTo(CATEGORY,category).limit(page).get()
 
-    fun getMostRequestedProducts(category: String) =
+
+    fun getMostRequestedProducts(category: String,page:Long) =
         productsCollection.whereEqualTo(CATEGORY, category)
-            .orderBy(ORDERS, Query.Direction.DESCENDING).get()
+            .orderBy(ORDERS, Query.Direction.DESCENDING).limit(page).get()
 
 
     fun createNewUser(
@@ -86,7 +87,7 @@ class FirebaseDb {
     fun getBestDealsProducts(pagingPage: Long) =
         productsCollection.whereEqualTo(CATEGORY, BEST_DEALS).limit(pagingPage).get()
 
-    fun getChairs(pagingPage: Long) =
+    fun getHomeProducts(pagingPage: Long) =
         productsCollection.limit(pagingPage).get()
 
     //add order by orders

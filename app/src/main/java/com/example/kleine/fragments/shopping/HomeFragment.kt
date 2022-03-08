@@ -1,12 +1,10 @@
 package com.example.kleine.fragments.shopping
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
@@ -14,11 +12,8 @@ import com.example.kleine.adapters.viewpager.HomeViewpagerAdapter
 import com.example.kleine.databinding.FragmentHomeBinding
 import com.example.kleine.fragments.categories.*
 import com.example.kleine.fragments.categories.HomeProductsFragment
-import com.example.kleine.model.Category
-import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -50,7 +45,6 @@ class HomeFragment : Fragment() {
             ChairFragment(),
             CupboardFragment(),
             TableFragment(),
-            AccessoryFragment(),
             FurnitureFragment(),
             EnlighteningFragment()
         )

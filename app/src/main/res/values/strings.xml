@@ -37,8 +37,8 @@
     <string name="g_add_to_cart">Add to cart</string>
     <string name="g_search_now">Search Now</string>
     <string name="g_best_deals">Best Deals</string>
-    <string name="g_chair">Chair.</string>
-    <string name="g_cupboard">Cupboard.</string>
+    <string name="g_chair">Chair</string>
+    <string name="g_cupboard">Cupboard</string>
     <string name="g_table">Table</string>
     <string name="g_accessory">Accessory</string>
     <string name="g_furniture">Furniture</string>

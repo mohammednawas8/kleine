@@ -25,6 +25,7 @@ import com.example.kleine.util.Constants.Companion.ORDERS
 import com.example.kleine.util.Constants.Companion.PRODUCTS_COLLECTION
 import com.example.kleine.util.Constants.Companion.RED
 import com.example.kleine.util.Constants.Companion.SIZES
+import com.example.kleine.util.Constants.Companion.TABLES_CATEGORY
 import com.example.kleine.util.Constants.Companion.XLARGE
 import com.example.kleine.viewmodel.lunchapp.KleineViewModel
 import com.example.kleine.viewmodel.lunchapp.ViewModelProviderFactory
@@ -64,19 +65,18 @@ class LunchActivity : AppCompatActivity() {
 
     private fun saveNewProduct() {
 
-        val title = "Cupboard 4"
-        val description = "Original cupboard"
-        val category = CUPBOARD_CATEGORY
-        val price = "1200"
-        val newPrice = "77"
-        val seller = "mo mart"
-        val orders = 78
+        val title = "Table 2"
+        val description = "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022"
+        val category = TABLES_CATEGORY
+        val price = "100"
+        val newPrice = "0"
+        val seller = "ps mart"
+        val orders = 22
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Fawdj.jpeg?alt=media&token=761fcb84-6c5e-4729-b7a6-11a5f9948f17",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Fcupbard3.jpg?alt=media&token=dfeeb964-b338-47e0-97c4-14368ec3f502",
-            "https://firebasestorage.googleapis.com/v0/b/kleine-6e51a.appspot.com/o/products%2FEzfV4pXLZ00XPW2NbPrO%2Fcupbard3.jpg?alt=media&token=dfeeb964-b338-47e0-97c4-14368ec3f502"
+            "https://img.zcdn.com.au/lf/8/hash/38080/19204999/4/Anika%2BRound%2BDining%2BTable.jpg",
+            "https://img.zcdn.com.au/lf/8/hash/38080/19204999/4/Anika%2BRound%2BDining%2BTable.jpg"
         )
 
         images.put(IMAGES,imagesList.toList())
@@ -97,10 +97,10 @@ class LunchActivity : AppCompatActivity() {
         )
         sizes.put(SIZES,sizesList.toList())
 
-        val prodcut = Product(10812,title, description, category, price,newPrice, seller, images, colors, sizes,orders)
+        val prodcut = Product(12311,title, description, category, price,newPrice, seller, images, colors, sizes,orders)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
-            .document("5ZHYSD5s6N2mumIqaANu")
+            .document()
             .set(prodcut)
 
 

@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.kleine.databinding.ViewpagerImageItemBinding
 
 class ViewPager2Images : RecyclerView.Adapter<ViewPager2Images.ViewPager2ImagesViewHolder>() {
-    inner class ViewPager2ImagesViewHolder(val binding:ViewpagerImageItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewPager2ImagesViewHolder(val binding: ViewpagerImageItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val diffCallback = object : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {

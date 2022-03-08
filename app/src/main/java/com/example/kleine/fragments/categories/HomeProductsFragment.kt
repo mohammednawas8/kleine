@@ -1,15 +1,12 @@
 package com.example.kleine.fragments.categories
 
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,11 +17,9 @@ import com.example.kleine.adapters.recyclerview.AdsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentHomeProductsBinding
-import com.example.kleine.databinding.FragmentProductPreviewBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
-import com.example.kleine.viewmodel.shopping.ShoppingViewModelProviderFactory
 
 class HomeProductsFragment : Fragment() {
     private lateinit var binding: FragmentHomeProductsBinding
@@ -54,18 +49,18 @@ class HomeProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdsRecyclerView()
-        observeClothes()
+        setupHeaderRecyclerView()
+        observeHeaderProducts()
 
         setupBestDealsRecyclerView()
         observeBestDeals()
 
-        setupChairsRecyclerView()
-        observeChairs()
+        setupAllProductsRecyclerView()
+        observeAllProducts()
 
         adsPaging()
         bestDealsPaging()
-        chairsPaging()
+        productsPaging()
 
         observeEmptyAds()
         observeEmptyBestDeals()
@@ -127,23 +122,23 @@ class HomeProductsFragment : Fragment() {
         })
     }
 
-    private fun chairsPaging() {
+    private fun productsPaging() {
         binding.scrollChair.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
 
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getChairs()
+                viewModel.getHomeProduct()
             }
         })
     }
 
-    private fun observeChairs() {
-        viewModel.chairs.observe(viewLifecycleOwner, Observer { chairsList ->
+    private fun observeAllProducts() {
+        viewModel.home.observe(viewLifecycleOwner, Observer { chairsList ->
             productsAdapter.differ.submitList(chairsList.toList())
 
         })
     }
 
-    private fun setupChairsRecyclerView() {
+    private fun setupAllProductsRecyclerView() {
         binding.rvChairs.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = productsAdapter
@@ -161,7 +156,7 @@ class HomeProductsFragment : Fragment() {
 
 
 
-    private fun observeClothes() {
+    private fun observeHeaderProducts() {
         viewModel.clothes.observe(viewLifecycleOwner, Observer { clothesList ->
             adsAdapter.differ.submitList(clothesList.toList())
         })
@@ -173,7 +168,7 @@ class HomeProductsFragment : Fragment() {
         })
     }
 
-    private fun setupAdsRecyclerView() {
+    private fun setupHeaderRecyclerView() {
         binding.rvAds.apply {
             adapter = adsAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.*
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
+import com.example.kleine.util.Constants.Companion.TABLES_CATEGORY
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,7 +22,15 @@ class ShoppingViewModel(
     val emptyClothes = MutableLiveData<Boolean>()
     val bestDeals = MutableLiveData<List<Product>>()
     val emptyBestDeals = MutableLiveData<Boolean>()
-    val chairs = MutableLiveData<List<Product>>()
+
+    val home = MutableLiveData<List<Product>>()
+
+    val chairs = MutableLiveData<Resource<List<Product>>>()
+    val mostRequestedChairs = MutableLiveData<Resource<List<Product>>>()
+
+    val tables = MutableLiveData<Resource<List<Product>>>()
+    val mostRequestedTables = MutableLiveData<Resource<List<Product>>>()
+
     val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
     val addToCart = MutableLiveData<Resource<Boolean>>()
@@ -47,12 +57,19 @@ class ShoppingViewModel(
     val mostRequestedProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
 
 
-    private var chairsPagingPage: Long = 10
+
+    private var homePage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
 
     private var cupboardPaging: Long = 4
     private var mostOrderCupboardPaging: Long = 5
+
+    private var mostRequestedChairsPage = 3
+    private var chairsPage = 4
+
+    private var mostRequestedTablePage = 3
+    private var tablePage = 4
 
 
     init {
@@ -68,11 +85,70 @@ class ShoppingViewModel(
 
         getClothesProducts()
         getBestDealsProduct()
-        getChairs()
+        getHomeProduct()
         getCupboardsByOrders(3)
         getCupboardProduct(4)
         getUser()
+
+        getChairs()
+        getMostRequestedChairs()
+
+        getTables()
+        getMostRequestedTables()
     }
+
+     fun getChairs() {
+        chairs.postValue(Resource.Loading())
+        firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY,homePage).addOnCompleteListener {
+            if(it.isSuccessful){
+                val products = it.result.toObjects(Product::class.java)
+                chairs.postValue(Resource.Success(products))
+                chairsPage+=4
+            }else{
+                chairs.postValue(Resource.Error(it.exception.toString()))
+            }
+        }
+    }
+
+     fun getMostRequestedChairs(){
+        mostRequestedChairs.postValue(Resource.Loading())
+        firebaseDatabase.getMostRequestedProducts(CHAIR_CATEGORY,homePage).addOnCompleteListener {
+            if(it.isSuccessful){
+                val products = it.result.toObjects(Product::class.java)
+                mostRequestedChairs.postValue(Resource.Success(products))
+                mostRequestedChairsPage+=4
+            }else{
+                mostRequestedChairs.postValue(Resource.Error(it.exception.toString()))
+            }
+        }
+    }
+
+     fun getTables() {
+        tables.postValue(Resource.Loading())
+        firebaseDatabase.getProductsByCategory(TABLES_CATEGORY,homePage).addOnCompleteListener {
+            if(it.isSuccessful){
+                val products = it.result.toObjects(Product::class.java)
+                tables.postValue(Resource.Success(products))
+                tablePage+=4
+            }else{
+                tables.postValue(Resource.Error(it.exception.toString()))
+            }
+        }
+    }
+
+     fun getMostRequestedTables(){
+        mostRequestedTables.postValue(Resource.Loading())
+        firebaseDatabase.getMostRequestedProducts(TABLES_CATEGORY,homePage).addOnCompleteListener {
+            if(it.isSuccessful){
+                val products = it.result.toObjects(Product::class.java)
+                mostRequestedTables.postValue(Resource.Success(products))
+                mostRequestedTablePage+=4
+            }else{
+                mostRequestedTables.postValue(Resource.Error(it.exception.toString()))
+            }
+        }
+    }
+
 
 //    fun getProductsByCategory(category:String,position:Int){
 //        bestProducts[position].postValue(Resource.Loading())
@@ -100,17 +176,18 @@ class ShoppingViewModel(
 //        }
 //    }
 
-    fun getCategories(onSuccess: (List<Category>) -> Unit) {
-        categories.postValue(Resource.Loading())
-        firebaseDatabase.getCategories().addOnCompleteListener {
-            if (it.isSuccessful) {
-                val categoriesList = it.result.toObjects(Category::class.java)
-                categories.postValue(Resource.Success(categoriesList))
-                onSuccess(categoriesList)
-            } else
-                categories.postValue(Resource.Error(it.exception.toString()))
-        }
-    }
+
+//    fun getCategories(onSuccess: (List<Category>) -> Unit) {
+//        categories.postValue(Resource.Loading())
+//        firebaseDatabase.getCategories().addOnCompleteListener {
+//            if (it.isSuccessful) {
+//                val categoriesList = it.result.toObjects(Category::class.java)
+//                categories.postValue(Resource.Success(categoriesList))
+//                onSuccess(categoriesList)
+//            } else
+//                categories.postValue(Resource.Error(it.exception.toString()))
+//        }
+//    }
 
 
     fun getClothesProducts() =
@@ -144,20 +221,21 @@ class ShoppingViewModel(
                 Log.e(TAG, it.exception.toString())
         }
 
-    fun getChairs() = firebaseDatabase.getChairs(chairsPagingPage).addOnCompleteListener {
-        if (it.isSuccessful) {
-            val documents = it.result
-            if (!documents!!.isEmpty) {
-                val productsList = documents.toObjects(Product::class.java)
-                chairs.postValue(productsList)
-                chairsPagingPage += 10
+    fun getHomeProduct() =
+        firebaseDatabase.getHomeProducts(homePage).addOnCompleteListener {
+            if (it.isSuccessful) {
+                val documents = it.result
+                if (!documents!!.isEmpty) {
+                    val productsList = documents.toObjects(Product::class.java)
+                    home.postValue(productsList)
+                    homePage += 10
 
+                }
+            } else {
+                Log.e(TAG, it.exception.toString())
             }
-        } else {
-            Log.e(TAG, it.exception.toString())
-        }
 
-    }
+        }
 
 
     fun getCupboardsByOrders(size: Int) =

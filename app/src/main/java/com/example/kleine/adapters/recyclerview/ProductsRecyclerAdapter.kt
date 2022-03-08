@@ -2,6 +2,7 @@ package com.example.kleine.adapters.recyclerview
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,7 @@ import com.example.kleine.util.Constants.Companion.IMAGES
 
 class ProductsRecyclerAdapter() :
     RecyclerView.Adapter<ProductsRecyclerAdapter.BestProductsRecyclerAdapterViewHolder>() {
-    var onItemClick : ((Product) ->Unit)?=null
+    var onItemClick: ((Product) -> Unit)? = null
 
     inner class BestProductsRecyclerAdapterViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -32,7 +33,7 @@ class ProductsRecyclerAdapter() :
         }
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -57,7 +58,7 @@ class ProductsRecyclerAdapter() :
         }
 
         product.newPrice?.let {
-            if(product.newPrice.isNotEmpty()){
+            if (product.newPrice.isNotEmpty() && product.newPrice != "0") {
                 holder.binding.apply {
                     tvPrice.paintFlags = tvPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     tvNewPrice.text = "$${product.newPrice}"

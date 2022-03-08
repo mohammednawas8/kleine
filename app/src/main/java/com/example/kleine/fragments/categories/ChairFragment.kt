@@ -2,11 +2,11 @@ package com.example.kleine.fragments.categories
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,47 +16,48 @@ import com.example.kleine.R
 import com.example.kleine.SpacingDecorator.HorizantalSpacingItemDecorator
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
-import com.example.kleine.databinding.FragmentCupboardBinding
+import com.example.kleine.databinding.FragmentChairBinding
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 
-class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
+
+class ChairFragment : Fragment() {
+    val TAG = "ChairFragment"
     private lateinit var viewModel: ShoppingViewModel
-    private lateinit var binding: FragmentCupboardBinding
-    private lateinit var mostOrderedCupboardsAdapter: ProductsRecyclerAdapter
-    private lateinit var cupboardAdapter: ProductsRecyclerAdapter
-    private val TAG = "CupboardFragment"
+    private lateinit var binding: FragmentChairBinding
+    private lateinit var headerAdapter: ProductsRecyclerAdapter
+    private lateinit var productsAdapter: ProductsRecyclerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mostOrderedCupboardsAdapter = ProductsRecyclerAdapter()
-        cupboardAdapter = ProductsRecyclerAdapter()
+
+        headerAdapter = ProductsRecyclerAdapter()
+        productsAdapter = ProductsRecyclerAdapter()
         viewModel = (activity as ShoppingActivity).viewModel
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-
-        binding = FragmentCupboardBinding.inflate(inflater)
+    ): View? {
+        binding = FragmentChairBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupMostOrderedCupboardRecyclerView()
-        observeMostOrderedCupboard()
+        setupHeaderRecyclerview()
+        observeHeader()
 
-        setupCupboardRecyclerView()
-        observeCupboard()
+        setupProductsRecyclerView()
+        observeProducts()
 
-        mostRequestedCupboardPaging()
-        cupboardPaging()
+        headerPaging()
+        productsPaging()
 
-        cupboardAdapter.onItemClick = { product ->
+        productsAdapter.onItemClick = { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
             bundle.putString("flag", Constants.PRODUCT_FLAG)
@@ -64,7 +65,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
             findNavController().navigate(R.id.action_homeFragment_to_productPreviewFragment2,bundle)
         }
 
-        mostOrderedCupboardsAdapter.onItemClick = { product ->
+        headerAdapter.onItemClick = { product ->
             val bundle = Bundle()
             bundle.putParcelable("product",product)
             bundle.putString("flag", Constants.PRODUCT_FLAG)
@@ -73,28 +74,28 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
 
     }
 
-    private fun cupboardPaging() {
+    private fun productsPaging() {
         binding.scrollCupboard.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getCupboardProduct(cupboardAdapter.differ.currentList.size)
+                viewModel.getCupboardProduct(productsAdapter.differ.currentList.size)
             }
         })
     }
 
-    private fun mostRequestedCupboardPaging() {
+    private fun headerPaging() {
         binding.rvHeader.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if (!recyclerView.canScrollHorizontally(1) && dx != 0)
-                    viewModel.getCupboardsByOrders(mostOrderedCupboardsAdapter.differ.currentList.size)
+                    viewModel.getCupboardsByOrders(headerAdapter.differ.currentList.size)
 
             }
         })
     }
 
-    private fun observeCupboard() {
-        viewModel.cupboard.observe(viewLifecycleOwner, Observer { response ->
+    private fun observeProducts() {
+        viewModel.chairs.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
                 is Resource.Loading -> {
@@ -104,7 +105,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
 
                 is Resource.Success -> {
                     hideBottomLoading()
-                    cupboardAdapter.differ.submitList(response.data)
+                    productsAdapter.differ.submitList(response.data)
                     return@Observer
                 }
 
@@ -125,15 +126,15 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         binding.progressbar2.visibility = View.VISIBLE
     }
 
-    private fun setupCupboardRecyclerView() {
+    private fun setupProductsRecyclerView() {
         binding.rvProducts.apply {
-            adapter = cupboardAdapter
+            adapter = productsAdapter
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         }
     }
 
-    private fun observeMostOrderedCupboard() {
-        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { response ->
+    private fun observeHeader() {
+        viewModel.mostRequestedChairs.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
                 is Resource.Loading -> {
@@ -143,7 +144,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
 
                 is Resource.Success -> {
                     hideTopLoading()
-                    mostOrderedCupboardsAdapter.differ.submitList(response.data)
+                    headerAdapter.differ.submitList(response.data)
                     return@Observer
                 }
 
@@ -164,13 +165,12 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         binding.progressbar1.visibility = View.VISIBLE
     }
 
-    private fun setupMostOrderedCupboardRecyclerView() {
+    private fun setupHeaderRecyclerview() {
         binding.rvHeader.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = mostOrderedCupboardsAdapter
+            adapter = headerAdapter
             addItemDecoration(HorizantalSpacingItemDecorator(100))
         }
     }
-
 
 }
