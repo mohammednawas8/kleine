@@ -65,18 +65,21 @@ class LunchActivity : AppCompatActivity() {
 
     private fun saveNewProduct() {
 
-        val title = "Table 2"
-        val description = "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022"
+        val title = "Table 3"
+        val description = "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 " +
+                "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022" +
+                "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022"
+
         val category = TABLES_CATEGORY
         val price = "100"
-        val newPrice = "0"
+        val newPrice = "20"
         val seller = "ps mart"
         val orders = 22
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://img.zcdn.com.au/lf/8/hash/38080/19204999/4/Anika%2BRound%2BDining%2BTable.jpg",
-            "https://img.zcdn.com.au/lf/8/hash/38080/19204999/4/Anika%2BRound%2BDining%2BTable.jpg"
+            "https://secure.img1-fg.wfcdn.com/im/01085742/resize-h755-w755%5Ecompr-r85/1022/102295873/Andresen+47.75%27%27+Console+Table.jpg",
+            "https://secure.img1-fg.wfcdn.com/im/01085742/resize-h755-w755%5Ecompr-r85/1022/102295873/Andresen+47.75%27%27+Console+Table.jpg"
         )
 
         images.put(IMAGES,imagesList.toList())
@@ -97,12 +100,10 @@ class LunchActivity : AppCompatActivity() {
         )
         sizes.put(SIZES,sizesList.toList())
 
-        val prodcut = Product(12311,title, description, category, price,newPrice, seller, images, colors, sizes,orders)
+        val prodcut = Product(12311,title, description, category, newPrice,price, seller, images, colors, sizes,orders)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
             .document()
             .set(prodcut)
-
-
     }
 }

@@ -77,7 +77,7 @@ class ChairFragment : Fragment() {
     private fun productsPaging() {
         binding.scrollCupboard.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getCupboardProduct(productsAdapter.differ.currentList.size)
+                viewModel.getChairs(productsAdapter.differ.currentList.size)
             }
         })
     }
@@ -88,7 +88,7 @@ class ChairFragment : Fragment() {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if (!recyclerView.canScrollHorizontally(1) && dx != 0)
-                    viewModel.getCupboardsByOrders(headerAdapter.differ.currentList.size)
+                    viewModel.getMostRequestedChairs(headerAdapter.differ.currentList.size)
 
             }
         })

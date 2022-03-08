@@ -194,7 +194,7 @@ class ProductPreviewFragment : Fragment() {
             tvProductPrice.text = "$${product.price}"
             tvProductOfferPrice.visibility = View.GONE
             product.newPrice?.let {
-                if (product.newPrice.isNotEmpty()) {
+                if (product.newPrice.isNotEmpty() && product.newPrice != "0") {
                     tvProductPrice.paintFlags =
                         tvProductPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     tvProductOfferPrice.text = "$${product.newPrice}"

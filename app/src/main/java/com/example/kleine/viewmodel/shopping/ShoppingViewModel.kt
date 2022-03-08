@@ -57,7 +57,6 @@ class ShoppingViewModel(
     val mostRequestedProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
 
 
-
     private var homePage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -65,11 +64,11 @@ class ShoppingViewModel(
     private var cupboardPaging: Long = 4
     private var mostOrderCupboardPaging: Long = 5
 
-    private var mostRequestedChairsPage = 3
-    private var chairsPage = 4
+    private var mostRequestedChairsPage: Long = 3
+    private var chairsPage: Long = 4
 
-    private var mostRequestedTablePage = 3
-    private var tablePage = 4
+    private var mostRequestedTablePage: Long = 3
+    private var tablePage: Long = 4
 
 
     init {
@@ -90,61 +89,98 @@ class ShoppingViewModel(
         getCupboardProduct(4)
         getUser()
 
-        getChairs()
-        getMostRequestedChairs()
+        getChairs(4)
+        getMostRequestedChairs(3)
 
-        getTables()
-        getMostRequestedTables()
+        getTables(4)
+        getMostRequestedTables(3)
     }
 
-     fun getChairs() {
+    fun getChairs(size: Int) {
         chairs.postValue(Resource.Loading())
-        firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY,homePage).addOnCompleteListener {
-            if(it.isSuccessful){
-                val products = it.result.toObjects(Product::class.java)
-                chairs.postValue(Resource.Success(products))
-                chairsPage+=4
-            }else{
-                chairs.postValue(Resource.Error(it.exception.toString()))
+        shouldPaging(CHAIR_CATEGORY, size) {
+            if (it) {
+                chairs.postValue(Resource.Loading())
+                firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, chairsPage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                chairs.postValue(Resource.Success(productsList))
+                                chairsPage += 4
+
+                            }
+                        } else
+                            chairs.postValue(Resource.Error(it.exception.toString()))
+                    }
             }
         }
     }
 
-     fun getMostRequestedChairs(){
+
+    fun getMostRequestedChairs(size:Int) {
         mostRequestedChairs.postValue(Resource.Loading())
-        firebaseDatabase.getMostRequestedProducts(CHAIR_CATEGORY,homePage).addOnCompleteListener {
-            if(it.isSuccessful){
-                val products = it.result.toObjects(Product::class.java)
-                mostRequestedChairs.postValue(Resource.Success(products))
-                mostRequestedChairsPage+=4
-            }else{
-                mostRequestedChairs.postValue(Resource.Error(it.exception.toString()))
+        shouldPaging(CHAIR_CATEGORY, size) {
+            if (it) {
+                chairs.postValue(Resource.Loading())
+                firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, mostRequestedChairsPage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedChairs.postValue(Resource.Success(productsList))
+                                mostRequestedChairsPage += 4
+
+                            }
+                        } else
+                            mostRequestedChairs.postValue(Resource.Error(it.exception.toString()))
+                    }
             }
         }
     }
 
-     fun getTables() {
+    fun getTables(size: Int) {
         tables.postValue(Resource.Loading())
-        firebaseDatabase.getProductsByCategory(TABLES_CATEGORY,homePage).addOnCompleteListener {
-            if(it.isSuccessful){
-                val products = it.result.toObjects(Product::class.java)
-                tables.postValue(Resource.Success(products))
-                tablePage+=4
-            }else{
-                tables.postValue(Resource.Error(it.exception.toString()))
+        shouldPaging(TABLES_CATEGORY, size) {
+            if (it) {
+                tables.postValue(Resource.Loading())
+                firebaseDatabase.getProductsByCategory(TABLES_CATEGORY, tablePage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                tables.postValue(Resource.Success(productsList))
+                                tablePage += 4
+
+                            }
+                        } else
+                            chairs.postValue(Resource.Error(it.exception.toString()))
+                    }
             }
         }
     }
 
-     fun getMostRequestedTables(){
+    fun getMostRequestedTables(size: Int) {
         mostRequestedTables.postValue(Resource.Loading())
-        firebaseDatabase.getMostRequestedProducts(TABLES_CATEGORY,homePage).addOnCompleteListener {
-            if(it.isSuccessful){
-                val products = it.result.toObjects(Product::class.java)
-                mostRequestedTables.postValue(Resource.Success(products))
-                mostRequestedTablePage+=4
-            }else{
-                mostRequestedTables.postValue(Resource.Error(it.exception.toString()))
+        shouldPaging(TABLES_CATEGORY, size) {
+            if (it) {
+                mostRequestedTables.postValue(Resource.Loading())
+                firebaseDatabase.getProductsByCategory(TABLES_CATEGORY, mostRequestedTablePage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedTables.postValue(Resource.Success(productsList))
+                                mostRequestedTablePage += 3
+
+                            }
+                        } else
+                            mostRequestedTables.postValue(Resource.Error(it.exception.toString()))
+                    }
             }
         }
     }

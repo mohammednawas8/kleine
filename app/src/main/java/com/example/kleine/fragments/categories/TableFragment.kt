@@ -36,7 +36,6 @@ class TableFragment : Fragment(R.layout.fragment_table) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val database = FirebaseDb()
         headerAdapter = ProductsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()
         viewModel = (activity as ShoppingActivity).viewModel
@@ -85,7 +84,7 @@ class TableFragment : Fragment(R.layout.fragment_table) {
     private fun productsPaging() {
         binding.scrollCupboard.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getCupboardProduct(productsAdapter.differ.currentList.size)
+                viewModel.getTables(productsAdapter.differ.currentList.size)
             }
         })
     }
@@ -96,7 +95,7 @@ class TableFragment : Fragment(R.layout.fragment_table) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if (!recyclerView.canScrollHorizontally(1) && dx != 0)
-                    viewModel.getCupboardsByOrders(headerAdapter.differ.currentList.size)
+                    viewModel.getMostRequestedTables(headerAdapter.differ.currentList.size)
 
             }
         })
