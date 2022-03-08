@@ -58,6 +58,14 @@ class FirebaseDb {
 
     private val firebaseAuth = Firebase.auth
 
+    fun getProductsByCategory(category: String) =
+        productsCollection.whereEqualTo(CATEGORY, category).get()
+
+    fun getMostRequestedProducts(category: String) =
+        productsCollection.whereEqualTo(CATEGORY, category)
+            .orderBy(ORDERS, Query.Direction.DESCENDING).get()
+
+
     fun createNewUser(
         email: String, password: String
     ) = firebaseAuth.createUserWithEmailAndPassword(email, password)

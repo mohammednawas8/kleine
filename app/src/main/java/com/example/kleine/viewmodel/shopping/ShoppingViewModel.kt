@@ -9,6 +9,7 @@ import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ShoppingViewModel(
     private val firebaseDatabase: FirebaseDb
@@ -42,6 +43,10 @@ class ShoppingViewModel(
 
     val categories = MutableLiveData<Resource<List<Category>>>()
 
+    val bestProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
+    val mostRequestedProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
+
+
     private var chairsPagingPage: Long = 10
     private var clothesPaging: Long = 5
     private var bestDealsPaging: Long = 5
@@ -51,21 +56,58 @@ class ShoppingViewModel(
 
 
     init {
-        getCategories()
-//        getClothesProducts()
-//        getBestDealsProduct()
-//        getChairs()
-//        getCupboardsByOrders(3)
-//        getCupboardProduct(4)
+//        getCategories() { categories ->
+//            var i =0
+//            categories.forEach {
+//                bestProducts.add(MutableLiveData())
+//                mostRequestedProducts.add(MutableLiveData())
+//                getProductsByCategory(it.name,i)
+//                getMostRequestedProducts(it.name,i)
+//                i++
+//            }
+
+        getClothesProducts()
+        getBestDealsProduct()
+        getChairs()
+        getCupboardsByOrders(3)
+        getCupboardProduct(4)
         getUser()
     }
 
-    fun getCategories() {
+//    fun getProductsByCategory(category:String,position:Int){
+//        bestProducts[position].postValue(Resource.Loading())
+//        firebaseDatabase.getProductsByCategory(category).addOnCompleteListener {
+//            if (it.isSuccessful){
+//                val products = it.result.toObjects(Product::class.java)
+//                bestProducts[position].postValue(Resource.Success(products))
+//
+//            }else{
+//                bestProducts[position].postValue(Resource.Error(it.exception.toString()))
+//            }
+//        }
+//    }
+//
+//    fun getMostRequestedProducts(category:String,position:Int){
+//        mostRequestedProducts[position].postValue(Resource.Loading())
+//        firebaseDatabase.getMostRequestedProducts(category).addOnCompleteListener {
+//            if (it.isSuccessful){
+//                val products = it.result.toObjects(Product::class.java)
+//                mostRequestedProducts[position].postValue(Resource.Success(products))
+//
+//            }else{
+//                mostRequestedProducts[position].postValue(Resource.Error(it.exception.toString()))
+//            }
+//        }
+//    }
+
+    fun getCategories(onSuccess: (List<Category>) -> Unit) {
         categories.postValue(Resource.Loading())
         firebaseDatabase.getCategories().addOnCompleteListener {
-            if (it.isSuccessful)
-                categories.postValue(Resource.Success(it.result.toObjects(Category::class.java)))
-            else
+            if (it.isSuccessful) {
+                val categoriesList = it.result.toObjects(Category::class.java)
+                categories.postValue(Resource.Success(categoriesList))
+                onSuccess(categoriesList)
+            } else
                 categories.postValue(Resource.Error(it.exception.toString()))
         }
     }
@@ -348,7 +390,7 @@ class ShoppingViewModel(
         })
     }
 
-    fun test(s:String){
+    fun test(s: String) {
         Log.d("test", s)
     }
 
