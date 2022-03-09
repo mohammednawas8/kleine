@@ -21,7 +21,8 @@ data class Product(
     val colors:@RawValue HashMap<String, Any>?=null,
     val sizes:@RawValue HashMap<String, Any>?=null,
     val orders:Int = 0,
-    val offerTime:Date? = null
+    val offerTime:Date? = null,
+    val sizeUnit:String?=null
 
 ) : Parcelable
     {
@@ -35,7 +36,7 @@ data class Product(
          images: HashMap<String, Any>,
          colors: HashMap<String, Any>,
          sizes: HashMap<String, Any>
-    ) : this(id,title,description,category,null,price,seller, images, colors, sizes,0,null)
+    ) : this(id,title,description,category,null,price,seller, images, colors, sizes,0,null,null)
 
     constructor():this(0,"","","","",null,null,null)
 }

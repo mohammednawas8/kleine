@@ -17,6 +17,7 @@ import com.example.kleine.util.Constants.Companion.BLACK
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.COLORS
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
+import com.example.kleine.util.Constants.Companion.FURNITURE_CATEGORY
 import com.example.kleine.util.Constants.Companion.GREEN
 import com.example.kleine.util.Constants.Companion.IMAGES
 import com.example.kleine.util.Constants.Companion.LARGE
@@ -66,37 +67,46 @@ class LunchActivity : AppCompatActivity() {
 
     private fun saveNewProduct() {
 
-        val title = "Ronda 40cm 3 Light Pendant Slate Grey"
-        val description = "Modern home lighting 2022 made in Palestine with high lighting quality"
+        val title = "Bedside tables"
+        val description = "Your bedroom is a sanctuary where you unwind and create your own personal space." +
+                " You deserve to have this space ornamented to help you stay organized, relaxed, and comfortable." +
+                " Bedroom furniture creates utility and helps you be your functional best"
 
-            val category = ACCESSORY_CATEGORY
-        val price = "50"
-        val newPrice = "35"
+
+
+
+            val category = FURNITURE_CATEGORY
+        val price = "300"
+        val newPrice = "229"
         val seller = "ps mart"
-        val orders = 120
+        val orders = 3
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://www.nottinghamlightingcentre.co.uk/app/uploads/2019/04/RON1039_0.jpg",
-            "https://www.nottinghamlightingcentre.co.uk/app/uploads/2019/04/RON1039_0.jpg"
+            "https://wakefit-co.s3.ap-south-1.amazonaws.com/img/product-thumbnails/elara-double-drawer-bedside-table-lifestyle-rectangle-new.webp",
+            "https://wakefit-co.s3.ap-south-1.amazonaws.com/img/product-thumbnails/elara-double-drawer-bedside-table-lifestyle-rectangle-new.webp",
+            "https://wakefit-co.s3.ap-south-1.amazonaws.com/img/product-thumbnails/elara-double-drawer-bedside-table-lifestyle-rectangle-new.webp"
+
         )
 
         images.put(IMAGES,imagesList.toList())
 
         val colors = HashMap<String,Any>()
         val colorsList = listOf<String>(
-            "#292929",
-            "#d1d1d1",
+            "#8D4E38"
         )
+
         colors.put(COLORS, colorsList.toList())
 
         val sizes = HashMap<String,Any>()
+        val sizeUnit = "Space"
         val sizesList = listOf(
-            "40cm"
+            "1*2",
         )
+
         sizes.put(SIZES,sizesList.toList())
 
-        val prodcut = Product(123071,title, description, category, newPrice,price, seller, images, colors, sizes,orders)
+        val prodcut = Product(1208025,title, description, category, newPrice,price, seller, images, colors, sizes,orders,null,sizeUnit)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
             .document()

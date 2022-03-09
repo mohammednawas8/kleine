@@ -13,10 +13,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/viewpager_card"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/_350sdp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,8 +35,8 @@
 
         <ImageView
             android:id="@+id/img_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_close"
@@ -61,12 +60,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.96" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.56" />
+
 
 
     <LinearLayout
@@ -119,6 +113,14 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linear_product_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/linear_product_name"
+        app:layout_constraintEnd_toEndOf="@id/guideline2">
 
     <TextView
         android:id="@+id/tv_product_description"
@@ -128,10 +130,8 @@
         android:text="Subhead chair content."
         android:textColor="@color/g_hint"
         android:textSize="@dimen/_10ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/linear_product_name"
-        android:maxHeight="@dimen/_100sdp"/>
+        android:textStyle="bold" />
+    </LinearLayout>
 
     <View
         android:id="@+id/line"
@@ -141,7 +141,7 @@
         android:background="@drawable/line"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/tv_product_description" />
+        app:layout_constraintTop_toBottomOf="@id/linear_product_description" />
 
     <LinearLayout
         android:id="@+id/linear"
@@ -183,6 +183,7 @@
                     android:visibility="invisible"
                     android:layout_marginTop="14dp"
                     android:layout_marginStart="10dp"
+                    android:textSize="@dimen/_9ssp"
                     />
 
             </LinearLayout>
@@ -191,7 +192,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginEnd="15dp"/>
 
 
         </LinearLayout>
@@ -210,17 +212,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_weight="1"
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/g_size"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 
                 <TextView
+                    android:id="@+id/tv_size_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textSize="@dimen/_10ssp"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
                     android:id="@+id/tv_size_error"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/g_please_select_size"
+                    android:textSize="@dimen/_9ssp"
                     android:textColor="@color/g_red"
                     android:visibility="invisible"
                     android:layout_marginTop="14dp"

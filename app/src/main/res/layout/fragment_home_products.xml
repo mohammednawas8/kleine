@@ -24,10 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminateTint="@color/g_hint"
-                app:layout_constraintStart_toStartOf="@id/rv_chairs"
-                app:layout_constraintEnd_toEndOf="@id/rv_chairs"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:visibility="gone"/>
+                app:layout_constraintEnd_toEndOf="@id/rv_chairs"
+                app:layout_constraintStart_toStartOf="@id/rv_chairs"
+                app:layout_constraintTop_toBottomOf="@+id/rv_chairs" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline1"
@@ -100,7 +101,7 @@
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="@id/guideline2"
                 app:layout_constraintStart_toStartOf="@id/guideline1"
-                app:layout_constraintTop_toBottomOf="@id/tv_best_products" />
+                app:layout_constraintTop_toBottomOf="@id/tv_best_products"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -243,12 +243,12 @@ class CartFragment : Fragment() {
                     if (products!!.isNotEmpty()) {
                         cartProducts = CartProductsList(products)
                         cartAdapter.differ.submitList(products)
-                        var totalPrice = 0
+                        var totalPrice:Double = 0.0
                         products.forEach {
-                            if (it.newPrice != null && it.newPrice.isNotEmpty()) {
-                                totalPrice += it.newPrice.toInt() * it.quantity
+                            if (it.newPrice != null && it.newPrice.isNotEmpty() && it.newPrice != "0") {
+                                totalPrice += it.newPrice.toDouble() * it.quantity
                             } else
-                                totalPrice += it.price.toInt() * it.quantity
+                                totalPrice += it.price.toDouble() * it.quantity
 
 
                         }

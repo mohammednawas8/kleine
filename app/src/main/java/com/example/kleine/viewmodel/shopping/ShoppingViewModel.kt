@@ -121,6 +121,7 @@ class ShoppingViewModel(
         furniture.postValue(Resource.Loading())
         shouldPaging(FURNITURE_CATEGORY, size) {
             if (it) {
+                tables.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(FURNITURE_CATEGORY, furniturePage)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -143,6 +144,7 @@ class ShoppingViewModel(
         mostRequestedFurniture.postValue(Resource.Loading())
         shouldPaging(FURNITURE_CATEGORY, size) {
             if (it) {
+                mostRequestedFurniture.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(FURNITURE_CATEGORY, furniturePage)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -164,6 +166,7 @@ class ShoppingViewModel(
         accessory.postValue(Resource.Loading())
         shouldPaging(ACCESSORY_CATEGORY, size) {
             if (it) {
+                Log.d("test","paging")
                 firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, accessoryPage)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -175,7 +178,10 @@ class ShoppingViewModel(
 
                             }
                         } else
-                            accessory.postValue(Resource.Error(it.exception.toString()))
+                            accessory.postValue(Resource.Error(it.exception.toString())).also {
+                                Log.d("test","not paging")
+
+                            }
                     }
             }
         }
@@ -206,8 +212,9 @@ class ShoppingViewModel(
 
     fun getChairs(size: Int) {
         chairs.postValue(Resource.Loading())
-        shouldPaging(CHAIR_CATEGORY, size) {
+        shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
+
                 chairs.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, chairsPage)
                     .addOnCompleteListener {
@@ -229,17 +236,17 @@ class ShoppingViewModel(
 
     fun getMostRequestedChairs(size: Int) {
         mostRequestedChairs.postValue(Resource.Loading())
-        shouldPaging(CHAIR_CATEGORY, size) {
+        shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
                 chairs.postValue(Resource.Loading())
-                firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, mostRequestedChairsPage)
+                firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, chairsPage)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
                                 mostRequestedChairs.postValue(Resource.Success(productsList))
-                                mostRequestedChairsPage += 4
+                                chairsPage += 4
 
                             }
                         } else
@@ -440,7 +447,7 @@ class ShoppingViewModel(
             .whereEqualTo("name", category).get().addOnSuccessListener {
                 val tempCategory = it.toObjects(Category::class.java)
                 val products = tempCategory[0].products
-                Log.d("test", " prodcuts ${tempCategory[0].products}, size $listSize")
+//                Log.d("test", " prodcuts ${tempCategory[0].products}, size $listSize")
                 if (listSize == products)
                     onSuccess(false)
                 else

@@ -65,7 +65,7 @@ class CartRecyclerAdapter(
             tvCartSize.text = product.size
             imgColor.setImageDrawable(imageDrawable)
 
-            if (product.newPrice != null && product.newPrice.isNotEmpty()) {
+            if (product.newPrice != null && product.newPrice.isNotEmpty() && product.newPrice != "0") {
                 tvProductCartPrice.text = "$${product.newPrice}"
             } else
                 tvProductCartPrice.text = "$${product.price}"
