@@ -12,6 +12,7 @@ import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants
+import com.example.kleine.util.Constants.Companion.ACCESSORY_CATEGORY
 import com.example.kleine.util.Constants.Companion.BLACK
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.COLORS
@@ -65,42 +66,37 @@ class LunchActivity : AppCompatActivity() {
 
     private fun saveNewProduct() {
 
-        val title = "Table 3"
-        val description = "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 " +
-                "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022" +
-                "Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022 Modern table 2022"
+        val title = "Ronda 40cm 3 Light Pendant Slate Grey"
+        val description = "Modern home lighting 2022 made in Palestine with high lighting quality"
 
-        val category = TABLES_CATEGORY
-        val price = "100"
-        val newPrice = "20"
+            val category = ACCESSORY_CATEGORY
+        val price = "50"
+        val newPrice = "35"
         val seller = "ps mart"
-        val orders = 22
+        val orders = 120
 
         val images = HashMap<String,Any>()
         val imagesList = listOf(
-            "https://secure.img1-fg.wfcdn.com/im/01085742/resize-h755-w755%5Ecompr-r85/1022/102295873/Andresen+47.75%27%27+Console+Table.jpg",
-            "https://secure.img1-fg.wfcdn.com/im/01085742/resize-h755-w755%5Ecompr-r85/1022/102295873/Andresen+47.75%27%27+Console+Table.jpg"
+            "https://www.nottinghamlightingcentre.co.uk/app/uploads/2019/04/RON1039_0.jpg",
+            "https://www.nottinghamlightingcentre.co.uk/app/uploads/2019/04/RON1039_0.jpg"
         )
 
         images.put(IMAGES,imagesList.toList())
 
         val colors = HashMap<String,Any>()
         val colorsList = listOf<String>(
-            "#D8F0D6",
-            "#B8D9FA",
+            "#292929",
+            "#d1d1d1",
         )
         colors.put(COLORS, colorsList.toList())
 
         val sizes = HashMap<String,Any>()
         val sizesList = listOf(
-            Constants.SMALL,
-            MEDIUM,
-            LARGE,
-            XLARGE
+            "40cm"
         )
         sizes.put(SIZES,sizesList.toList())
 
-        val prodcut = Product(12311,title, description, category, newPrice,price, seller, images, colors, sizes,orders)
+        val prodcut = Product(123071,title, description, category, newPrice,price, seller, images, colors, sizes,orders)
 
         Firebase.firestore.collection(PRODUCTS_COLLECTION)
             .document()

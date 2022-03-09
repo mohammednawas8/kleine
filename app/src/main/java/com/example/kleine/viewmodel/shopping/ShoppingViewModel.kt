@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.*
 import com.example.kleine.resource.Resource
+import com.example.kleine.util.Constants.Companion.ACCESSORY_CATEGORY
 import com.example.kleine.util.Constants.Companion.CHAIR_CATEGORY
 import com.example.kleine.util.Constants.Companion.CUPBOARD_CATEGORY
+import com.example.kleine.util.Constants.Companion.FURNITURE_CATEGORY
 import com.example.kleine.util.Constants.Companion.TABLES_CATEGORY
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
@@ -23,13 +25,19 @@ class ShoppingViewModel(
     val bestDeals = MutableLiveData<List<Product>>()
     val emptyBestDeals = MutableLiveData<Boolean>()
 
-    val home = MutableLiveData<List<Product>>()
+    val home = MutableLiveData<Resource<List<Product>>>()
 
     val chairs = MutableLiveData<Resource<List<Product>>>()
     val mostRequestedChairs = MutableLiveData<Resource<List<Product>>>()
 
     val tables = MutableLiveData<Resource<List<Product>>>()
     val mostRequestedTables = MutableLiveData<Resource<List<Product>>>()
+
+    val accessory = MutableLiveData<Resource<List<Product>>>()
+    val mostRequestedAccessories = MutableLiveData<Resource<List<Product>>>()
+
+    val furniture = MutableLiveData<Resource<List<Product>>>()
+    val mostRequestedFurniture = MutableLiveData<Resource<List<Product>>>()
 
     val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
@@ -70,6 +78,12 @@ class ShoppingViewModel(
     private var mostRequestedTablePage: Long = 3
     private var tablePage: Long = 4
 
+    private var mostRequestedAccessoryPage: Long = 3
+    private var accessoryPage: Long = 4
+
+    private var mostRequestedFurniturePage: Long = 3
+    private var furniturePage: Long = 4
+
 
     init {
 //        getCategories() { categories ->
@@ -84,7 +98,7 @@ class ShoppingViewModel(
 
         getClothesProducts()
         getBestDealsProduct()
-        getHomeProduct()
+        getHomeProduct(10)
         getCupboardsByOrders(3)
         getCupboardProduct(4)
         getUser()
@@ -94,6 +108,100 @@ class ShoppingViewModel(
 
         getTables(4)
         getMostRequestedTables(3)
+
+        getAccessories(4)
+        getMostRequestedAccessories(3)
+
+        getFurniture(4)
+        getMostRequestedFurniture(3)
+
+    }
+
+    fun getFurniture(size: Int) {
+        furniture.postValue(Resource.Loading())
+        shouldPaging(FURNITURE_CATEGORY, size) {
+            if (it) {
+                firebaseDatabase.getProductsByCategory(FURNITURE_CATEGORY, furniturePage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                furniture.postValue(Resource.Success(productsList))
+                                furniturePage += 4
+
+                            }
+                        } else
+                            furniture.postValue(Resource.Error(it.exception.toString()))
+                    }
+            }
+        }
+    }
+
+
+    fun getMostRequestedFurniture(size: Int) {
+        mostRequestedFurniture.postValue(Resource.Loading())
+        shouldPaging(FURNITURE_CATEGORY, size) {
+            if (it) {
+                firebaseDatabase.getProductsByCategory(FURNITURE_CATEGORY, furniturePage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedFurniture.postValue(Resource.Success(productsList))
+                                furniturePage += 4
+
+                            }
+                        } else
+                            mostRequestedFurniture.postValue(Resource.Error(it.exception.toString()))
+                    }
+            }
+        }
+    }
+
+    fun getAccessories(size: Int) {
+        accessory.postValue(Resource.Loading())
+        shouldPaging(ACCESSORY_CATEGORY, size) {
+            if (it) {
+                firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, accessoryPage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                accessory.postValue(Resource.Success(productsList))
+                                accessoryPage += 4
+
+                            }
+                        } else
+                            accessory.postValue(Resource.Error(it.exception.toString()))
+                    }
+            }
+        }
+    }
+
+
+    fun getMostRequestedAccessories(size: Int) {
+        mostRequestedAccessories.postValue(Resource.Loading())
+        shouldPaging(ACCESSORY_CATEGORY, size) {
+            if (it) {
+                chairs.postValue(Resource.Loading())
+                firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, mostRequestedAccessoryPage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedAccessories.postValue(Resource.Success(productsList))
+                                mostRequestedAccessoryPage += 4
+
+                            }
+                        } else
+                            mostRequestedAccessories.postValue(Resource.Error(it.exception.toString()))
+                    }
+            }
+        }
     }
 
     fun getChairs(size: Int) {
@@ -119,7 +227,7 @@ class ShoppingViewModel(
     }
 
 
-    fun getMostRequestedChairs(size:Int) {
+    fun getMostRequestedChairs(size: Int) {
         mostRequestedChairs.postValue(Resource.Loading())
         shouldPaging(CHAIR_CATEGORY, size) {
             if (it) {
@@ -257,21 +365,28 @@ class ShoppingViewModel(
                 Log.e(TAG, it.exception.toString())
         }
 
-    fun getHomeProduct() =
-        firebaseDatabase.getHomeProducts(homePage).addOnCompleteListener {
-            if (it.isSuccessful) {
-                val documents = it.result
-                if (!documents!!.isEmpty) {
-                    val productsList = documents.toObjects(Product::class.java)
-                    home.postValue(productsList)
-                    homePage += 10
+    fun getHomeProduct(size: Int) {
+        home.postValue(Resource.Loading())
+        shouldPagingHome(size)
+        {
+            if (it) {
+                home.postValue(Resource.Loading())
+                firebaseDatabase.getHomeProducts(homePage)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val documents = it.result
+                            if (!documents!!.isEmpty) {
+                                val productsList = documents.toObjects(Product::class.java)
+                                home.postValue(Resource.Success(productsList))
+                                homePage += 4
 
-                }
-            } else {
-                Log.e(TAG, it.exception.toString())
+                            }
+                        } else
+                            home.postValue(Resource.Error(it.exception.toString()))
+                    }
             }
-
         }
+    }
 
 
     fun getCupboardsByOrders(size: Int) =
@@ -315,6 +430,9 @@ class ShoppingViewModel(
             }
         }
 
+    /*
+    * TODO : Move these functions to firebaseDatabase class
+     */
 
     private fun shouldPaging(category: String, listSize: Int, onSuccess: (Boolean) -> Unit) {
         FirebaseFirestore.getInstance()
@@ -327,6 +445,22 @@ class ShoppingViewModel(
                     onSuccess(false)
                 else
                     onSuccess(true)
+            }
+    }
+
+    private fun shouldPagingHome(listSize: Int, onSuccess: (Boolean) -> Unit) {
+        FirebaseFirestore.getInstance()
+            .collection("categories").get().addOnSuccessListener {
+                var productsCount = 0
+                it.toObjects(Category::class.java).forEach { category ->
+                    productsCount+=category.products!!.toInt()
+                }
+
+                if(listSize == productsCount)
+                    onSuccess(false)
+                else
+                    onSuccess(true)
+
             }
     }
 

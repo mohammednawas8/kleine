@@ -19,6 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ProgressBar
+                android:id="@+id/progressbar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/g_hint"
+                app:layout_constraintStart_toStartOf="@id/rv_chairs"
+                app:layout_constraintEnd_toEndOf="@id/rv_chairs"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline1"
                 android:layout_width="wrap_content"

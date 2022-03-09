@@ -1,6 +1,7 @@
 package com.example.kleine.fragments.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentHomeProductsBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 
@@ -27,6 +29,7 @@ class HomeProductsFragment : Fragment() {
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var bestDealsAdapter: BestDealsRecyclerAdapter
     private lateinit var productsAdapter: ProductsRecyclerAdapter
+    private val TAG = "HomeProductsFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,16 +129,41 @@ class HomeProductsFragment : Fragment() {
         binding.scrollChair.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
 
             if (v!!.getChildAt(0).bottom <= (v.height + scrollY)) {
-                viewModel.getHomeProduct()
+                viewModel.getHomeProduct(productsAdapter.differ.currentList.size)
             }
         })
     }
 
     private fun observeAllProducts() {
-        viewModel.home.observe(viewLifecycleOwner, Observer { chairsList ->
-            productsAdapter.differ.submitList(chairsList.toList())
+            viewModel.home.observe(viewLifecycleOwner, Observer { response ->
 
-        })
+                when (response) {
+                    is Resource.Loading -> {
+                        showBottomLoading()
+                        return@Observer
+                    }
+
+                    is Resource.Success -> {
+                        hideBottomLoading()
+                        productsAdapter.differ.submitList(response.data)
+                        Log.d("test",response.data?.size.toString())
+                        return@Observer
+                    }
+
+                    is Resource.Error -> {
+                        hideBottomLoading()
+                        Log.e(TAG, response.message.toString())
+                        return@Observer
+                    }
+                }
+            })
+    }
+    private fun hideBottomLoading() {
+        binding.progressbar2.visibility = View.GONE
+    }
+
+    private fun showBottomLoading() {
+        binding.progressbar2.visibility = View.VISIBLE
     }
 
     private fun setupAllProductsRecyclerView() {

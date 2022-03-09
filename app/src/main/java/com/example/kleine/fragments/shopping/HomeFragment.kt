@@ -45,8 +45,8 @@ class HomeFragment : Fragment() {
             ChairFragment(),
             CupboardFragment(),
             TableFragment(),
-            FurnitureFragment(),
-            EnlighteningFragment()
+            AccessoryFragment(),
+            FurnitureFragment()
         )
         binding.viewpagerHome.isUserInputEnabled = false
 

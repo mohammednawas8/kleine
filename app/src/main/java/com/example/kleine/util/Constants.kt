@@ -25,6 +25,8 @@ class Constants {
         const val CHAIR_CATEGORY = "Chair"
         const val CUPBOARD_CATEGORY = "Cupboard"
         const val TABLES_CATEGORY = "Table"
+        const val ACCESSORY_CATEGORY = "Accessory"
+        const val FURNITURE_CATEGORY = "Furniture"
 
 
         const val ORDERS = "orders"

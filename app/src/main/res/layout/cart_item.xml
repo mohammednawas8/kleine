@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_cart_product_name"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_180sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
@@ -125,13 +125,15 @@
             android:id="@+id/tv_cart_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/img_size"
+            android:text="XXL"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/img_size"
             app:layout_constraintEnd_toEndOf="@id/img_size"
             app:layout_constraintStart_toStartOf="@id/img_size"
-            app:layout_constraintBottom_toBottomOf="@id/img_size"
-            android:textColor="@color/white"
-            android:text="XXL"
-            android:textSize="11sp"/>
+            app:layout_constraintTop_toTopOf="@id/img_size" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
