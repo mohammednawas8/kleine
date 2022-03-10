@@ -8,6 +8,7 @@ import com.example.kleine.resource.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class KleineViewModel(
@@ -114,5 +115,12 @@ class KleineViewModel(
 
     fun logOut(){
         firebaseDatabase.logout()
+    }
+
+    fun isUserSignedIn() : Boolean {
+        if (FirebaseAuth.getInstance().currentUser?.uid != null)
+            return true
+        return false
+
     }
 }
