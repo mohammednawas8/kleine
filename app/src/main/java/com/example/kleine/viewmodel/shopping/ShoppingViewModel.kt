@@ -86,38 +86,30 @@ class ShoppingViewModel(
 
 
     init {
-//        getCategories() { categories ->
-//            var i =0
-//            categories.forEach {
-//                bestProducts.add(MutableLiveData())
-//                mostRequestedProducts.add(MutableLiveData())
-//                getProductsByCategory(it.name,i)
-//                getMostRequestedProducts(it.name,i)
-//                i++
-//            }
-
         getClothesProducts()
         getBestDealsProduct()
-        getHomeProduct(10)
-        getCupboardsByOrders(3)
-        getCupboardProduct(4)
+        getHomeProduct()
+
+        getCupboardsByOrders()
+        getCupboardProduct()
+
         getUser()
 
-        getChairs(4)
-        getMostRequestedChairs(3)
+        getChairs()
+        getMostRequestedChairs()
 
-        getTables(4)
-        getMostRequestedTables(3)
+        getTables()
+        getMostRequestedTables()
 
-        getAccessories(4)
-        getMostRequestedAccessories(3)
+        getAccessories()
+        getMostRequestedAccessories()
 
-        getFurniture(4)
-        getMostRequestedFurniture(3)
+        getFurniture()
+        getMostRequestedFurniture()
 
     }
 
-    fun getFurniture(size: Int) {
+    fun getFurniture(size: Int = 0) {
         furniture.postValue(Resource.Loading())
         shouldPaging(FURNITURE_CATEGORY, size) {
             if (it) {
@@ -135,12 +127,14 @@ class ShoppingViewModel(
                         } else
                             furniture.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                furniture.postValue(Resource.Error("Cannot paging"))
+
         }
     }
 
 
-    fun getMostRequestedFurniture(size: Int) {
+    fun getMostRequestedFurniture(size: Int = 0) {
         mostRequestedFurniture.postValue(Resource.Loading())
         shouldPaging(FURNITURE_CATEGORY, size) {
             if (it) {
@@ -158,13 +152,14 @@ class ShoppingViewModel(
                         } else
                             mostRequestedFurniture.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                mostRequestedFurniture.postValue(Resource.Error("Cannot paging"))
         }
     }
 
-    fun getAccessories(size: Int) {
+    fun getAccessories(size: Int = 0) {
         accessory.postValue(Resource.Loading())
-        shouldPaging(ACCESSORY_CATEGORY, size) {
+        shouldPaging(ACCESSORY_CATEGORY,size) {
             if (it) {
                 Log.d("test","paging")
                 firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, accessoryPage)
@@ -178,17 +173,16 @@ class ShoppingViewModel(
 
                             }
                         } else
-                            accessory.postValue(Resource.Error(it.exception.toString())).also {
-                                Log.d("test","not paging")
-
-                            }
+                            accessory.postValue(Resource.Error(it.exception.toString()))
                     }
+            }else{
+                accessory.postValue(Resource.Error("Cannot page"))
             }
         }
     }
 
 
-    fun getMostRequestedAccessories(size: Int) {
+    fun getMostRequestedAccessories(size: Int = 0) {
         mostRequestedAccessories.postValue(Resource.Loading())
         shouldPaging(ACCESSORY_CATEGORY, size) {
             if (it) {
@@ -206,11 +200,12 @@ class ShoppingViewModel(
                         } else
                             mostRequestedAccessories.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                mostRequestedAccessories.postValue(Resource.Error("Cannot paging"))
         }
     }
 
-    fun getChairs(size: Int) {
+    fun getChairs(size: Int = 0) {
         chairs.postValue(Resource.Loading())
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
@@ -229,12 +224,13 @@ class ShoppingViewModel(
                         } else
                             chairs.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                chairs.postValue(Resource.Error("Cannot paging"))
         }
     }
 
 
-    fun getMostRequestedChairs(size: Int) {
+    fun getMostRequestedChairs(size: Int = 0) {
         mostRequestedChairs.postValue(Resource.Loading())
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
@@ -252,11 +248,12 @@ class ShoppingViewModel(
                         } else
                             mostRequestedChairs.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                chairs.postValue(Resource.Error("Cannot paging"))
         }
     }
 
-    fun getTables(size: Int) {
+    fun getTables(size: Int = 0) {
         tables.postValue(Resource.Loading())
         shouldPaging(TABLES_CATEGORY, size) {
             if (it) {
@@ -272,13 +269,14 @@ class ShoppingViewModel(
 
                             }
                         } else
-                            chairs.postValue(Resource.Error(it.exception.toString()))
+                            tables.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                home.postValue(Resource.Error("Cannot paging"))
         }
     }
 
-    fun getMostRequestedTables(size: Int) {
+    fun getMostRequestedTables(size: Int = 0) {
         mostRequestedTables.postValue(Resource.Loading())
         shouldPaging(TABLES_CATEGORY, size) {
             if (it) {
@@ -296,49 +294,11 @@ class ShoppingViewModel(
                         } else
                             mostRequestedTables.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                mostRequestedTables.postValue(Resource.Error("Cannot paging"))
         }
     }
 
-
-//    fun getProductsByCategory(category:String,position:Int){
-//        bestProducts[position].postValue(Resource.Loading())
-//        firebaseDatabase.getProductsByCategory(category).addOnCompleteListener {
-//            if (it.isSuccessful){
-//                val products = it.result.toObjects(Product::class.java)
-//                bestProducts[position].postValue(Resource.Success(products))
-//
-//            }else{
-//                bestProducts[position].postValue(Resource.Error(it.exception.toString()))
-//            }
-//        }
-//    }
-//
-//    fun getMostRequestedProducts(category:String,position:Int){
-//        mostRequestedProducts[position].postValue(Resource.Loading())
-//        firebaseDatabase.getMostRequestedProducts(category).addOnCompleteListener {
-//            if (it.isSuccessful){
-//                val products = it.result.toObjects(Product::class.java)
-//                mostRequestedProducts[position].postValue(Resource.Success(products))
-//
-//            }else{
-//                mostRequestedProducts[position].postValue(Resource.Error(it.exception.toString()))
-//            }
-//        }
-//    }
-
-
-//    fun getCategories(onSuccess: (List<Category>) -> Unit) {
-//        categories.postValue(Resource.Loading())
-//        firebaseDatabase.getCategories().addOnCompleteListener {
-//            if (it.isSuccessful) {
-//                val categoriesList = it.result.toObjects(Category::class.java)
-//                categories.postValue(Resource.Success(categoriesList))
-//                onSuccess(categoriesList)
-//            } else
-//                categories.postValue(Resource.Error(it.exception.toString()))
-//        }
-//    }
 
 
     fun getClothesProducts() =
@@ -372,7 +332,7 @@ class ShoppingViewModel(
                 Log.e(TAG, it.exception.toString())
         }
 
-    fun getHomeProduct(size: Int) {
+    fun getHomeProduct(size: Int = 0) {
         home.postValue(Resource.Loading())
         shouldPagingHome(size)
         {
@@ -391,12 +351,13 @@ class ShoppingViewModel(
                         } else
                             home.postValue(Resource.Error(it.exception.toString()))
                     }
-            }
+            }else
+                home.postValue(Resource.Error("Cannot paging"))
         }
     }
 
 
-    fun getCupboardsByOrders(size: Int) =
+    fun getCupboardsByOrders(size: Int = 0) =
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
                 mostCupboardOrdered.postValue(Resource.Loading())
@@ -414,10 +375,11 @@ class ShoppingViewModel(
                             mostCupboardOrdered.postValue(Resource.Error(it.exception.toString()))
 
                     }
-            }
+            }else
+                mostCupboardOrdered.postValue(Resource.Error("Cannot paging"))
         }
 
-    fun getCupboardProduct(size: Int) =
+    fun getCupboardProduct(size: Int = 0) =
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
                 cupboard.postValue(Resource.Loading())
@@ -434,24 +396,25 @@ class ShoppingViewModel(
                     } else
                         cupboard.postValue(Resource.Error(it.exception.toString()))
                 }
-            }
+            }else
+                cupboard.postValue(Resource.Error("Cannot paging"))
         }
 
     /*
     * TODO : Move these functions to firebaseDatabase class
      */
 
-    private fun shouldPaging(category: String, listSize: Int, onSuccess: (Boolean) -> Unit) {
+    private fun shouldPaging(category: String, listSize: Int , onSuccess: (Boolean) -> Unit) {
         FirebaseFirestore.getInstance()
             .collection("categories")
             .whereEqualTo("name", category).get().addOnSuccessListener {
                 val tempCategory = it.toObjects(Category::class.java)
                 val products = tempCategory[0].products
-//                Log.d("test", " prodcuts ${tempCategory[0].products}, size $listSize")
+                Log.d("test", " $category : prodcuts ${tempCategory[0].products}, size $listSize")
                 if (listSize == products)
-                    onSuccess(false)
+                    onSuccess(false).also { Log.d(TAG,"$category Paging:false") }
                 else
-                    onSuccess(true)
+                    onSuccess(true).also { Log.d(TAG,"$category Paging:true") }
             }
     }
 
