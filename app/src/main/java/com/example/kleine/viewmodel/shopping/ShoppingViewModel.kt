@@ -585,7 +585,13 @@ class ShoppingViewModel(
         }
     }
 
-    private fun getUser() {
+    private val user: User? = null
+    fun getUser() {
+        if (user != null) {
+            profile.postValue(Resource.Success(user))
+            return
+        }
+
         profile.postValue(Resource.Loading())
         firebaseDatabase.getUser().addSnapshotListener { value, error ->
             if (error != null)

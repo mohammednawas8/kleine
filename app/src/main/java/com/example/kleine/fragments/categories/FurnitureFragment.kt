@@ -40,6 +40,9 @@ class FurnitureFragment : Fragment(R.layout.fragment_furniture) {
 
         viewModel.getMostRequestedFurniture()
         viewModel.getFurniture()
+
+        Log.d("Test","Furniture")
+
     }
 
     override fun onCreateView(

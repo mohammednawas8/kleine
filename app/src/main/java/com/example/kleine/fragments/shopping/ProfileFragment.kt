@@ -35,6 +35,7 @@ class ProfileFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         viewModel = (activity as ShoppingActivity).viewModel
+        viewModel.getUser()
     }
 
     override fun onCreateView (

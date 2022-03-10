@@ -43,6 +43,8 @@ class AccessoryFragment : Fragment(R.layout.fragment_enlightening) {
         viewModel.getAccessories()
         viewModel.getMostRequestedAccessories()
 
+        Log.d("Test","accessory")
+
     }
 
     override fun onCreateView(
