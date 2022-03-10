@@ -35,6 +35,9 @@ class ChairFragment : Fragment() {
         headerAdapter = ProductsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()
         viewModel = (activity as ShoppingActivity).viewModel
+
+        viewModel.getMostRequestedChairs()
+        viewModel.getChairs()
     }
 
     override fun onCreateView(

@@ -39,6 +39,8 @@ class TableFragment : Fragment(R.layout.fragment_table) {
         headerAdapter = ProductsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()
         viewModel = (activity as ShoppingActivity).viewModel
+        viewModel.getTables()
+        viewModel.getMostRequestedTables()
     }
 
     override fun onCreateView(

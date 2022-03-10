@@ -38,7 +38,12 @@ class AccessoryFragment : Fragment(R.layout.fragment_enlightening) {
         super.onCreate(savedInstanceState)
         headerAdapter = ProductsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()
-        viewModel = (activity as ShoppingActivity).viewModel    }
+        viewModel = (activity as ShoppingActivity).viewModel
+
+        viewModel.getAccessories()
+        viewModel.getMostRequestedAccessories()
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

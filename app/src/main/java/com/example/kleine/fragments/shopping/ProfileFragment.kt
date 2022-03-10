@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.kleine.BuildConfig
@@ -71,7 +72,8 @@ class ProfileFragment : Fragment() {
 
     private fun onTrackOrderClick() {
         binding.linearTrackOrder.setOnClickListener {
-            Snackbar.make(requireView(),resources.getText(R.string.g_coming_soon),Snackbar.LENGTH_SHORT).show()
+            val snackBar = requireActivity().findViewById<CoordinatorLayout>(R.id.snackBar_coordinator)
+            Snackbar.make(snackBar,resources.getText(R.string.g_coming_soon),Snackbar.LENGTH_SHORT).show()
         }
     }
 

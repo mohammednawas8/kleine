@@ -39,7 +39,7 @@ class ShoppingViewModel(
     val furniture = MutableLiveData<Resource<List<Product>>>()
     val mostRequestedFurniture = MutableLiveData<Resource<List<Product>>>()
 
-    val mostCupboardOrdered = MutableLiveData<Resource<List<Product>>>()
+    val mostRequestedCupboard = MutableLiveData<Resource<List<Product>>>()
     val cupboard = MutableLiveData<Resource<List<Product>>>()
     val addToCart = MutableLiveData<Resource<Boolean>>()
 
@@ -89,27 +89,31 @@ class ShoppingViewModel(
         getClothesProducts()
         getBestDealsProduct()
         getHomeProduct()
-
-        getCupboardsByOrders()
-        getCupboardProduct()
-
-        getUser()
-
-        getChairs()
-        getMostRequestedChairs()
-
-        getTables()
-        getMostRequestedTables()
-
-        getAccessories()
-        getMostRequestedAccessories()
-
-        getFurniture()
-        getMostRequestedFurniture()
+//        getMostRequestedCupboards()
+//        getCupboardProduct()
+//
+//        getUser()
+//
+//        getChairs()
+//        getMostRequestedChairs()
+//
+//        getTables()
+//        getMostRequestedTables()
+//
+//        getAccessories()
+//        getMostRequestedAccessories()
+//
+//        getFurniture()
+//        getMostRequestedFurniture()
 
     }
 
+    private var furnitureProducts: List<Product>? = null
     fun getFurniture(size: Int = 0) {
+        if (furnitureProducts != null && size == 0) {
+            furniture.postValue(Resource.Success(furnitureProducts))
+            return
+        }
         furniture.postValue(Resource.Loading())
         shouldPaging(FURNITURE_CATEGORY, size) {
             if (it) {
@@ -120,6 +124,7 @@ class ShoppingViewModel(
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
+                                furnitureProducts = productsList
                                 furniture.postValue(Resource.Success(productsList))
                                 furniturePage += 4
 
@@ -127,14 +132,18 @@ class ShoppingViewModel(
                         } else
                             furniture.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 furniture.postValue(Resource.Error("Cannot paging"))
 
         }
     }
 
-
+    private var mostRequestedFurnitureProducts: List<Product>? = null
     fun getMostRequestedFurniture(size: Int = 0) {
+        if (mostRequestedFurnitureProducts != null && size == 0) {
+            mostRequestedFurniture.postValue(Resource.Success(mostRequestedFurnitureProducts))
+            return
+        }
         mostRequestedFurniture.postValue(Resource.Loading())
         shouldPaging(FURNITURE_CATEGORY, size) {
             if (it) {
@@ -145,6 +154,7 @@ class ShoppingViewModel(
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedFurnitureProducts = productsList
                                 mostRequestedFurniture.postValue(Resource.Success(productsList))
                                 furniturePage += 4
 
@@ -152,16 +162,21 @@ class ShoppingViewModel(
                         } else
                             mostRequestedFurniture.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 mostRequestedFurniture.postValue(Resource.Error("Cannot paging"))
         }
     }
 
+    private var accessoriesProducts: List<Product>? = null
     fun getAccessories(size: Int = 0) {
+        if (accessoriesProducts != null && size == 0) {
+            accessory.postValue(Resource.Success(accessoriesProducts))
+            return
+        }
         accessory.postValue(Resource.Loading())
-        shouldPaging(ACCESSORY_CATEGORY,size) {
+        shouldPaging(ACCESSORY_CATEGORY, size) {
             if (it) {
-                Log.d("test","paging")
+                Log.d("test", "paging")
                 firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, accessoryPage)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
@@ -169,43 +184,57 @@ class ShoppingViewModel(
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
                                 accessory.postValue(Resource.Success(productsList))
+                                accessoriesProducts = productsList
                                 accessoryPage += 4
 
                             }
                         } else
                             accessory.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else{
+            } else {
                 accessory.postValue(Resource.Error("Cannot page"))
             }
         }
     }
 
-
+    private var mostRequestedAccessoriesProducts: List<Product>? = null
     fun getMostRequestedAccessories(size: Int = 0) {
+        if (mostRequestedAccessoriesProducts != null && size == 0) {
+            mostRequestedAccessories.postValue(Resource.Success(mostRequestedAccessoriesProducts))
+            return
+        }
         mostRequestedAccessories.postValue(Resource.Loading())
         shouldPaging(ACCESSORY_CATEGORY, size) {
             if (it) {
                 chairs.postValue(Resource.Loading())
-                firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, mostRequestedAccessoryPage)
+                firebaseDatabase.getProductsByCategory(
+                    ACCESSORY_CATEGORY,
+                    mostRequestedAccessoryPage
+                )
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
                                 mostRequestedAccessories.postValue(Resource.Success(productsList))
+                                mostRequestedAccessoriesProducts = productsList
                                 mostRequestedAccessoryPage += 4
 
                             }
                         } else
                             mostRequestedAccessories.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 mostRequestedAccessories.postValue(Resource.Error("Cannot paging"))
         }
     }
 
+    private var chairsProducts: List<Product>? = null
     fun getChairs(size: Int = 0) {
+        if (chairsProducts != null && size == 0) {
+            chairs.postValue(Resource.Success(chairsProducts))
+            return
+        }
         chairs.postValue(Resource.Loading())
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
@@ -217,6 +246,7 @@ class ShoppingViewModel(
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
+                                chairsProducts = productsList
                                 chairs.postValue(Resource.Success(productsList))
                                 chairsPage += 4
 
@@ -224,13 +254,17 @@ class ShoppingViewModel(
                         } else
                             chairs.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 chairs.postValue(Resource.Error("Cannot paging"))
         }
     }
 
-
+    private var mostRequestedChairsProducts: List<Product>? = null
     fun getMostRequestedChairs(size: Int = 0) {
+        if (mostRequestedChairsProducts != null && size == 0) {
+            mostRequestedChairs.postValue(Resource.Success(chairsProducts))
+            return
+        }
         mostRequestedChairs.postValue(Resource.Loading())
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
@@ -241,6 +275,7 @@ class ShoppingViewModel(
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedChairsProducts = productsList
                                 mostRequestedChairs.postValue(Resource.Success(productsList))
                                 chairsPage += 4
 
@@ -248,12 +283,17 @@ class ShoppingViewModel(
                         } else
                             mostRequestedChairs.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 chairs.postValue(Resource.Error("Cannot paging"))
         }
     }
 
+    private var tablesProducts: List<Product>? = null
     fun getTables(size: Int = 0) {
+        if (tablesProducts != null && size == 0) {
+            tables.postValue(Resource.Success(tablesProducts))
+            return
+        }
         tables.postValue(Resource.Loading())
         shouldPaging(TABLES_CATEGORY, size) {
             if (it) {
@@ -264,6 +304,7 @@ class ShoppingViewModel(
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
+                                tablesProducts = productsList
                                 tables.postValue(Resource.Success(productsList))
                                 tablePage += 4
 
@@ -271,12 +312,17 @@ class ShoppingViewModel(
                         } else
                             tables.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 home.postValue(Resource.Error("Cannot paging"))
         }
     }
 
+    private var mostRequestedTablesProducts: List<Product>? = null
     fun getMostRequestedTables(size: Int = 0) {
+        if (mostRequestedTablesProducts != null && size == 0) {
+            tables.postValue(Resource.Success(mostRequestedTablesProducts))
+            return
+        }
         mostRequestedTables.postValue(Resource.Loading())
         shouldPaging(TABLES_CATEGORY, size) {
             if (it) {
@@ -287,6 +333,7 @@ class ShoppingViewModel(
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
+                                mostRequestedTablesProducts = productsList
                                 mostRequestedTables.postValue(Resource.Success(productsList))
                                 mostRequestedTablePage += 3
 
@@ -294,11 +341,10 @@ class ShoppingViewModel(
                         } else
                             mostRequestedTables.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 mostRequestedTables.postValue(Resource.Error("Cannot paging"))
         }
     }
-
 
 
     fun getClothesProducts() =
@@ -351,35 +397,49 @@ class ShoppingViewModel(
                         } else
                             home.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
+            } else
                 home.postValue(Resource.Error("Cannot paging"))
         }
     }
 
+    private var mostRequestedCupboardProducts: List<Product>? = null
+    fun getMostRequestedCupboards(size: Int = 0) {
+        if (mostRequestedCupboardProducts != null && size == 0) {
+            mostRequestedCupboard.postValue(Resource.Success(mostRequestedCupboardProducts))
+            return
+        }
 
-    fun getCupboardsByOrders(size: Int = 0) =
+        mostRequestedCupboard.postValue(Resource.Loading())
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
-                mostCupboardOrdered.postValue(Resource.Loading())
+                mostRequestedCupboard.postValue(Resource.Loading())
                 firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val documents = it.result
                             if (!documents!!.isEmpty) {
                                 val productsList = documents.toObjects(Product::class.java)
-                                mostCupboardOrdered.postValue(Resource.Success(productsList))
+                                mostRequestedCupboardProducts = productsList
+                                mostRequestedCupboard.postValue(Resource.Success(productsList))
                                 mostOrderCupboardPaging += 5
 
                             }
                         } else
-                            mostCupboardOrdered.postValue(Resource.Error(it.exception.toString()))
-
+                            mostRequestedCupboard.postValue(Resource.Error(it.exception.toString()))
                     }
-            }else
-                mostCupboardOrdered.postValue(Resource.Error("Cannot paging"))
-        }
 
-    fun getCupboardProduct(size: Int = 0) =
+
+            } else
+                mostRequestedCupboard.postValue(Resource.Error("Cannot paging"))
+        }
+    }
+
+    private var dCupboardProducts: List<Product>? = null
+    fun getCupboardProduct(size: Int = 0) {
+        if (dCupboardProducts != null && size == 0) {
+            cupboard.postValue(Resource.Success(dCupboardProducts))
+            return
+        }
         shouldPaging(CUPBOARD_CATEGORY, size) {
             if (it) {
                 cupboard.postValue(Resource.Loading())
@@ -389,6 +449,7 @@ class ShoppingViewModel(
                         val documents = it.result
                         if (!documents!!.isEmpty) {
                             val productsList = documents.toObjects(Product::class.java)
+                            dCupboardProducts = productsList
                             cupboard.postValue(Resource.Success(productsList))
                             cupboardPaging += 10
                         }
@@ -396,15 +457,16 @@ class ShoppingViewModel(
                     } else
                         cupboard.postValue(Resource.Error(it.exception.toString()))
                 }
-            }else
+            } else
                 cupboard.postValue(Resource.Error("Cannot paging"))
         }
+    }
 
     /*
     * TODO : Move these functions to firebaseDatabase class
      */
 
-    private fun shouldPaging(category: String, listSize: Int , onSuccess: (Boolean) -> Unit) {
+    private fun shouldPaging(category: String, listSize: Int, onSuccess: (Boolean) -> Unit) {
         FirebaseFirestore.getInstance()
             .collection("categories")
             .whereEqualTo("name", category).get().addOnSuccessListener {
@@ -412,9 +474,9 @@ class ShoppingViewModel(
                 val products = tempCategory[0].products
                 Log.d("test", " $category : prodcuts ${tempCategory[0].products}, size $listSize")
                 if (listSize == products)
-                    onSuccess(false).also { Log.d(TAG,"$category Paging:false") }
+                    onSuccess(false).also { Log.d(TAG, "$category Paging:false") }
                 else
-                    onSuccess(true).also { Log.d(TAG,"$category Paging:true") }
+                    onSuccess(true).also { Log.d(TAG, "$category Paging:true") }
             }
     }
 
@@ -423,10 +485,10 @@ class ShoppingViewModel(
             .collection("categories").get().addOnSuccessListener {
                 var productsCount = 0
                 it.toObjects(Category::class.java).forEach { category ->
-                    productsCount+=category.products!!.toInt()
+                    productsCount += category.products!!.toInt()
                 }
 
-                if(listSize == productsCount)
+                if (listSize == productsCount)
                     onSuccess(false)
                 else
                     onSuccess(true)

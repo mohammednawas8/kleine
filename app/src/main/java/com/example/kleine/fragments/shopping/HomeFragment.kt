@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
@@ -14,6 +16,7 @@ import com.example.kleine.fragments.categories.*
 import com.example.kleine.fragments.categories.HomeProductsFragment
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -28,6 +31,7 @@ class HomeFragment : Fragment() {
 
         viewModel = (activity as ShoppingActivity).viewModel
     }
+    
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +43,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        binding.frameScan.setOnClickListener {
+            val snackBar = requireActivity().findViewById<CoordinatorLayout>(R.id.snackBar_coordinator)
+            Snackbar.make(snackBar,resources.getText(R.string.g_coming_soon), Snackbar.LENGTH_SHORT).show()
+        }
+        binding.fragmeMicrohpone.setOnClickListener {
+            val snackBar = requireActivity().findViewById<CoordinatorLayout>(R.id.snackBar_coordinator)
+            Snackbar.make(snackBar,resources.getText(R.string.g_coming_soon),Snackbar.LENGTH_SHORT).show()
+        }
 
         val categoriesFragments = arrayListOf<Fragment>(
             HomeProductsFragment(),
@@ -140,11 +154,14 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         val bottomNavigation =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.visibility = View.VISIBLE
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
 
 }

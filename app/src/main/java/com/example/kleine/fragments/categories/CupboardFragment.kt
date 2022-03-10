@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,6 +33,11 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         mostOrderedCupboardsAdapter = ProductsRecyclerAdapter()
         cupboardAdapter = ProductsRecyclerAdapter()
         viewModel = (activity as ShoppingActivity).viewModel
+
+        viewModel.getMostRequestedCupboards()
+        viewModel.getCupboardProduct()
+        Log.d("test","cupboardFragment")
+
     }
 
     override fun onCreateView(
@@ -87,7 +93,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if (!recyclerView.canScrollHorizontally(1) && dx != 0)
-                    viewModel.getCupboardsByOrders(mostOrderedCupboardsAdapter.differ.currentList.size)
+                    viewModel.getMostRequestedCupboards(mostOrderedCupboardsAdapter.differ.currentList.size)
 
             }
         })
@@ -133,7 +139,7 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
     }
 
     private fun observeMostOrderedCupboard() {
-        viewModel.mostCupboardOrdered.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.mostRequestedCupboard.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
                 is Resource.Loading -> {
@@ -172,5 +178,15 @@ class CupboardFragment : Fragment(R.layout.fragment_cupboard) {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+    }
 
 }

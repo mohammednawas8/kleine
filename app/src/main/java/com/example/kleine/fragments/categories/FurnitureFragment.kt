@@ -37,6 +37,9 @@ class FurnitureFragment : Fragment(R.layout.fragment_furniture) {
         headerAdapter = ProductsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()
         viewModel = (activity as ShoppingActivity).viewModel
+
+        viewModel.getMostRequestedFurniture()
+        viewModel.getFurniture()
     }
 
     override fun onCreateView(

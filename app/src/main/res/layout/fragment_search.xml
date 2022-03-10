@@ -34,7 +34,7 @@
 
 
     <FrameLayout
-        android:id="@+id/linear"
+        android:id="@+id/frame_scan"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/favorite_background"
@@ -57,6 +57,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/fragme_microhpone"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_5sdp"

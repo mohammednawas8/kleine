@@ -36,4 +36,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/snackBar_coordinator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
