@@ -1,6 +1,7 @@
 package com.example.kleine.fragments.shopping
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.kleine.R
 import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.viewpager.HomeViewpagerAdapter
@@ -22,6 +24,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment() {
     val TAG = "HomeFragment"
+    val args by navArgs<HomeFragmentArgs>()
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var binding: FragmentHomeBinding
 
@@ -85,6 +88,10 @@ class HomeFragment : Fragment() {
             binding.tvSearch.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
             }
+
+        // handle the category click from searchFragment
+        Log.d("test22",args.position.toString())
+        binding.viewpagerHome.currentItem = args.position
 
 
     }

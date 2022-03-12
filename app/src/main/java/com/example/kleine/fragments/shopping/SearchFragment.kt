@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.kleine.R
 import com.example.kleine.SpacingDecorator.VerticalSpacingItemDecorator
 import com.example.kleine.adapters.recyclerview.CategoriesRecyclerAdapter
@@ -22,6 +23,7 @@ import com.example.kleine.databinding.FragmentSearchBinding
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.search.SearchViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 
 
@@ -63,6 +65,25 @@ class SearchFragment : Fragment() {
 
         onCancelTvClick()
 
+        onCategoryClick()
+
+    }
+
+    private fun onCategoryClick() {
+        categoriesAdapter.onItemClick = { category ->
+            var position = 0
+            when (category.name) {
+                resources.getString(R.string.g_chair) -> position = 1
+                resources.getString(R.string.g_cupboard) -> position = 2
+                resources.getString(R.string.g_table) -> position = 3
+                resources.getString(R.string.g_accessory) -> position = 4
+                resources.getString(R.string.g_furniture) -> position = 5
+            }
+
+            val bundle = Bundle()
+            bundle.putInt("position",position)
+            findNavController().navigate(R.id.action_searchFragment_to_homeFragment,bundle)
+        }
     }
 
     private fun onCancelTvClick() {

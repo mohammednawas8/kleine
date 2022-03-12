@@ -52,6 +52,8 @@ class HomeProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvBestDeals.visibility = View.GONE
+
         setupHeaderRecyclerView()
         observeHeaderProducts()
 
@@ -140,6 +142,7 @@ class HomeProductsFragment : Fragment() {
                 when (response) {
                     is Resource.Loading -> {
                         showBottomLoading()
+
                         return@Observer
                     }
 
@@ -160,10 +163,13 @@ class HomeProductsFragment : Fragment() {
     }
     private fun hideBottomLoading() {
         binding.progressbar2.visibility = View.GONE
+        binding.tvBestProducts.visibility = View.VISIBLE
+
     }
 
     private fun showBottomLoading() {
         binding.progressbar2.visibility = View.VISIBLE
+        binding.tvBestProducts.visibility = View.GONE
     }
 
     private fun setupAllProductsRecyclerView() {
@@ -193,6 +199,7 @@ class HomeProductsFragment : Fragment() {
     private fun observeBestDeals() {
         viewModel.bestDeals.observe(viewLifecycleOwner, Observer { bestDealsList ->
             bestDealsAdapter.differ.submitList(bestDealsList.toList())
+            binding.tvBestDeals.visibility = View.VISIBLE
         })
     }
 

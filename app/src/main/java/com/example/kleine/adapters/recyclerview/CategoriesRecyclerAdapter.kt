@@ -45,9 +45,14 @@ class CategoriesRecyclerAdapter : RecyclerView.Adapter<CategoriesRecyclerAdapter
             Glide.with(holder.itemView).load(category.image).into(imgCategory)
             tvCategoryName.text = category.name
         }
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(category)
+        }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+     var onItemClick :((Category)->Unit)?=null
 }
