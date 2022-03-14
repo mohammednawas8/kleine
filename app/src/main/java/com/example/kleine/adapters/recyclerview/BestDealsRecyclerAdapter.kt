@@ -11,11 +11,13 @@ import com.example.kleine.databinding.BestDealItemBinding
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.IMAGES
 
-class BestDealsRecyclerAdapter : RecyclerView.Adapter<BestDealsRecyclerAdapter.BestDealsRecyclerAdapterViewHolder>() {
+class BestDealsRecyclerAdapter :
+    RecyclerView.Adapter<BestDealsRecyclerAdapter.BestDealsRecyclerAdapterViewHolder>() {
 
-    inner class BestDealsRecyclerAdapterViewHolder(val binding:BestDealItemBinding):RecyclerView.ViewHolder(binding.root)
+    inner class BestDealsRecyclerAdapterViewHolder(val binding: BestDealItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<Product>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
         }
@@ -25,7 +27,7 @@ class BestDealsRecyclerAdapter : RecyclerView.Adapter<BestDealsRecyclerAdapter.B
         }
     }
 
-    val differ = AsyncListDiffer(this,diffCallBack)
+    val differ = AsyncListDiffer(this, diffCallBack)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -48,9 +50,18 @@ class BestDealsRecyclerAdapter : RecyclerView.Adapter<BestDealsRecyclerAdapter.B
             tvOldPrice.text = "$${product.price}"
             tvOldPrice.paintFlags = tvOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
+
+        holder.binding.btnSeeProduct.setOnClickListener {
+            onItemClick?.invoke(product)
+        }
+
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+    var onItemClick: ((Product) -> Unit)? = null
+
+
 }

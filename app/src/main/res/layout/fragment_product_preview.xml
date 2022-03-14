@@ -35,12 +35,13 @@
 
         <ImageView
             android:id="@+id/img_close"
-            android:layout_width="@dimen/_10sdp"
-            android:layout_height="@dimen/_10sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_close"
             app:tint="@color/black"
+            android:scaleType="centerInside"
             />
 
 

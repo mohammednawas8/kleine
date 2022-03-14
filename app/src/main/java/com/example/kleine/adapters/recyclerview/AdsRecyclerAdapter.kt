@@ -10,9 +10,8 @@ import com.example.kleine.databinding.ChairExtraAdsItemBinding
 import com.example.kleine.model.Product
 import com.example.kleine.util.Constants.Companion.IMAGES
 
-class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder>()
-{
-    val diffCallBack = object : DiffUtil.ItemCallback<Product>(){
+class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder>() {
+    val diffCallBack = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
         }
@@ -22,9 +21,10 @@ class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder
         }
     }
 
-    val differ = AsyncListDiffer(this,diffCallBack)
+    val differ = AsyncListDiffer(this, diffCallBack)
 
-    inner class AdsViewHolder(val binding:ChairExtraAdsItemBinding):RecyclerView.ViewHolder(binding.root)
+    inner class AdsViewHolder(val binding: ChairExtraAdsItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,7 +32,7 @@ class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder
     ): AdsViewHolder {
         return AdsViewHolder(
             ChairExtraAdsItemBinding.inflate(
-                LayoutInflater.from(parent.context),parent,false
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }
@@ -47,9 +47,23 @@ class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder
             tvAdPrice.text = "$${product.price}"
             tvAdName.text = product.title
         }
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(product)
+        }
+
+        holder.binding.btnAddToCart.setOnClickListener {
+            onAddToCartClick?.invoke(product)
+        }
+
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+    var onItemClick: ((Product) -> Unit)? = null
+
+    var onAddToCartClick: ((Product) -> Unit)? = null
+
 }

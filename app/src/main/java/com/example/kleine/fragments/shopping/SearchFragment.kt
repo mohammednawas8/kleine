@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ import com.example.kleine.databinding.FragmentSearchBinding
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.search.SearchViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 
@@ -67,6 +69,15 @@ class SearchFragment : Fragment() {
 
         onCategoryClick()
 
+        binding.frameScan.setOnClickListener {
+            val snackBar = requireActivity().findViewById<CoordinatorLayout>(R.id.snackBar_coordinator)
+            Snackbar.make(snackBar,resources.getText(R.string.g_coming_soon), Snackbar.LENGTH_SHORT).show()
+        }
+        binding.fragmeMicrohpone.setOnClickListener {
+            val snackBar = requireActivity().findViewById<CoordinatorLayout>(R.id.snackBar_coordinator)
+            Snackbar.make(snackBar,resources.getText(R.string.g_coming_soon), Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun onCategoryClick() {
@@ -81,8 +92,8 @@ class SearchFragment : Fragment() {
             }
 
             val bundle = Bundle()
-            bundle.putInt("position",position)
-            findNavController().navigate(R.id.action_searchFragment_to_homeFragment,bundle)
+            bundle.putInt("position", position)
+            findNavController().navigate(R.id.action_searchFragment_to_homeFragment, bundle)
         }
     }
 

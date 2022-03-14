@@ -22,19 +22,20 @@
 
             <ImageView
                 android:id="@+id/img_close_language"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:src="@drawable/ic_close"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/g_black" />
+                app:tint="@color/black" />
 
             <TextView
                 android:id="@+id/tv_order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins_light"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_20ssp"

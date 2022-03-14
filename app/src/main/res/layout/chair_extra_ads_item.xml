@@ -49,7 +49,7 @@
             android:fontFamily="@font/sf_pro_display"/>
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/btn_see_product"
+            android:id="@+id/btn_add_to_cart"
             android:layout_width="@dimen/_77sdp"
             android:layout_height="@dimen/_25sdp"
             android:background="@drawable/btn_background"

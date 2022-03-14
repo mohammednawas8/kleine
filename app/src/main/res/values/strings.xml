@@ -118,5 +118,6 @@
     <string name="g_check_your_email">Check your Email</string>
     <string name="street">Street</string>
     <string name="g_order_details">Order Details</string>
+    <string name="product_added">Product added to your cart</string>
 
 </resources>

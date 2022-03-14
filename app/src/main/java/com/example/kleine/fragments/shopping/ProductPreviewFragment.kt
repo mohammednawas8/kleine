@@ -187,8 +187,10 @@ class ProductPreviewFragment : Fragment() {
         val sizes = product.sizes!![SIZES] as List<String>
         binding.apply {
             viewPagerAdapter.differ.submitList(imagesList)
-            colorsAdapter.differ.submitList(colors.toList())
-            sizesAdapter.differ.submitList(sizes)
+            if (colors.isNotEmpty() && colors[0] != "")
+                colorsAdapter.differ.submitList(colors.toList())
+            if (sizes.isNotEmpty() && sizes[0] != "")
+                sizesAdapter.differ.submitList(sizes)
             tvProductName.text = product.title
             tvProductDescription.text = product.description
             tvProductPrice.text = "$${product.price}"
@@ -202,7 +204,7 @@ class ProductPreviewFragment : Fragment() {
                 }
             }
             product.sizeUnit?.let {
-                if(it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     binding.tvSizeUnit.visibility = View.VISIBLE
                     binding.tvSizeUnit.text = " ($it)"
                 }

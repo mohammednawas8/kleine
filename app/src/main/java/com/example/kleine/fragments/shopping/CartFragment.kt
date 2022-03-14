@@ -57,7 +57,7 @@ class CartFragment : Fragment() {
         onMinusClick()
         onItemClick()
 
-        observeGetProductNavigation()
+        observeProductClickNavigation()
 
         onCheckoutClick()
 
@@ -73,7 +73,7 @@ class CartFragment : Fragment() {
         }
     }
 
-    private fun observeGetProductNavigation() {
+    private fun observeProductClickNavigation() {
         viewModel.product.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
@@ -239,8 +239,9 @@ class CartFragment : Fragment() {
                 is Resource.Success -> {
                     hideLoading()
 
+                    //Handle empty cart case
                     val products = response.data
-                    if (products!!.isNotEmpty()) {
+                    if (products!!.isNotEmpty()) { // cart is not empty
                         cartProducts = CartProductsList(products)
                         cartAdapter.differ.submitList(products)
                         var totalPrice:Double = 0.0
@@ -255,7 +256,7 @@ class CartFragment : Fragment() {
 
                         binding.tvTotalprice.text = "$ $totalPrice"
 
-                    } else {
+                    } else { // cart is empty
                         cartAdapter.differ.submitList(products)
                         binding.apply {
                             btnCheckout.visibility = View.INVISIBLE

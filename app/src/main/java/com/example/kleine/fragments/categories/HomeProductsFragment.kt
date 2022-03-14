@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,13 +20,15 @@ import com.example.kleine.adapters.recyclerview.BestDealsRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.ProductsRecyclerAdapter
 import com.example.kleine.databinding.FragmentHomeProductsBinding
 import com.example.kleine.firebaseDatabase.FirebaseDb
+import com.example.kleine.model.CartProduct
 import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.PRODUCT_FLAG
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class HomeProductsFragment : Fragment() {
     private lateinit var binding: FragmentHomeProductsBinding
-    private lateinit var adsAdapter: AdsRecyclerAdapter
+    private lateinit var headerAdapter: AdsRecyclerAdapter
     private lateinit var viewModel: ShoppingViewModel
     private lateinit var bestDealsAdapter: BestDealsRecyclerAdapter
     private lateinit var productsAdapter: ProductsRecyclerAdapter
@@ -35,7 +38,7 @@ class HomeProductsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val database = FirebaseDb()
         viewModel = (activity as ShoppingActivity).viewModel
-        adsAdapter = AdsRecyclerAdapter()
+        headerAdapter = AdsRecyclerAdapter()
         bestDealsAdapter = BestDealsRecyclerAdapter()
         productsAdapter = ProductsRecyclerAdapter()
     }
@@ -63,12 +66,18 @@ class HomeProductsFragment : Fragment() {
         setupAllProductsRecyclerView()
         observeAllProducts()
 
-        adsPaging()
+        headerPaging()
         bestDealsPaging()
         productsPaging()
 
-        observeEmptyAds()
+        observeEmptyHeader()
         observeEmptyBestDeals()
+
+        onHeaderProductClick()
+        onBestDealsProductClick()
+
+        observeAddHeaderProductsToCart()
+
 
         productsAdapter.onItemClick = { product ->
             val bundle = Bundle()
@@ -83,6 +92,77 @@ class HomeProductsFragment : Fragment() {
 
     }
 
+    private fun observeAddHeaderProductsToCart() {
+        viewModel.addToCart.observe(viewLifecycleOwner, Observer { response ->
+
+            when (response) {
+                is Resource.Loading -> {
+                    showTopScreenProgressbar()
+                    return@Observer
+                }
+
+                is Resource.Success -> {
+                    hideTopScreenProgressbar()
+                    val snackBarPosition = requireActivity().findViewById<CoordinatorLayout>(R.id.snackBar_coordinator)
+                    Snackbar.make(snackBarPosition,requireContext().getText(R.string.product_added),2500).show()
+                    return@Observer
+                }
+
+                is Resource.Error -> {
+                    hideTopScreenProgressbar()
+                    return@Observer
+                }
+            }
+        })
+    }
+
+    private fun hideTopScreenProgressbar() {
+
+    }
+
+    private fun showTopScreenProgressbar() {
+
+    }
+
+    private fun onBestDealsProductClick() {
+        bestDealsAdapter.onItemClick = { product ->
+            val bundle = Bundle()
+            bundle.putParcelable("product", product)
+            findNavController().navigate(
+                R.id.action_homeFragment_to_productPreviewFragment2,
+                bundle
+            )
+
+        }
+    }
+
+    private fun onHeaderProductClick() {
+        headerAdapter.onItemClick = { product ->
+            val bundle = Bundle()
+            bundle.putParcelable("product", product)
+            findNavController().navigate(
+                R.id.action_homeFragment_to_productPreviewFragment2,
+                bundle
+            )
+        }
+
+        headerAdapter.onAddToCartClick = { product ->
+            val image = (product.images?.get("images") as List<String>)[0]
+            val cartProduct = CartProduct(
+                product.id,
+                product.title!!,
+                product.seller!!,
+                image,
+                product.price!!,
+                product.newPrice,
+                1,
+                "",
+                ""
+            )
+            viewModel.addProductToCart(cartProduct)
+        }
+    }
+
     private fun observeEmptyBestDeals() {
         viewModel.emptyBestDeals.observe(viewLifecycleOwner, Observer {
             if (it == true) {
@@ -94,7 +174,7 @@ class HomeProductsFragment : Fragment() {
         })
     }
 
-    private fun observeEmptyAds() {
+    private fun observeEmptyHeader() {
         viewModel.emptyClothes.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 binding.apply {
@@ -116,7 +196,7 @@ class HomeProductsFragment : Fragment() {
         })
     }
 
-    private fun adsPaging() {
+    private fun headerPaging() {
         binding.rvAds.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -137,30 +217,31 @@ class HomeProductsFragment : Fragment() {
     }
 
     private fun observeAllProducts() {
-            viewModel.home.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.home.observe(viewLifecycleOwner, Observer { response ->
 
-                when (response) {
-                    is Resource.Loading -> {
-                        showBottomLoading()
+            when (response) {
+                is Resource.Loading -> {
+                    showBottomLoading()
 
-                        return@Observer
-                    }
-
-                    is Resource.Success -> {
-                        hideBottomLoading()
-                        productsAdapter.differ.submitList(response.data)
-                        Log.d("test",response.data?.size.toString())
-                        return@Observer
-                    }
-
-                    is Resource.Error -> {
-                        hideBottomLoading()
-                        Log.e(TAG, response.message.toString())
-                        return@Observer
-                    }
+                    return@Observer
                 }
-            })
+
+                is Resource.Success -> {
+                    hideBottomLoading()
+                    productsAdapter.differ.submitList(response.data)
+                    Log.d("test", response.data?.size.toString())
+                    return@Observer
+                }
+
+                is Resource.Error -> {
+                    hideBottomLoading()
+                    Log.e(TAG, response.message.toString())
+                    return@Observer
+                }
+            }
+        })
     }
+
     private fun hideBottomLoading() {
         binding.progressbar2.visibility = View.GONE
         binding.tvBestProducts.visibility = View.VISIBLE
@@ -188,11 +269,9 @@ class HomeProductsFragment : Fragment() {
     }
 
 
-
-
     private fun observeHeaderProducts() {
         viewModel.clothes.observe(viewLifecycleOwner, Observer { clothesList ->
-            adsAdapter.differ.submitList(clothesList.toList())
+            headerAdapter.differ.submitList(clothesList.toList())
         })
     }
 
@@ -205,7 +284,7 @@ class HomeProductsFragment : Fragment() {
 
     private fun setupHeaderRecyclerView() {
         binding.rvAds.apply {
-            adapter = adsAdapter
+            adapter = headerAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
     }
