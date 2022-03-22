@@ -13,12 +13,12 @@ import com.example.kleine.util.Constants.Companion.FURNITURE_CATEGORY
 import com.example.kleine.util.Constants.Companion.TABLES_CATEGORY
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
-import kotlin.collections.ArrayList
+
+private const val TAG = "ShoppingViewModel"
 
 class ShoppingViewModel(
     private val firebaseDatabase: FirebaseDb
 ) : ViewModel() {
-    private val TAG = "ShoppingViewModel"
 
     val clothes = MutableLiveData<List<Product>>()
     val emptyClothes = MutableLiveData<Boolean>()
@@ -61,8 +61,8 @@ class ShoppingViewModel(
 
     val categories = MutableLiveData<Resource<List<Category>>>()
 
-    val bestProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
-    val mostRequestedProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
+//    val bestProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
+//    val mostRequestedProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
 
 
     private var homePage: Long = 10
@@ -89,23 +89,6 @@ class ShoppingViewModel(
         getClothesProducts()
         getBestDealsProduct()
         getHomeProduct()
-//        getMostRequestedCupboards()
-//        getCupboardProduct()
-//
-//        getUser()
-//
-//        getChairs()
-//        getMostRequestedChairs()
-//
-//        getTables()
-//        getMostRequestedTables()
-//
-//        getAccessories()
-//        getMostRequestedAccessories()
-//
-//        getFurniture()
-//        getMostRequestedFurniture()
-
     }
 
     private var furnitureProducts: List<Product>? = null
@@ -115,8 +98,8 @@ class ShoppingViewModel(
             return
         }
         furniture.postValue(Resource.Loading())
-        shouldPaging(FURNITURE_CATEGORY, size) {
-            if (it) {
+        shouldPaging(FURNITURE_CATEGORY, size) { shouldPaging ->
+            if (shouldPaging) {
                 tables.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(FURNITURE_CATEGORY, furniturePage)
                     .addOnCompleteListener {
@@ -145,10 +128,13 @@ class ShoppingViewModel(
             return
         }
         mostRequestedFurniture.postValue(Resource.Loading())
-        shouldPaging(FURNITURE_CATEGORY, size) {
-            if (it) {
+        shouldPaging(FURNITURE_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 mostRequestedFurniture.postValue(Resource.Loading())
-                firebaseDatabase.getProductsByCategory(FURNITURE_CATEGORY, furniturePage)
+                firebaseDatabase.getProductsByCategory(
+                    FURNITURE_CATEGORY,
+                    mostRequestedFurniturePage
+                )
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val documents = it.result
@@ -156,7 +142,7 @@ class ShoppingViewModel(
                                 val productsList = documents.toObjects(Product::class.java)
                                 mostRequestedFurnitureProducts = productsList
                                 mostRequestedFurniture.postValue(Resource.Success(productsList))
-                                furniturePage += 4
+                                mostRequestedFurniturePage += 4
 
                             }
                         } else
@@ -174,8 +160,8 @@ class ShoppingViewModel(
             return
         }
         accessory.postValue(Resource.Loading())
-        shouldPaging(ACCESSORY_CATEGORY, size) {
-            if (it) {
+        shouldPaging(ACCESSORY_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 Log.d("test", "paging")
                 firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, accessoryPage)
                     .addOnCompleteListener {
@@ -204,8 +190,8 @@ class ShoppingViewModel(
             return
         }
         mostRequestedAccessories.postValue(Resource.Loading())
-        shouldPaging(ACCESSORY_CATEGORY, size) {
-            if (it) {
+        shouldPaging(ACCESSORY_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 chairs.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(
                     ACCESSORY_CATEGORY,
@@ -236,8 +222,8 @@ class ShoppingViewModel(
             return
         }
         chairs.postValue(Resource.Loading())
-        shouldPaging(CUPBOARD_CATEGORY, size) {
-            if (it) {
+        shouldPaging(CUPBOARD_CATEGORY, size) {shouldPaging->
+            if (shouldPaging) {
 
                 chairs.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, chairsPage)
@@ -266,10 +252,10 @@ class ShoppingViewModel(
             return
         }
         mostRequestedChairs.postValue(Resource.Loading())
-        shouldPaging(CUPBOARD_CATEGORY, size) {
-            if (it) {
+        shouldPaging(CUPBOARD_CATEGORY, size) {shouldPaging->
+            if (shouldPaging) {
                 chairs.postValue(Resource.Loading())
-                firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, chairsPage)
+                firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, mostRequestedChairsPage)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val documents = it.result
@@ -277,7 +263,7 @@ class ShoppingViewModel(
                                 val productsList = documents.toObjects(Product::class.java)
                                 mostRequestedChairsProducts = productsList
                                 mostRequestedChairs.postValue(Resource.Success(productsList))
-                                chairsPage += 4
+                                mostRequestedChairsPage += 4
 
                             }
                         } else
@@ -295,8 +281,8 @@ class ShoppingViewModel(
             return
         }
         tables.postValue(Resource.Loading())
-        shouldPaging(TABLES_CATEGORY, size) {
-            if (it) {
+        shouldPaging(TABLES_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 tables.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(TABLES_CATEGORY, tablePage)
                     .addOnCompleteListener {
@@ -324,8 +310,8 @@ class ShoppingViewModel(
             return
         }
         mostRequestedTables.postValue(Resource.Loading())
-        shouldPaging(TABLES_CATEGORY, size) {
-            if (it) {
+        shouldPaging(TABLES_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 mostRequestedTables.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(TABLES_CATEGORY, mostRequestedTablePage)
                     .addOnCompleteListener {
@@ -381,8 +367,8 @@ class ShoppingViewModel(
     fun getHomeProduct(size: Int = 0) {
         home.postValue(Resource.Loading())
         shouldPagingHome(size)
-        {
-            if (it) {
+        { shouldPaging->
+            if (shouldPaging) {
                 home.postValue(Resource.Loading())
                 firebaseDatabase.getHomeProducts(homePage)
                     .addOnCompleteListener {
@@ -410,8 +396,8 @@ class ShoppingViewModel(
         }
 
         mostRequestedCupboard.postValue(Resource.Loading())
-        shouldPaging(CUPBOARD_CATEGORY, size) {
-            if (it) {
+        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 mostRequestedCupboard.postValue(Resource.Loading())
                 firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging)
                     .addOnCompleteListener {
@@ -440,8 +426,8 @@ class ShoppingViewModel(
             cupboard.postValue(Resource.Success(dCupboardProducts))
             return
         }
-        shouldPaging(CUPBOARD_CATEGORY, size) {
-            if (it) {
+        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging->
+            if (shouldPaging) {
                 cupboard.postValue(Resource.Loading())
                 firebaseDatabase.getCupboards(cupboardPaging).addOnCompleteListener {
                     if (it.isSuccessful) {
