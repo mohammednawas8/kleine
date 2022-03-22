@@ -26,9 +26,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 
-
 class SearchFragment : Fragment() {
-    val TAG = "SearchFragment"
+    private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
     private lateinit var inputMethodManger: InputMethodManager
     private lateinit var viewModel: ShoppingViewModel

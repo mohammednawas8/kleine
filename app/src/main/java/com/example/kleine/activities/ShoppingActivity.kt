@@ -1,6 +1,5 @@
 package com.example.kleine.activities
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -16,7 +15,6 @@ import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.example.kleine.viewmodel.shopping.ShoppingViewModelProviderFactory
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
 
 private const val TAG = "ShoppingActivity"
 
@@ -28,7 +26,7 @@ class ShoppingActivity : AppCompatActivity() {
         ViewModelProvider(this, providerFactory)[ShoppingViewModel::class.java]
     }
 
-    lateinit var cartViewModel: CartViewModel
+    private lateinit var cartViewModel: CartViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping)
@@ -63,7 +61,7 @@ class ShoppingActivity : AppCompatActivity() {
                     else {
                         bottomNavigation.getOrCreateBadge(R.id.cartFragment).apply {
                             backgroundColor = resources.getColor(R.color.g_white)
-                            number = response.data!!
+                            number = response.data
                         }
                     }
                     return@Observer
@@ -78,12 +76,5 @@ class ShoppingActivity : AppCompatActivity() {
         })
     }
 
-    private fun setLocal(activity: Activity, langCode: String) {
-        val locale = Locale(langCode)
-        Locale.setDefault(locale)
-        val resources = resources
-        val config = resources?.configuration
-        config?.locale = locale
-        resources?.updateConfiguration(config,resources?.displayMetrics)
-    }
+
 }
