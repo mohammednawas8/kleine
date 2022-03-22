@@ -101,6 +101,10 @@ dependencies {
     //stepView
     implementation 'com.shuhart.stepview:stepview:1.5.1'
 
+    //Android Ktx
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
+
+
 
 
 }

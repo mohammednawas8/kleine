@@ -11,21 +11,19 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import com.example.kleine.R
 import com.example.kleine.SpacingDecorator.VerticalSpacingItemDecorator
+import com.example.kleine.activities.ShoppingActivity
 import com.example.kleine.adapters.recyclerview.CategoriesRecyclerAdapter
 import com.example.kleine.adapters.recyclerview.SearchRecyclerAdapter
 import com.example.kleine.databinding.FragmentSearchBinding
 import com.example.kleine.resource.Resource
-import com.example.kleine.viewmodel.shopping.search.SearchViewModel
+import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 
 
@@ -33,13 +31,16 @@ class SearchFragment : Fragment() {
     val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
     private lateinit var inputMethodManger: InputMethodManager
-    private lateinit var viewModel: SearchViewModel
+    private lateinit var viewModel: ShoppingViewModel
     private lateinit var categoriesAdapter: CategoriesRecyclerAdapter
     private lateinit var searchAdapter: SearchRecyclerAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
+        viewModel = (activity as ShoppingActivity).viewModel
+        viewModel.getCategories()
+
     }
 
     override fun onCreateView(

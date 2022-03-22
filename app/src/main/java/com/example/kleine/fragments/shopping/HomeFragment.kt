@@ -89,75 +89,8 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
             }
 
-        // handle the category click from searchFragment
-        Log.d("test22",args.position.toString())
-        binding.viewpagerHome.currentItem = args.position
-
-
     }
 
-//    private fun observeCategories() {
-//        viewModel.categories.observe(viewLifecycleOwner, Observer { response ->
-//            when (response) {
-//                is Resource.Loading -> {
-//                    Log.d(TAG, "Categories:Loading")
-//                    return@Observer
-//                }
-//
-//                is Resource.Success -> {
-//                    val categories = response.data
-//                    setupTabLayout(categories!!)
-//                    return@Observer
-//                }
-//
-//                is Resource.Error -> {
-//                    Log.e(TAG, "CategoriesError:${response.message.toString()}")
-//                    return@Observer
-//                }
-//            }
-//        })
-//    }
-
-//    private fun setupTabLayout(categories: List<Category>) {
-//        val fragmentsList = ArrayList<Fragment>()
-//        var i = 0
-//        fragmentsList.add(HomeProductsFragment())
-//        categories.forEach {
-//            fragmentsList.add(BlankFragment())
-//            i++
-//        }
-//
-//        val categoriesTabLayoutAdapter =
-//            HomeViewpagerAdapter(fragmentsList, childFragmentManager, lifecycle)
-//
-//
-//        binding.viewpagerHome.adapter = categoriesTabLayoutAdapter
-//        TabLayoutMediator(binding.tabLayout, binding.viewpagerHome) { tab, position ->
-//            if (position == 0)
-//                tab.text = resources.getText(R.string.g_home)
-//            else
-//                tab.text = categories[position - 1].name
-//        }.attach()
-//
-//        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                if (tab!!.position != 0)
-//                    (fragmentsList[tab.position] as BlankFragment).setData(
-//                        tab.position,
-//                        viewModel,
-//                        requireActivity()
-//                    )
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//
-//            }
-//        })
-//    }
 
     override fun onResume() {
         super.onResume()

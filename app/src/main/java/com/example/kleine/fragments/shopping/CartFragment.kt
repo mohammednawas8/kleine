@@ -23,11 +23,11 @@ import com.example.kleine.util.Constants.Companion.SELECT_ADDRESS_FLAG
 import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+private const val TAG = "CartFragment"
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private lateinit var viewModel: CartViewModel
     private lateinit var cartAdapter: CartRecyclerAdapter
-    private val TAG = "CartFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

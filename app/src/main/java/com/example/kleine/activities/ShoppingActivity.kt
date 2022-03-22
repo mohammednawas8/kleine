@@ -1,8 +1,6 @@
 package com.example.kleine.activities
 
 import android.app.Activity
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,7 +11,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.kleine.R
 import com.example.kleine.firebaseDatabase.FirebaseDb
-import com.example.kleine.helpers.LocaleHelper
 import com.example.kleine.resource.Resource
 import com.example.kleine.viewmodel.shopping.ShoppingViewModel
 import com.example.kleine.viewmodel.shopping.ShoppingViewModelProviderFactory
@@ -21,14 +18,16 @@ import com.example.kleine.viewmodel.shopping.cart.CartViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
+private const val TAG = "ShoppingActivity"
+
 class ShoppingActivity : AppCompatActivity() {
-    val TAG = "ShoppingActivity"
 
     val viewModel by lazy {
         val fDatabase = FirebaseDb()
         val providerFactory = ShoppingViewModelProviderFactory(fDatabase)
         ViewModelProvider(this, providerFactory)[ShoppingViewModel::class.java]
     }
+
     lateinit var cartViewModel: CartViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
