@@ -94,7 +94,7 @@ class SearchFragment : Fragment() {
 
             val bundle = Bundle()
             bundle.putInt("position", position)
-            findNavController().navigate(R.id.action_searchFragment_to_homeFragment, bundle)
+//            findNavController().navigate(R.id.action_searchFragment_to_homeFragment, bundle)
         }
     }
 

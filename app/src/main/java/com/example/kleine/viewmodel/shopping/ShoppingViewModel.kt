@@ -61,9 +61,8 @@ class ShoppingViewModel(
 
     val categories = MutableLiveData<Resource<List<Category>>>()
 
-//    val bestProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
-//    val mostRequestedProducts = ArrayList<MutableLiveData<Resource<List<Product>>>>()
 
+    val search = MutableLiveData<Resource<List<Product>>>()
 
     private var homePage: Long = 10
     private var clothesPaging: Long = 5
@@ -128,7 +127,7 @@ class ShoppingViewModel(
             return
         }
         mostRequestedFurniture.postValue(Resource.Loading())
-        shouldPaging(FURNITURE_CATEGORY, size) { shouldPaging->
+        shouldPaging(FURNITURE_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 mostRequestedFurniture.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(
@@ -160,7 +159,7 @@ class ShoppingViewModel(
             return
         }
         accessory.postValue(Resource.Loading())
-        shouldPaging(ACCESSORY_CATEGORY, size) { shouldPaging->
+        shouldPaging(ACCESSORY_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 Log.d("test", "paging")
                 firebaseDatabase.getProductsByCategory(ACCESSORY_CATEGORY, accessoryPage)
@@ -190,7 +189,7 @@ class ShoppingViewModel(
             return
         }
         mostRequestedAccessories.postValue(Resource.Loading())
-        shouldPaging(ACCESSORY_CATEGORY, size) { shouldPaging->
+        shouldPaging(ACCESSORY_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 chairs.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(
@@ -222,7 +221,7 @@ class ShoppingViewModel(
             return
         }
         chairs.postValue(Resource.Loading())
-        shouldPaging(CUPBOARD_CATEGORY, size) {shouldPaging->
+        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
 
                 chairs.postValue(Resource.Loading())
@@ -252,7 +251,7 @@ class ShoppingViewModel(
             return
         }
         mostRequestedChairs.postValue(Resource.Loading())
-        shouldPaging(CUPBOARD_CATEGORY, size) {shouldPaging->
+        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 chairs.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(CHAIR_CATEGORY, mostRequestedChairsPage)
@@ -281,7 +280,7 @@ class ShoppingViewModel(
             return
         }
         tables.postValue(Resource.Loading())
-        shouldPaging(TABLES_CATEGORY, size) { shouldPaging->
+        shouldPaging(TABLES_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 tables.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(TABLES_CATEGORY, tablePage)
@@ -310,7 +309,7 @@ class ShoppingViewModel(
             return
         }
         mostRequestedTables.postValue(Resource.Loading())
-        shouldPaging(TABLES_CATEGORY, size) { shouldPaging->
+        shouldPaging(TABLES_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 mostRequestedTables.postValue(Resource.Loading())
                 firebaseDatabase.getProductsByCategory(TABLES_CATEGORY, mostRequestedTablePage)
@@ -367,7 +366,7 @@ class ShoppingViewModel(
     fun getHomeProduct(size: Int = 0) {
         home.postValue(Resource.Loading())
         shouldPagingHome(size)
-        { shouldPaging->
+        { shouldPaging ->
             if (shouldPaging) {
                 home.postValue(Resource.Loading())
                 firebaseDatabase.getHomeProducts(homePage)
@@ -396,7 +395,7 @@ class ShoppingViewModel(
         }
 
         mostRequestedCupboard.postValue(Resource.Loading())
-        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging->
+        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 mostRequestedCupboard.postValue(Resource.Loading())
                 firebaseDatabase.getMostOrderedCupboard(mostOrderCupboardPaging)
@@ -426,7 +425,7 @@ class ShoppingViewModel(
             cupboard.postValue(Resource.Success(dCupboardProducts))
             return
         }
-        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging->
+        shouldPaging(CUPBOARD_CATEGORY, size) { shouldPaging ->
             if (shouldPaging) {
                 cupboard.postValue(Resource.Loading())
                 firebaseDatabase.getCupboards(cupboardPaging).addOnCompleteListener {
@@ -662,8 +661,36 @@ class ShoppingViewModel(
         })
     }
 
-    fun test(s: String) {
-        Log.d("test", s)
+    fun searchProducts(searchQuery: String) {
+        search.postValue(Resource.Loading())
+        firebaseDatabase.searchProducts(searchQuery).addOnCompleteListener {
+            if (it.isSuccessful) {
+                val productsList = it.result!!.toObjects(Product::class.java)
+                search.postValue(Resource.Success(productsList))
+
+            } else
+                search.postValue(Resource.Error(it.exception.toString()))
+
+        }
+    }
+
+    private var categoriesSafe: List<Category>? = null
+    fun getCategories() {
+        if(categoriesSafe != null){
+            categories.postValue(Resource.Success(categoriesSafe))
+            return
+        }
+        categories.postValue(Resource.Loading())
+        firebaseDatabase.getCategories().addOnCompleteListener {
+            if (it.isSuccessful) {
+                val categoriesList = it.result!!.toObjects(Category::class.java)
+                categoriesSafe = categoriesList
+                categories.postValue(Resource.Success(categoriesList))
+            } else
+                categories.postValue(Resource.Error(it.exception.toString()))
+        }
+
+
     }
 
 }
