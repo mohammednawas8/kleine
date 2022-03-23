@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:padding="8dp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-    android:id="@+id/parent_linear">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_linear"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-  <TextView
-      android:id="@+id/tv_order_id"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      tools:text="@tools:sample/lorem"
-      style="@style/MediumTextViewThin"
-      android:layout_weight="1"/>
 
-    <ImageView
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        android:src="@drawable/ic_arrow"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-  </LinearLayout>
-  <TextView
-      android:id="@+id/tv_order_date"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      tools:text="@tools:sample/lorem" />
+        <ImageView
+            android:id="@+id/img_order_state"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_circle" />
 
-  <View
-      android:id="@+id/line"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/_1sdp"
-      android:layout_marginTop="15dp"
-      android:background="@drawable/line"
-      android:backgroundTint="@color/g_icon_tint"
-      />
+        <TextView
+            android:id="@+id/tv_order_id"
+            style="@style/MediumTextViewThin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            tools:text="@tools:sample/lorem" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/ic_arrow" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_order_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/lorem" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/g_icon_tint" />
 </LinearLayout>

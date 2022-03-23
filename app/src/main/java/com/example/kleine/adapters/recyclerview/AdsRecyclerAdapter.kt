@@ -52,6 +52,7 @@ class AdsRecyclerAdapter : RecyclerView.Adapter<AdsRecyclerAdapter.AdsViewHolder
             onItemClick?.invoke(product)
         }
 
+
         holder.binding.btnAddToCart.setOnClickListener {
             onAddToCartClick?.invoke(product)
         }

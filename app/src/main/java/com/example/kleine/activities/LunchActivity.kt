@@ -55,7 +55,6 @@ class LunchActivity : AppCompatActivity() {
 
 //        val random = Random.nextInt(from = 10000, until = 99999)
 
-
 //        saveNewProduct()
     }
 
@@ -106,4 +105,5 @@ class LunchActivity : AppCompatActivity() {
             .document()
             .set(prodcut)
     }
+
 }
