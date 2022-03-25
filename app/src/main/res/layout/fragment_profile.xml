@@ -350,6 +350,42 @@
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linear_switch_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/settings_items_background"
+                    android:backgroundTint="#9C27B0"
+                    android:src="@drawable/ic_switch_accounts"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_switch_account"
+                    style="@style/MediumTextViewThin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/switch_account"
+                    android:textColor="@color/g_hint"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/g_icon_tint"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/linear_out"
@@ -387,6 +423,8 @@
                     app:tint="@color/g_icon_tint"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
+
+
         </LinearLayout>
 
 

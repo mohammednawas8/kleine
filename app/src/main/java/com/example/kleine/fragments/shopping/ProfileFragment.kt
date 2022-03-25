@@ -1,6 +1,5 @@
 package com.example.kleine.fragments.shopping
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -57,12 +56,19 @@ class ProfileFragment : Fragment() {
         onAllOrderClick()
         onTrackOrderClick()
         onLanguageClick()
+        onSwitchLanguageClick()
 
         observeProfile()
         binding.tvVersionCode.text =
             "${resources.getText(R.string.g_version)} ${BuildConfig.VERSION_NAME}"
+    }
 
-
+    private fun onSwitchLanguageClick() {
+        binding.linearSwitchAccount.setOnClickListener {
+            TODO("Check if user has Store account -- >" +
+                    "Yes : Move to the Store activity and save store state in shared preferences" +
+                    "No : Move to sign up fragment for Store account" )
+        }
     }
 
     private fun onLanguageClick() {

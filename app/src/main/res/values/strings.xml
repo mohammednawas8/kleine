@@ -119,5 +119,6 @@
     <string name="street">Street</string>
     <string name="g_order_details">Order Details</string>
     <string name="product_added">Product added to your cart</string>
+    <string name="switch_account">Switch Account</string>
 
 </resources>
