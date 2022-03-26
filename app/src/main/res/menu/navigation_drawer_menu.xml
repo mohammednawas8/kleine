@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/mnu_home"
+    android:title="@string/g_home"
+    android:icon="@drawable/ic_home"/>
+
+    <item android:id="@+id/mnu_products"
+    android:title="@string/g_products"
+    android:icon="@drawable/ic_products"/>
+
+    <item android:id="@+id/mnu_orders"
+    android:title="@string/g_orders"
+    android:icon="@drawable/ic_all_orders"/>
+
+    <item android:id="@+id/mnu_language"
+        android:title="@string/g_language"
+        android:icon="@drawable/ic_language"/>
+
+    <item android:id="@+id/mnu_switch_account"
+        android:title="@string/switch_account"
+        android:icon="@drawable/ic_switch_accounts"/>
+
+</menu>

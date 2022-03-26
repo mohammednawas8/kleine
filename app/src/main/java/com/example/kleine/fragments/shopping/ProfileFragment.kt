@@ -15,6 +15,7 @@ import com.example.kleine.BuildConfig
 import com.example.kleine.R
 import com.example.kleine.activities.LunchActivity
 import com.example.kleine.activities.ShoppingActivity
+import com.example.kleine.activities.StoreActivity
 import com.example.kleine.databinding.FragmentProfileBinding
 import com.example.kleine.model.User
 import com.example.kleine.resource.Resource
@@ -56,18 +57,22 @@ class ProfileFragment : Fragment() {
         onAllOrderClick()
         onTrackOrderClick()
         onLanguageClick()
-        onSwitchLanguageClick()
+        onSwitchAccountClick()
 
         observeProfile()
         binding.tvVersionCode.text =
             "${resources.getText(R.string.g_version)} ${BuildConfig.VERSION_NAME}"
     }
 
-    private fun onSwitchLanguageClick() {
+    private fun onSwitchAccountClick() {
         binding.linearSwitchAccount.setOnClickListener {
-            TODO("Check if user has Store account -- >" +
-                    "Yes : Move to the Store activity and save store state in shared preferences" +
-                    "No : Move to sign up fragment for Store account" )
+
+            val intent = Intent(activity,StoreActivity::class.java)
+            startActivity(intent)
+
+//            TODO("Check if user has Store account -- >" +
+//                    "Yes : Move to the Store activity and save store state in shared preferences" +
+//                    "No : Move to sign up fragment for Store account" )
         }
     }
 
