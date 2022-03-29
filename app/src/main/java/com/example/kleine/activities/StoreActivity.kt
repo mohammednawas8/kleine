@@ -5,13 +5,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentTransaction
 import com.example.kleine.R
 import com.example.kleine.databinding.ActivityStoreBinding
-import com.example.kleine.fragments.BlankFragment
-import com.example.kleine.fragments.categories.FurnitureFragment
-import com.example.kleine.fragments.categories.TableFragment
+import com.example.kleine.store.fragments.StoreHomeFragment
+
 
 class StoreActivity : AppCompatActivity() {
 
@@ -29,13 +26,15 @@ class StoreActivity : AppCompatActivity() {
 
         val fragmentManger = supportFragmentManager
         val fragmentTransaction = fragmentManger.beginTransaction()
-//        fragmentTransaction.replace(R.id.fragment_host,BlankFragment())
+        fragmentTransaction.replace(R.id.fragment_host,StoreHomeFragment())
         fragmentTransaction.commit()
 
         binding.navigationView.menu.getItem(0).isChecked = true
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
+
+
 
             binding.navigationView.menu.forEach { unselectedItems ->
                 if(unselectedItems != menuItem)

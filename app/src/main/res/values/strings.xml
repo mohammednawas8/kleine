@@ -123,5 +123,8 @@
     <string name="open_menu">Open Menu</string>
     <string name="close_menu">Close Menu</string>
     <string name="my_store">My Store</string>
+    <string name="g_total_sales">Total Sales</string>
+    <string name="today_sales">Today Sales</string>
+    <string name="pending_orders">Pending Orders</string>
 
 </resources>
