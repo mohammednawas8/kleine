@@ -25,7 +25,7 @@ import com.example.kleine.resource.Resource
 import com.example.kleine.util.Constants.Companion.ORDER_FAILED_FLAG
 import com.example.kleine.util.Constants.Companion.ORDER_SUCCESS_FLAG
 import com.example.kleine.util.Constants.Companion.UPDATE_ADDRESS_FLAG
-import com.example.kleine.viewmodel.billingViewmodel.BillingViewModel
+import com.example.kleine.viewmodel.billing.BillingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BillingFragment : Fragment() {

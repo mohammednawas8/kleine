@@ -29,7 +29,7 @@
 
 
         <TextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_store_name"
             style="@style/MediumTextViewThin"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
@@ -49,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/g_edit_personal_details"
-            app:layout_constraintTop_toBottomOf="@id/tv_user_name"
-            app:layout_constraintStart_toStartOf="@+id/tv_user_name" />
+            app:layout_constraintTop_toBottomOf="@id/tv_store_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_store_name" />
 
         <ImageView
             android:id="@+id/arrow"
@@ -58,7 +58,7 @@
             android:layout_height="@dimen/_15sdp"
             android:src="@drawable/ic_arrow"
             app:layout_constraintEnd_toEndOf="@id/constraint_profile"
-            app:layout_constraintTop_toTopOf="@id/tv_user_name"
+            app:layout_constraintTop_toTopOf="@id/tv_store_name"
             app:layout_constraintBottom_toBottomOf="@id/tv_edit_personal_details"
             app:tint="@color/white" />
 

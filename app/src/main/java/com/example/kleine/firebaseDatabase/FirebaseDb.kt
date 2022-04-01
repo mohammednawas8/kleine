@@ -390,5 +390,7 @@ class FirebaseDb {
     fun signInWithGoogle(credential: AuthCredential) =
         FirebaseAuth.getInstance().signInWithCredential(credential)
 
+    fun fetchStore(uid:String) = storesCollection.whereEqualTo("uid",uid).get()
+
     fun logout() = Firebase.auth.signOut()
 }
