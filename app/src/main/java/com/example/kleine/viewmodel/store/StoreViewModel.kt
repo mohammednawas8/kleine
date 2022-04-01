@@ -1,5 +1,6 @@
 package com.example.kleine.viewmodel.store
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,4 +31,5 @@ class StoreViewModel(
                 _store.postValue(Resource.Error(response.exception.toString()))
         }
     }
+
 }

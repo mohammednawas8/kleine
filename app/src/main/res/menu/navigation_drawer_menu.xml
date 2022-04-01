@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:enabled="true">
 <item android:id="@+id/mnu_home"
     android:title="@string/g_home"
     android:icon="@drawable/ic_home"/>
@@ -19,5 +21,14 @@
     <item android:id="@+id/mnu_switch_account"
         android:title="@string/switch_account"
         android:icon="@drawable/ic_switch_accounts"/>
+    </group>
+
+    <group android:enabled="true"
+        android:id="@+id/group2">
+        <item android:id="@+id/mnu_logout"
+            android:title="@string/g_logout"
+            android:icon="@drawable/ic_logout"/>
+
+    </group>
 
 </menu>

@@ -31,18 +31,18 @@ class MySplashScreen : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = (activity as LunchActivity).viewModel
-        startActivity(Intent(activity,StoreActivity::class.java))
-//        val isUserSignedIn = viewModel.isUserSignedIn()
-//        if (isUserSignedIn) {
-//            val intent = Intent(requireActivity(), ShoppingActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-//            Handler().postDelayed({
-//                startActivity(intent)
-//            }, 1500)
-//        } else
-//            Handler().postDelayed({
-//                findNavController().navigate(R.id.action_mySplashScreen_to_firstScreenFragment)
-//            }, 1500)
+//        startActivity(Intent(activity,StoreActivity::class.java))
+        val isUserSignedIn = viewModel.isUserSignedIn()
+        if (isUserSignedIn) {
+            val intent = Intent(requireActivity(), ShoppingActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            Handler().postDelayed({
+                startActivity(intent)
+            }, 1500)
+        } else
+            Handler().postDelayed({
+                findNavController().navigate(R.id.action_mySplashScreen_to_firstScreenFragment)
+            }, 1500)
 
     }
 
