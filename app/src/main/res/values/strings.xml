@@ -126,5 +126,7 @@
     <string name="g_total_sales">Total Sales</string>
     <string name="today_sales">Today Sales</string>
     <string name="pending_orders">Pending Orders</string>
+    <string name="help">Help</string>
+    <string name="help_text">Got a question? We\'re here to answer!</string>
 
 </resources>

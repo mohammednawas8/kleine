@@ -351,7 +351,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_switch_account"
+                android:id="@+id/linear_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -363,16 +363,16 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/settings_items_background"
                     android:backgroundTint="#9C27B0"
-                    android:src="@drawable/ic_switch_accounts"
+                    android:src="@drawable/ic_help"
                     app:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/tv_switch_account"
+                    android:id="@+id/tv_help"
                     style="@style/MediumTextViewThin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/switch_account"
+                    android:text="@string/help"
                     android:textColor="@color/g_hint"
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_15sdp"
@@ -409,12 +409,12 @@
                     style="@style/MediumTextViewThin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:text="@string/g_logout"
                     android:textColor="@color/g_hint"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_gravity="center_vertical"/>
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"

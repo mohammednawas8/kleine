@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
@@ -391,6 +392,8 @@ class FirebaseDb {
         FirebaseAuth.getInstance().signInWithCredential(credential)
 
     fun fetchStore(uid:String) = storesCollection.whereEqualTo("uid",uid).get()
+
+
 
     fun logout() = Firebase.auth.signOut()
 }

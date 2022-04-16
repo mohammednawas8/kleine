@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.kleine.R
 import com.example.kleine.activities.LunchActivity
 import com.example.kleine.activities.ShoppingActivity
-import com.example.kleine.activities.StoreActivity
 import com.example.kleine.databinding.FragemntSplashScreenBinding
 
 @SuppressLint("CustomSplashScreen")
@@ -31,7 +30,6 @@ class MySplashScreen : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = (activity as LunchActivity).viewModel
-//        startActivity(Intent(activity,StoreActivity::class.java))
         val isUserSignedIn = viewModel.isUserSignedIn()
         if (isUserSignedIn) {
             val intent = Intent(requireActivity(), ShoppingActivity::class.java)

@@ -1,14 +1,11 @@
 package com.example.kleine.viewmodel.store
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kleine.firebaseDatabase.FirebaseDb
 import com.example.kleine.model.Store
 import com.example.kleine.resource.Resource
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
 class StoreViewModel(
     val firebaseDatabase: FirebaseDb
@@ -27,6 +24,7 @@ class StoreViewModel(
             if (response.isSuccessful) {
                 val userStore = response.result.toObjects(Store::class.java).first()
                 _store.postValue(Resource.Success(userStore))
+
             } else
                 _store.postValue(Resource.Error(response.exception.toString()))
         }
