@@ -5,6 +5,8 @@ kleine app targets people who are looking to buy high quality furniture products
 ![Untitled-1](https://user-images.githubusercontent.com/78867217/163694236-4e1657e8-d24d-4da6-a451-4c71f68d1cec.jpg)
 ![Untitled-1](https://user-images.githubusercontent.com/78867217/163694361-6d33565a-9178-4ed7-873e-e8def0160166.jpg)
 
+https://www.mediafire.com/file/lw2i7ttokgk3g35/keline.apk/file
+
 # Libraries and technologies used
 - Navigation component : one activity contains multiple fragments instead of creating multiple activites.
 - Firebase Auth : Manging Accounts/ Loging in and Registrations.
